@@ -7,7 +7,7 @@ $title = htmlspecialchars($post['title']); ?>
     <div class="col-sm-8">
         <div class="card border-primary mb-3" style="max-width: 50rem;">
             <h3 class="bordure card-header ">
-                <?= htmlspecialchars($post['title']) ?> <!--$post->getTitle()-->
+                <?= htmlspecialchars($post['title']) ?> <!--  $post->getTitle()   -->
                 <em>le <?= $post['dateLastModification'] ?></em>
                 <p>auteur : <?= nl2br(htmlspecialchars($post['login'])) ?></p>
             </h3>
