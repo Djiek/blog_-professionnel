@@ -6,19 +6,18 @@
 
 // session_unset();
 // session_destroy();
+print_r($_SESSION);
 
 $title = 'Mon blog'; ?>
 <link rel="stylesheet" type="text/css" href="public/css/css.css">
 <?php $content = ob_get_clean(); ?>
 <?php require('template.php'); ?>
 
-<?php var_dump($_SESSION['login']); ?>
-
 
 <div>
     <br/>
-   <?php if (isset($_SESSION['login']) AND isset($_SESSION['mail']))
-{   ?> <h3> Bienvenue <?php echo $_SESSION['login']; }
+   <?php if (isset($_SESSION['login']))
+{   ?> <h3> Bienvenue <?php echo $_SESSION['user']['login']; }
          ?>
     
      </h3>

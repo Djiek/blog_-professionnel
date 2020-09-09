@@ -20,7 +20,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?action=listPosts">Liste des blogs Posts</a>
                 </li>
-                <?php if (isset($_SESSION['login']) and isset($_SESSION['mail'])) { ?>
+                <?php if (isset($_SESSION['login'])) { ?>
                     <li class="nav-item">
                         <a class="nav-link" href="index.php?action=connection">Se déconecter</a>
                     </li>

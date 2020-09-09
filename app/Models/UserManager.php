@@ -37,6 +37,7 @@ class UserManager extends Manager
         $result = $user->rowCount();
         return $result;
     }
+    //regrouper les deux
 
         public function loginVerify($login)
     {

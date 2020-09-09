@@ -40,9 +40,6 @@ class PostManager extends Manager
         return $postPage;
     }
 
-
-
-
     public function getPosts($currentPage)
     {
         $nbPerPage = $this->getNbPerPage();
@@ -64,7 +61,7 @@ class PostManager extends Manager
         $req->execute(array($postId));
         $post = $req->fetch();
 
-        return $post;
+        return $post; //retourner un new blogpost 
     }
 
     public function addBlogPost($chapo, $title, $content)

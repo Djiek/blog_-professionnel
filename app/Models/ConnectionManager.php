@@ -9,26 +9,27 @@ use PDO;
 class ConnectionManager extends Manager
 {
 
-    public function getPassword(){
+    public function getUser($login){
         $db = $this->dbConnect();
-        $password = $db->prepare("SELECT password FROM user ");
-        $password->execute();
-        return $password;   
+        $user = $db->prepare("SELECT * FROM user WHERE login=:login  "); 
+        $user->bindValue(":login", $login, PDO::PARAM_STR);
+        $user->execute();
+        return $user->fetch();   
     }
+// //tout en une seule requete
+//        public function getMail(){
+//         $db = $this->dbConnect();
+//         $mail = $db->prepare("SELECT mail FROM user ");
+//         $mail->execute();
+//         return $mail;   
+//     }
 
-       public function getMail(){
-        $db = $this->dbConnect();
-        $mail = $db->prepare("SELECT mail FROM user ");
-        $mail->execute();
-        return $mail;   
-    }
-
-      public function getid(){
-        $db = $this->dbConnect();
-        $id = $db->prepare("SELECT id FROM user ");
-        $id->execute();
-        return $id;   
-    }
+//       public function getid(){
+//         $db = $this->dbConnect();
+//         $id = $db->prepare("SELECT id FROM user ");
+//         $id->execute();
+//         return $id;   
+//     }
 
 
     public function connectionUser($login, $password)

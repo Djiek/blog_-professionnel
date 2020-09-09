@@ -38,8 +38,8 @@ class CommentManager extends Manager
         // $pageOfNumber = ceil($countComments[0]["nbrComment"] / $nbPerPage); //ceil pour arondir au nombre au dessus en cas de division a virgule
         // return $pageOfNumber;
 
-        $getComment = $this->getComments($postId, $currentPage);
-        $db = $this->dbConnect($postId, $currentPage);
+        
+        $db = $this->dbConnect();
         $countComment = $db->prepare('SELECT count(id) as nbrComment FROM comment WHERE status=1 && blogPost_id = ?');
         $countComment->setFetchMode(PDO::FETCH_ASSOC);
         $countComment->execute(array($postId));

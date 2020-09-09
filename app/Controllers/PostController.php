@@ -96,29 +96,21 @@ class PostController
     function login()
     {
         $connectionManager = new ConnectionManager();
-         $password = $connectionManager->getPassword();
-         $id = $connectionManager->getId();
-         $mail = $connectionManager->getMail();
-        var_dump($password);die();
+        $user = $connectionManager->getUser($_POST["login"]);
+        //  $id = $connectionManager->getId();
+        //  $mail = $connectionManager->getMail();
         // $login = $connectionManager->getLogin();
         // Appel d'une fonction de cet objet
 
         if (isset($_POST["login"]) && isset($_POST["password"])) {
             // Comparaison du pass envoyé via le formulaire avec la base
-            $isPasswordCorrect = password_verify($_POST['password'], $password);
-            if (!$password) {
+            $isPasswordCorrect = password_verify($_POST['password'], $user['password']);
+            if (!$isPasswordCorrect) {
                 echo 'Mauvais identifiant ou mot de passe !';
             } else {
-                if ($isPasswordCorrect) {
-                    session_start();
-                    $_SESSION['id'] = $id;
-                    $_SESSION['mail'] = $mail;
-                    $users = $connectionManager->connectionUser($_POST["login"], $_POST["password"]);
-                    echo 'Vous êtes connecté !';
-                    require('app/Views/home.php');
-                } else {
-                    echo 'Mauvais identifiant ou mot de passe !';
-                }
+                $users = $connectionManager->connectionUser($_POST["login"], $_POST["password"]);
+                echo 'Vous êtes connecté !';
+                require('app/Views/home.php');
             }
         } else {
             throw new Exception('Erreur d\'iddentifiants.');

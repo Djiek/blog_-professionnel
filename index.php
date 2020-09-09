@@ -32,10 +32,10 @@ try { // On essaie de faire des choses
             $controller = new PostController();
             $controller->addPostForm();
         } elseif ($_GET['action'] == 'login') {
+             if (!empty($_POST['login']) && !empty($_POST['password']) ){
             if (isset($_POST['login']) && $_POST['password'] > 0) {
                 $_SESSION['User'] = array(
                     'login' => $_POST['login'],
-                    'password' => $_POST['password']
                 );
 
                 if (!empty($_POST['login']) && !empty($_POST['password'])) {
@@ -46,6 +46,7 @@ try { // On essaie de faire des choses
                     throw new Exception('Tous les champs ne sont pas remplis !');
                 }
             }
+             }
         } elseif ($_GET['action'] == 'connection') {
             $controller = new PostController();
             $controller->connection();
