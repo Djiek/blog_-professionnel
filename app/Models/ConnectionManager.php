@@ -8,7 +8,6 @@ use PDO;
 
 class ConnectionManager extends Manager
 {
-
     public function getUser($login){
         $db = $this->dbConnect();
         $user = $db->prepare("SELECT * FROM user WHERE login=:login  "); 
