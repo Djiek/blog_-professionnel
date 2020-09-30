@@ -2,7 +2,8 @@
 
 $title = 'Mon blog'; ?>
 
-<?php ob_start(); ?>
+<?php ob_start();
+?> 
 
 <br /><br />
 <div class="row">

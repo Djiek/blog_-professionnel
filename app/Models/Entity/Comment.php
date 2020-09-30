@@ -12,16 +12,16 @@ class Comment
     private $userId;
     private $blogPostId;
 
-    public function __construct($id, $title, $content, $date, $status, $userId, $blogPostId)
-    {
-        $this->id = $id;
-        $this->title = $title;
-        $this->content = $content;
-        $this->date = $date;
-        $this->status = $status;
-        $this->userId = $userId;
-        $this->blogPostId = $blogPostId;
-    }
+    // public function __construct($id, $title, $content, $date, $status, $userId, $blogPostId)
+    // {
+    //     $this->id = $id;
+    //     $this->title = $title;
+    //     $this->content = $content;
+    //     $this->date = $date;
+    //     $this->status = $status;
+    //     $this->userId = $userId;
+    //     $this->blogPostId = $blogPostId;
+    // }
 
 
     /**

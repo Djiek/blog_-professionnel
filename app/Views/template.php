@@ -6,7 +6,7 @@
     <title><?= $title ?></title>
     <link href="style.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="public/css/css.css">
-    <link rel='stylesheet' href='public/css/bootstrap/bootstrap.min.css' />
+    <link rel='stylesheet' href='public/css/bootstrap/bootstraap.min.css' />
 </head>
 
 <body>
@@ -20,19 +20,21 @@
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?action=listPosts">Liste des blogs Posts</a>
                 </li>
-                <?php if (isset($_SESSION['login'])) { ?>
+          <?php if(isset($_SESSION['User'])): ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?action=connection">Se déconecter</a>
+                        <a class="nav-link" href="index.php?action=logout">Se déconnecter</a>
                     </li>
-                <?php } else { ?>
+            <?php  else : ?>
                     <li class="nav-item">
                         <a class="nav-link" href="index.php?action=connection">Se connecter</a>
                     </li>
-
-                <?php  } ?>
+                    <?php endif; ?>
+     
+                 
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?action=addPostForm">Ajouter un blog post</a>
                 </li>
+            
             </ul>
         </div>
     </nav>
@@ -40,6 +42,14 @@
 
 
     <?= $content ?>
+  <?php   if (isset($_SESSION['error'])) {
+    echo $_SESSION['error'];
+    unset($_SESSION['error']);
+} 
+ if (isset($_SESSION['flash']['success'] )) {
+    echo $_SESSION['flash']['success'] ;
+    unset($_SESSION['flash']['success'] );
+} ?>
 </body>
 
 </html>
