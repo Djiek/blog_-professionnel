@@ -32,36 +32,34 @@ try { // On essaie de faire des choses
             $controller = new PostController();
             $controller->addPostForm();
         } elseif ($_GET['action'] == 'login') {
-             if (!empty($_POST['login']) && !empty($_POST['password']) ){
-            if (isset($_POST['login']) && $_POST['password'] > 0) {
-                $_SESSION['User'] = array(
-                    'login' => $_POST['login'],
-                );
-
-                if (!empty($_POST['login']) && !empty($_POST['password'])) {
-                    $controller = new PostController();
-                    $controller->login();
-                } else {
-                    // Autre exception
-                    throw new Exception('Tous les champs ne sont pas remplis !');
+            if (!empty($_POST['login']) && !empty($_POST['password'])) {
+                if (isset($_POST['login']) && strlen($_POST['password']) > 0) {
+                    if (!empty($_POST['login']) && !empty($_POST['password'])) {
+                        $controller = new PostController();
+                        $controller->login();
+                    } else {
+                        // Autre exception
+                        $_SESSION['error'] = "Tous les champs ne sont pas remplis !!";
+                        header('Location: index.php?action=connection');
+                    }
                 }
             }
-             }
         } elseif ($_GET['action'] == 'connection') {
             $controller = new PostController();
             $controller->connection();
-
+        } elseif ($_GET['action'] == 'logout') {
+            $controller = new PostController();
+            $controller->logout();
         } elseif ($_GET['action'] == 'inscriptionForm') {
             $controller = new PostController();
             $controller->inscriptionForm();
-
         } elseif ($_GET['action'] == 'inscription') {
             if (!empty($_POST['login']) && !empty($_POST['password']) && !empty($_POST['mail']  && !empty($_POST['cPassword']))) {
-                    $controller = new PostController();
-                    $controller->inscription($_POST['login'],  $_POST['password'], $_POST['mail']); //$hashPassword
-            } else {
-                // Autre exception
-                throw new Exception('Tous les champs ne sont pas remplis !');
+                $controller = new PostController();
+                $controller->inscription($_POST['login'],  $_POST['password'], $_POST['mail']); //$hashPassword
+            } elseif (!isset($_SESSION[$_POST['login']])) {
+                $_SESSION['error'] = "Tous les champs ne sont pas remplis !!";
+                header('Location: index.php?action=inscriptionForm');
             }
         } elseif ($_GET['action'] == 'postContact') {
             $controller = new MainController();
@@ -73,7 +71,8 @@ try { // On essaie de faire des choses
                     $controller->addComment($_GET['id'], 1, $_POST['content'], $_POST['title']);
                 } else {
                     // Autre exception
-                    throw new Exception('Tous les champs ne sont pas remplis !');
+                    $_SESSION['error'] = "Tous les champs ne sont pas remplis !!";
+                    header('Location: index.php?action=inscriptionForm');
                 }
             } else {
                 // Autre exception
@@ -91,7 +90,8 @@ try { // On essaie de faire des choses
                 );
             } else {
                 // Autre exception
-                throw new Exception('Tous les champs ne sont pas remplis !');
+                $_SESSION['error'] = "Tous les champs ne sont pas remplis !!";
+                header('Location: index.php?action=addPostForm');
             }
             // }
             // else {

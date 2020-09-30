@@ -11,17 +11,26 @@ class BlogPost
     private $date;
     private $status;
     private $userId;
+    //private $login;
 
-    public function __construct($id, $title, $content, $date, $status, $userId, $chapo)
-    {
-        $this->id = $id;
-        $this->title = $title;
-        $this->content = $content;
-        $this->date = $date;
-        $this->status = $status;
-        $this->userId = $userId;
-        $this->chapo = $chapo;
-    }
+    // public function __construct(array $row)
+    // { $this->hydrate($row);     
+    // }
+
+// public function hydrate(array $row)
+// {
+//   foreach ($row as $key => $value)
+//   {
+//     $method = 'set'.ucfirst($key);
+  
+//     // Si le setter correspondant existe.
+//     if (method_exists($this, $method))
+//     {
+//       // On appelle le setter.
+//       $this->$method($value);
+//     }
+//   }
+// }
 
     /**
      * @return mixed
@@ -67,7 +76,7 @@ class BlogPost
     /**
      * @param mixed $status
      */
-    public function setstatus($status)
+    public function setStatus($status)
     {
         $this->status = $status;
     }
@@ -135,4 +144,23 @@ class BlogPost
     {
         $this->chapo = $chapo;
     }
+
+
+// /**
+//      * @return mixed
+//      */
+//     public function getLogin()
+//     {
+//         return $this->login;
+//     }
+
+    // /**
+    //  * @param mixed $chapo
+    //  */
+    // public function setLogin($login)
+    // {
+    //     $this->login = $login;
+    // }
+
+  
 }

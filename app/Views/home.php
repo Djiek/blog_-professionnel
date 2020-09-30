@@ -17,7 +17,7 @@ $title = 'Mon blog'; ?>
 <div>
     <br/>
    <?php if (isset($_SESSION['login']))
-{   ?> <h3> Bienvenue <?php echo $_SESSION['user']['login']; }
+{   ?> <h3> Bienvenue <?php echo $_SESSION['User']['login']; }
          ?>
     
      </h3>

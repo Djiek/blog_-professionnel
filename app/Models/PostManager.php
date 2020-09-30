@@ -3,7 +3,10 @@
 namespace blogProfessionnel\app\Models;
 
 require_once("app/Models/Manager.php");
+require 'app/Models/Entity/BlogPost.php';
 
+use blogProfessionnel\app\Models\Entity\BlogPost;
+use blogProfessionnel\app\Models\Entity\User;
 use PDO;
 
 class PostManager extends Manager
@@ -50,7 +53,24 @@ class PostManager extends Manager
         $req->bindValue(":postPage", $postPage, PDO::PARAM_INT);
         $req->bindValue(":nbPerPage", $nbPerPage, PDO::PARAM_INT);
         $req->execute();
-        return $req;
+
+    $posts = [];
+        while($row = $req->fetch(PDO::FETCH_ASSOC)){
+                 $post = new BlogPost();
+                 $post->setId($row['id']);
+                 $post->setTitle($row['title']);
+                 $post->setContent($row['content']);
+                 $post->setDate($row['dateLastModification']);
+                 $post->setStatus($row['status']);
+                 $post->setUserId($row['user_id']);
+                 $post->setChapo($row['chapo']); 
+                 $posts[] =$post; 
+        }
+
+        // $req->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'posts');
+        // $posts = $req->fetchAll();
+        //$posts = new BlogPost($req['id'], $req['title'], $req['content'], $req["dateLastModification"], $req['status'], $req['user_id'], $req['chapo']);
+        return $posts; //retourner un new blogpost 
     }
 
     public function getPost($postId)
@@ -59,9 +79,24 @@ class PostManager extends Manager
         $req = $db->prepare('SELECT blogpost.id, title,chapo, content,status, user_id,user.login,DATE_FORMAT(dateLastModification, \'%d/%m/%Y à %Hh%imin%ss\') 
         AS dateLastModification FROM blogpost INNER JOIN user ON blogpost.user_id = user.id WHERE blogpost.id = ? AND blogpost.status = 1');
         $req->execute(array($postId));
-        $post = $req->fetch();
 
-        return $post; //retourner un new blogpost 
+      while($row = $req->fetch(PDO::FETCH_ASSOC)){
+ 
+                 $post = new BlogPost();
+                 $login= new User();
+                 $login->setLogin($row['login']);
+                 $post->setId($row['id']);
+                 $post->setTitle($row['title']);
+                 $post->setContent($row['content']);
+                 $post->setDate($row['dateLastModification']);
+                 $post->setStatus($row['status']);
+                 $post->setUserId($row['login']);
+                 $post->setChapo($row['chapo']); 
+                 $posts[] = $post;
+        }
+
+
+   return $posts; //retourner un new blogpost 
     }
 
     public function addBlogPost($chapo, $title, $content)

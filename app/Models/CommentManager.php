@@ -3,7 +3,10 @@
 namespace blogProfessionnel\app\Models;
 
 require_once("app/Models/Manager.php");
+require 'app/Models/Entity/Comment.php';
 
+use blogProfessionnel\app\Models\Entity\Comment;
+use blogProfessionnel\app\Models\Entity\User;
 use PDO;
 
 
@@ -60,15 +63,32 @@ class CommentManager extends Manager
         return $commentPage;
     }
 
-
     public function getComments($postId, $currentPage)
     {
         $nbPerPage = $this->getNbPerPage();
         $commentPage = $this->CommentPage($currentPage);
         $db = $this->dbConnect();
-        $comments = $db->prepare("SELECT  title, user_id,status, content,user.login, DATE_FORMAT(date, '%d/%m/%Y à %Hh%imin%ss')
-        AS date FROM comment INNER JOIN user ON comment.user_id = user.id WHERE blogPost_id = ? AND status = 1 ORDER BY date DESC LIMIT $commentPage ,$nbPerPage");
-        $comments->execute(array($postId));
+        $req = $db->prepare("SELECT  title, user_id,status, content,user.login, DATE_FORMAT(date, '%d/%m/%Y à %Hh%imin%ss')
+        AS date FROM comment INNER JOIN user ON comment.user_id = user.id WHERE blogPost_id = :postId AND status = 1 ORDER BY date DESC LIMIT :commentPage ,:nbPerPage");
+        $req->bindValue(":postId", $postId, PDO::PARAM_INT);
+        $req->bindValue(":commentPage", $commentPage, PDO::PARAM_INT);
+         $req->bindValue(":nbPerPage", $nbPerPage, PDO::PARAM_INT);
+        $req->execute();
+        $comments = [];
+         while($row = $req->fetch(PDO::FETCH_ASSOC)){
+             
+                 $login= new User();
+                 $login->setLogin($row['login']);
+                 $comment = new Comment();
+                 $comment->setTitle($row['title']);
+                 $comment->setContent($row['content']);
+                 $comment->setDate($row['date']);
+                 $comment->setStatus($row['status']);
+                 $comment->setUserId($row['login']);
+                 $comments[] =$comment; 
+        }
+
+        //$comment = new Comment($comments['id'],$comments['title'],$comments['content'],$comments['date'],$comments['status'],$comments['login'],$comments['blogPostId']);
         return $comments;
     }
 
@@ -92,6 +112,14 @@ class CommentManager extends Manager
         $db = $this->dbConnect();
         $comments = $db->prepare('INSERT INTO comment(status, blogPost_id, title, user_id, content,date) VALUES(0,?,?,?,?,NOW())');
         $affectedLines = $comments->execute(array($postId, $title, $userId, $content));
+        return $affectedLines;
+         }
+
+        public function updateStatus($postId, $userId)
+    {
+        $db = $this->dbConnect();
+        $comments = $db->prepare('UPDATE INTO comment(status) VALUES(1,NOW())');
+        $affectedLines = $comments->execute($postId,$userId);
         return $affectedLines;
     }
 }
