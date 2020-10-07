@@ -17,20 +17,20 @@ class BlogPost
     // { $this->hydrate($row);     
     // }
 
-// public function hydrate(array $row)
-// {
-//   foreach ($row as $key => $value)
-//   {
-//     $method = 'set'.ucfirst($key);
-  
-//     // Si le setter correspondant existe.
-//     if (method_exists($this, $method))
-//     {
-//       // On appelle le setter.
-//       $this->$method($value);
-//     }
-//   }
-// }
+    // public function hydrate(array $row)
+    // {
+    //   foreach ($row as $key => $value)
+    //   {
+    //     $method = 'set'.ucfirst($key);
+
+    //     // Si le setter correspondant existe.
+    //     if (method_exists($this, $method))
+    //     {
+    //       // On appelle le setter.
+    //       $this->$method($value);
+    //     }
+    //   }
+    // }
 
     /**
      * @return mixed
@@ -146,13 +146,13 @@ class BlogPost
     }
 
 
-// /**
-//      * @return mixed
-//      */
-//     public function getLogin()
-//     {
-//         return $this->login;
-//     }
+    // /**
+    //      * @return mixed
+    //      */
+    //     public function getLogin()
+    //     {
+    //         return $this->login;
+    //     }
 
     // /**
     //  * @param mixed $chapo
@@ -162,5 +162,5 @@ class BlogPost
     //     $this->login = $login;
     // }
 
-  
+
 }

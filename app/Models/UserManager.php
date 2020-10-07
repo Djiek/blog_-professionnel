@@ -10,7 +10,7 @@ use PDO;
 
 class UserManager extends Manager
 {
- 
+
     public function connectionUser($login, $password)
     {
         $db = $this->dbConnect();
@@ -27,9 +27,9 @@ class UserManager extends Manager
         $user = $db->prepare('SELECT * FROM user WHERE login=:login');
         $user->bindValue(":login", $login, PDO::PARAM_STR);
         $user->execute();
-        return $user->fetch();  
-        $users = new User($user['id'],$user['mail'],$user['login'],$user["password"], $user["admin"]);
-        return $users;  
+        return $user->fetch();
+        $users = new User($user['id'], $user['mail'], $user['login'], $user["password"], $user["admin"]);
+        return $users;
     }
 
     public function addUser($login, $password, $mail)
@@ -51,7 +51,7 @@ class UserManager extends Manager
     }
     //regrouper les deux
 
-        public function loginVerify($login)
+    public function loginVerify($login)
     {
         $db = $this->dbConnect();
         $user = $db->prepare("SELECT login FROM user WHERE login = :login");

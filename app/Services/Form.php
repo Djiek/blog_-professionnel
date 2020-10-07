@@ -4,7 +4,6 @@ namespace blogProfessionnel\app\Services;
 
 class Form
 {
-
     public function mail($name, $firstname, $email, $message)
     {
         $message = str_replace("\'", "'", $message);
@@ -17,10 +16,5 @@ class Form
         Message : $message";
         $heading = " From: $name /n Reply-To : $email";
         //  mail($destinataire,$subject,$message,$heading);     //a ouvrir quand ce sera en ligne pour recevoir le mail
-    }
-
-    public function nameError($name)
-    {
-        echo "Vous n'avez pas rempli le champs nom";
     }
 }

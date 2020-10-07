@@ -6,8 +6,6 @@ require_once('app/Services/Form.php');
 
 use \blogProfessionnel\app\Services\Form;
 
-
-
 class MainController
 {
 
@@ -21,23 +19,18 @@ class MainController
         return 'location:../public/image/cv.pdf';
     }
 
-
     public function postContact()
     {
-
         if (isset($_POST) && isset($_POST['name']) && isset($_POST['firstname']) && isset($_POST['email']) && isset($_POST['message'])) {
             extract($_POST); //pour simplifier l'ecriture de $_post['*']
-            if (empty($name)) {
-                $nameError = new Form();
-                $nameError->nameError($name);
-                die();
-            }
             if (!empty($name) && !empty($firstname) && !empty($email) && !empty($message)) {
                 $mail = new Form();
                 $mail->mail($name, $firstname, $email, $message);
-                echo "le mail a bien été envoyé.";
+                $_SESSION['flash']['success'] = 'Le mail a bien été envoyé.';
+                header('Location: index.php?action=home');
             } else {
-                echo "Vous n'avez pas rempli tout les champs.";
+                $_SESSION['error'] =  "Vous n'avez pas rempli tout les champs.";
+                header('Location: index.php?action=home');
             }
         }
     }
