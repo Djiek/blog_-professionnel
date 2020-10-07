@@ -15,7 +15,7 @@ $title = 'Mon blog'; ?>
     </div>
 </div>
 <?php
-foreach ($posts as $post): 
+foreach ($posts as $post) :
 ?>
     <div class="container ">
         <div class="row listpost ">

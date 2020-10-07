@@ -54,17 +54,17 @@ class PostManager extends Manager
         $req->bindValue(":nbPerPage", $nbPerPage, PDO::PARAM_INT);
         $req->execute();
 
-    $posts = [];
-        while($row = $req->fetch(PDO::FETCH_ASSOC)){
-                 $post = new BlogPost();
-                 $post->setId($row['id']);
-                 $post->setTitle($row['title']);
-                 $post->setContent($row['content']);
-                 $post->setDate($row['dateLastModification']);
-                 $post->setStatus($row['status']);
-                 $post->setUserId($row['user_id']);
-                 $post->setChapo($row['chapo']); 
-                 $posts[] =$post; 
+        $posts = [];
+        while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
+            $post = new BlogPost();
+            $post->setId($row['id']);
+            $post->setTitle($row['title']);
+            $post->setContent($row['content']);
+            $post->setDate($row['dateLastModification']);
+            $post->setStatus($row['status']);
+            $post->setUserId($row['user_id']);
+            $post->setChapo($row['chapo']);
+            $posts[] = $post;
         }
 
         // $req->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'posts');
@@ -80,23 +80,21 @@ class PostManager extends Manager
         AS dateLastModification FROM blogpost INNER JOIN user ON blogpost.user_id = user.id WHERE blogpost.id = ? AND blogpost.status = 1');
         $req->execute(array($postId));
 
-      while($row = $req->fetch(PDO::FETCH_ASSOC)){
- 
-                 $post = new BlogPost();
-                 $login= new User();
-                 $login->setLogin($row['login']);
-                 $post->setId($row['id']);
-                 $post->setTitle($row['title']);
-                 $post->setContent($row['content']);
-                 $post->setDate($row['dateLastModification']);
-                 $post->setStatus($row['status']);
-                 $post->setUserId($row['login']);
-                 $post->setChapo($row['chapo']); 
-                 $posts[] = $post;
+        while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
+
+            $post = new BlogPost();
+            $login = new User();
+            $login->setLogin($row['login']);
+            $post->setId($row['id']);
+            $post->setTitle($row['title']);
+            $post->setContent($row['content']);
+            $post->setDate($row['dateLastModification']);
+            $post->setStatus($row['status']);
+            $post->setUserId($row['login']);
+            $post->setChapo($row['chapo']);
+            $posts[] = $post;
         }
-
-
-   return $posts; //retourner un new blogpost 
+        return $posts; //retourner un new blogpost 
     }
 
     public function addBlogPost($chapo, $title, $content)

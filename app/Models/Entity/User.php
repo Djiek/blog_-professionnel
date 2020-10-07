@@ -82,7 +82,7 @@ class User
         $this->password = $password;
     }
 
-       /**
+    /**
      * @return mixed
      */
     public function getAdmin()

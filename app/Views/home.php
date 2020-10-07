@@ -1,12 +1,4 @@
 <?php
-// $_SESSION['user'] =[
-// 'login'=>$login,
-
-// ];
-
-// session_unset();
-// session_destroy();
-print_r($_SESSION);
 
 $title = 'Mon blog'; ?>
 <link rel="stylesheet" type="text/css" href="public/css/css.css">
@@ -15,37 +7,37 @@ $title = 'Mon blog'; ?>
 
 
 <div>
-    <br/>
-   <?php if (isset($_SESSION['login']))
-{   ?> <h3> Bienvenue <?php echo $_SESSION['User']['login']; }
-         ?>
-    
-     </h3>
-    <header>
+    <br />
+    <?php if (isset($_SESSION['User'])) : ?>
+        <h3 class="bordure"> Bienvenue <?php echo $_SESSION['User']['login']; ?>
+        <?php endif; ?>
 
-        <strong>
-            <div id="nom">
-                <font color=#263f3f>Marine Richini<br /><br /></font>
-            </div>
-            <!--le nom en dehors du tableau pour etre placé de l'autre côté-->
-        </strong>
-        <h4> Une Développeuse faite pour votre entreprise ! </h4>
-        <img src="public/image/photocv.PNG" alt="photo-cv">
-        <p>
-            <!--tableau pour les infos-->
+        </h3>
+        <header>
 
-            <p> Permis B -
-                Tourcoing </p>
+            <strong>
+                <div id="nom">
+                    <font color=#263f3f>Marine Richini<br /><br /></font>
+                </div>
+                <!--le nom en dehors du tableau pour etre placé de l'autre côté-->
+            </strong>
+            <h4> Une Développeuse faite pour votre entreprise ! </h4>
+            <img src="public/image/photocv.PNG" alt="photo-cv">
             <p>
-                <a href="https://www.linkedin.com/in/marine-richini-791149194/">
-                    <img src="public/image/linkedIn.png" height="50" width="50" alt="logo-linkedIn" /></a>
+                <!--tableau pour les infos-->
 
-                <a href="https://github.com/Djiek">
-                    <img src="public/image/github.png" height="50" width="50" alt="logo-linkedIn" /></a>
-            </p>
-        </p><br />
-        <a href="public/image/cv.pdf" download="cv.pdf">Telecharger mon Cv</a>
-    </header>
+                <p> Permis B -
+                    Tourcoing </p>
+                <p>
+                    <a href="https://www.linkedin.com/in/marine-richini-791149194/">
+                        <img src="public/image/linkedIn.png" height="50" width="50" alt="logo-linkedIn" /></a>
+
+                    <a href="https://github.com/Djiek">
+                        <img src="public/image/github.png" height="50" width="50" alt="logo-linkedIn" /></a>
+                </p>
+            </p><br />
+            <a href="public/image/cv.pdf" download="cv.pdf">Telecharger mon Cv</a>
+        </header>
 </div>
 
 
@@ -58,37 +50,34 @@ $title = 'Mon blog'; ?>
                 <h3> Mes expériences professionnelles</h3>
         </div>
         </font><br />
-        <!--fonction de couleur avec font sur les titres-->
-        <br /> <br /> <br />
-
         <ul>
 
             <li><U>Novembre 2019 à fevrier 2020 </U>
                 <FONT color=#01796F size="3pt"> Stage Developpeur Web</font><br />
                 Groupe Cerise - Tourcoing (59)<br />
                 Base de données nosql, php, angular,methode agile(SCRUM)
-            </li><br /><br />
+            </li><br />
 
 
             <li><U>Juin 2018</U>
                 <FONT color=#01796F size="3pt"> Agent de production</font><br />
                 Mission d'intérim : Usine Château Blanc - Marcq-en-Baroeul (59)<br />
                 Emballage des produits, nettoyage, mise en boite des macarons, étiquetages, etc.
-            </li><br /><br />
+            </li><br />
 
 
             <li><U>Mars à avril 2016</U>
                 <FONT color=#01796F size="3pt"> Restauration collective</font><br />
                 Mission d'intérim : Sovitrat - Lille (59) <br />
                 Préparation des recettes, préparation des entrée et dessert sur assiette.
-            </li><br /><br />
+            </li><br />
 
 
             <li><U>Juillet à septembre 2015</U>
                 <FONT color=#01796F size="3pt">Employée polyvalente </font><br />
                 Station Shell - Briis-sous-forges (91)<br />
                 Caisse, mise en rayon des produits, nettoyage des machines à café.
-            </li><br /><br />
+            </li><br />
 
 
             <li><U>Octobre 2013 à octobre 2014</U>
@@ -96,20 +85,20 @@ $title = 'Mon blog'; ?>
                 Compagnie du Tire Laine - Lille (59) </br>
                 Préparation du lieu et des repas des artistes en vue des concerts. Remise à jour des fichiers de contact pour les chargés de diffusion.<br />
                 Pose d'affiches et de flyers en vue des spectacles et festivals de la compagnie.
-            </li><br /><br />
+            </li><br />
 
 
             <li><U>Août à septembre 2013</U>
                 <FONT color=#01796F size="3pt"> Restauration scolaire </font><br />
                 Mairie de Lille (59)<br />
                 Préparation des commandes et plats pour les enfants, instalation des tables, nettoyage de la vaisselle et du laboratoire.
-            </li><br /><br />
+            </li><br />
 
             <li><U>De juillet 2006 à août 2009</U>
                 <FONT color=#01796F size="3pt"> Apprentie en pâtisserie et glacerie </font><br />
                 Westminster Hôtel et Veron Chocolatier - Le Touquet Paris Plage <br />
                 Conception d'entremets, décors en chocolat, biscuits, pâte à choux, tartes, glaces et sorbets, entremets glacés, etc,...
-            </li><br /><br />
+            </li><br />
         </ul>
     </strong>
 
@@ -124,30 +113,30 @@ $title = 'Mon blog'; ?>
         </font><br /> <!-- un id pour que mes titres soient ensemble-->
         <div id="texteCache2">
             <center>
-                <p><U> Mai 2019 à novembre 2019</U><br /><br />
-                    <FONT color=#01796F size="3pt">Formation développeur web et web mobile avec diplome obtenu</font><br /><br />
-                    Formation Afpa de Roubaix (59) <br />
-                    Développer la partie front-end d'une application web et développer la partie back-end d'une application web.<br /><br /><br />
+                <p><U> Mai 2019 à novembre 2019</U>
+                    <FONT color=#01796F size="3pt">Formation développeur web et web mobile avec diplome obtenu</font>
+                    Formation Afpa de Roubaix (59)
+                    Développer la partie front-end d'une application web et développer la partie back-end d'une application web.
                 </p>
 
-                <p> <U> Année 2011</U> <br /><br />
-                    <FONT color=#01796F size="3pt">Mention complémentaire pâtisserie obtenue</font><br /><br />
-                    CFA Arras (62) </br><br /><br />
+                <p> <U> Année 2011</U>
+                    <FONT color=#01796F size="3pt">Mention complémentaire pâtisserie obtenue</font>
+                    CFA Arras (62)
                 </p>
 
-                <p><U> Année 2010</U><br /><br />
-                    <FONT color=#01796F size="3pt">CAP Glacerie obtenu </font><br /><br />
-                    CFA Arras (62) <br /><br /><br />
+                <p><U> Année 2010</U>
+                    <FONT color=#01796F size="3pt">CAP Glacerie obtenu </font>
+                    CFA Arras (62)
                 </p>
 
-                <p><U> Année 2009</U><br /><br />
-                    <FONT color=#01796F size="3pt">BEP pâtisserie obtenu </font><br /><br />
-                    CFA Boulogne sur Mer (62) <br /><br /><br />
+                <p><U> Année 2009</U>
+                    <FONT color=#01796F size="3pt">BEP pâtisserie obtenu </font>
+                    CFA Boulogne sur Mer (62)
                 </p>
 
-                <p><U> Année 2005 à 2007</U><br /><br />
-                    <FONT color=#01796F size="3pt">Seconde et première STG communication</font><br /><br />
-                    Lycée Jean Lavezzari de Berck sur Mer (62) <br /><br />
+                <p><U> Année 2005 à 2007</U>
+                    <FONT color=#01796F size="3pt">Seconde et première STG communication</font>
+                    Lycée Jean Lavezzari de Berck sur Mer (62)
                 </p>
             </center>
         </div>
@@ -163,35 +152,35 @@ $title = 'Mon blog'; ?>
                     <FONT color=#263f3f> Bénévolat, wwoofing et centre d'intérêt
                 </h3>
             </div>
-            </font></br><br />
+            </font></br>
 
             <ul>
                 <li> <U>De 2017 à 2018 </U><br />
                     <FONT color=#01796F size="3pt"> Intervenante(cuisine)</font><br />
                     Association K-Pa-Cité - Roubaix (59) <br />
-                    Cours de pâtisserie avec les jeunes de l'association. Accompagnement sur les événements pour réaliser les repas. <br /><br />
+                    Cours de pâtisserie avec les jeunes de l'association. Accompagnement sur les événements pour réaliser les repas.
                 </li>
                 <li> <U> De 2015 à 2018 </U><br />
                     <FONT color=#01796F size="3pt"> Catering </font><br />
                     La Malterie, La Cave aux Poetes et la Condition Publique - Lille- Roubaix (59)<br />
-                    Préparation des repas avant les concerts via l'association Tourne Disque.<br /><br />
+                    Préparation des repas avant les concerts via l'association Tourne Disque.
                 </li>
                 <li> <U> Avril 2017</U><br />
                     <FONT color=#01796F size="3pt"> Wwoofing Suède</font><br />
                     3 semaines dans une ferme biologique <br />
-                    Plantation de légumes en serre et en ext&#233;rieur, entretient des fraisiers, soin des animaux (nourriture, eau, paille, etc,..) <br /><br />
+                    Plantation de légumes en serre et en ext&#233;rieur, entretient des fraisiers, soin des animaux (nourriture, eau, paille, etc,..)
                 </li>
                 <li><U> Novembre 2016 </U><br />
                     <FONT color=#01796F size="3pt"> Wwoofing Canada</font><br />
                     1 mois dans une ferme biologique <br />
-                    Elagage des haies et ronces, plantation d'ails, soin des animaux (nourriture, eau,paille, etc,...) <br /><br />
+                    Elagage des haies et ronces, plantation d'ails, soin des animaux (nourriture, eau,paille, etc,...)
                 </li>
             </ul>
 
             <div id="loisir">
                 <U>
                     <FONT color=#263f3f size="5pt"> Loisirs
-                </U></font></br></br>
+                </U></font></br>
 
                 Lecture. Chant et piano dans un groupe de pop astral (Kiwi Astral)
 
@@ -208,19 +197,19 @@ $title = 'Mon blog'; ?>
                         <h4 class="bordure"> Si vous avez des questions, n'hésitez pas à me contacter via ce formulaire.</h4>
                         <div class="form-group  bordure">
                             <label for="name">Nom : </label>
-                            <input type="text" name="name" class="form-control" id="name">
+                            <input type="text" name="name" class="form-control" id="name" required="required">
                         </div>
                         <div class="form-group  bordure">
                             <label for="firstname">Prénom : </label>
-                            <input type="text" name="firstname" class="form-control" id="firstname">
+                            <input type="text" name="firstname" class="form-control" id="firstname" required="required">
                         </div>
                         <div class="form-group  bordure">
                             <label for="email">Mail :</label>
-                            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="required">
                         </div>
                         <div class="form-group  bordure">
                             <label for="message">Votre message : </label>
-                            <textarea name="message" class="form-control" id="exampleTextarea" rows="3"></textarea>
+                            <textarea name="message" class="form-control" id="exampleTextarea" rows="3" required="required"></textarea>
                         </div>
                         <div class="bordure"> <button type="submit" class="btn btn-primary"> Envoyer </button></div>
                 </form>

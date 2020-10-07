@@ -4,9 +4,10 @@
 <head>
     <meta charset="utf-8" />
     <title><?= $title ?></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <link href="style.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="public/css/css.css">
-    <link rel='stylesheet' href='public/css/bootstrap/bootstraap.min.css' />
+    <link rel='stylesheet' href='public/css/bootstrap/bootstrap.min.css' />
 </head>
 
 <body>
@@ -20,21 +21,24 @@
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?action=listPosts">Liste des blogs Posts</a>
                 </li>
-          <?php if(isset($_SESSION['User'])): ?>
+                <?php if (isset($_SESSION['User'])) : ?>
                     <li class="nav-item">
                         <a class="nav-link" href="index.php?action=logout">Se déconnecter</a>
                     </li>
-            <?php  else : ?>
+                <?php else : ?>
                     <li class="nav-item">
                         <a class="nav-link" href="index.php?action=connection">Se connecter</a>
                     </li>
-                    <?php endif; ?>
-     
-                 
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?action=addPostForm">Ajouter un blog post</a>
-                </li>
-            
+                <?php endif; ?>
+
+                <?php if (isset($_SESSION['User']) && $_SESSION['User']['admin'] == 1) : ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php?action=addPostForm">Ajouter un blog post</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php?action=managementCommentPage">Gestion des commentaires</a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
     </nav>
@@ -42,14 +46,14 @@
 
 
     <?= $content ?>
-  <?php   if (isset($_SESSION['error'])) {
-    echo $_SESSION['error'];
-    unset($_SESSION['error']);
-} 
- if (isset($_SESSION['flash']['success'] )) {
-    echo $_SESSION['flash']['success'] ;
-    unset($_SESSION['flash']['success'] );
-} ?>
+    <?php if (isset($_SESSION['error'])) {
+        echo $_SESSION['error'];
+        unset($_SESSION['error']);
+    }
+    if (isset($_SESSION['flash']['success'])) {
+        echo "<h3 class='table-success bordure'>" . $_SESSION['flash']['success'] . "</h3>";
+        unset($_SESSION['flash']['success']);
+    } ?>
 </body>
 
 </html>

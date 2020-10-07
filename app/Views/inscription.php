@@ -1,7 +1,7 @@
 <?php
 $title = 'Inscription'; ?>
 
-<?php ob_start(); 
+<?php ob_start();
 ?>
 <br /><br />
 <div class="row">
@@ -12,16 +12,16 @@ $title = 'Inscription'; ?>
                 <fieldset>
                     <h2 class="bordure">Veuillez remplir le formulaire :</h2>
                     <div class="form-group  bordure">
-                        <p>Login</p><input type="login" name="login" /> <br />
+                        <p>Login</p><input type="login" name="login" required="required" /> <br />
                     </div>
                     <div class="form-group  bordure">
-                        <p> Mot de passe </p> <input type="password" name="password" /><br /><br />
+                        <p> Mot de passe </p> <input type="password" name="password" required="required" /><br /><br />
                     </div>
                     <div class="form-group  bordure">
-                        <p>Confirmation du mot de passe </p> <input type="password" name="cPassword" /><br /><br />
+                        <p>Confirmation du mot de passe </p> <input type="password" name="cPassword" required="required" /><br /><br />
                     </div>
                     <div class="form-group  bordure">
-                        <p>Mail </p> <input type="email" name="mail" /><br /><br />
+                        <p>Mail </p> <input type="email" name="mail" required="required" /><br /><br />
                     </div>
                     <div class="bordure"> <button type="submit" class="btn btn-primary"> Enregistrer </button></div>
             </form>
