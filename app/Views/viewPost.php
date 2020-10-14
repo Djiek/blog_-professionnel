@@ -3,7 +3,15 @@ $title = 'Mon blog';
 ?>
 
 <?php ob_start();
-?>
+if (isset($_SESSION['error'])) {
+        echo $_SESSION['error'];
+        unset($_SESSION['error']);
+    }
+    if (isset($_SESSION['flash']['success'])) {
+        echo "<h3 class='table-success bordure'>" . $_SESSION['flash']['success'] . "</h3>";
+        unset($_SESSION['flash']['success']);
+    } ?>
+
 <br />
 
 <div class="row bordure">
@@ -35,8 +43,8 @@ $title = 'Mon blog';
                         </div>
                     </div>
                 </div>
-            <?php endforeach;
-            ?>
+          
+           <?php endforeach; ?>
             <?php
             foreach ($comments as $comment) :
             ?>
@@ -53,12 +61,10 @@ $title = 'Mon blog';
                             <div class="row">
                                 <div class="col-sm-2"></div>
                                 <div class="col-sm-8">
-                                    <form action="index.php?action=updateStatusComment&id=<?= $comment->getId() ?>" method="POST">
-                                        <div class="bordure"> <button type="submit" class="btn btn-success"> Valider </button>
+                                        <div class="bordure"> <a href="index.php?action=updateStatusComment&id=<?= $comment->getId()?>&postId=<?= $comment->getBlogPostId() ?>" class="btn btn-success"> Valider </a>
                                     </form>
                                 </div>
-                                <form action="index.php?action=deleteComment&id=<?= $comment->getId() ?>" method="POST">
-                                    <div class="bordure"><button type="submit" class="btn btn-primary"> Rejeter</button>
+                                    <div class="bordure"><a onClick=" return confirm('Voulez-vous vraiment supprimer ce commentaire ?')" href="index.php?action=deleteComment&id=<?= $comment->getId()?>&postId=<?= $comment->getBlogPostId() ?>"  class="btn btn-primary"> Rejeter</a>
                                 </form>
                             </div>
 
@@ -66,7 +72,7 @@ $title = 'Mon blog';
                     </div>
                 </div>
         </div>
-    </div> <br />
+    </div> <br />  
 <?php
             endforeach;
 ?>

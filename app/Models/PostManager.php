@@ -97,13 +97,32 @@ class PostManager extends Manager
         return $posts; //retourner un new blogpost 
     }
 
-    public function addBlogPost($chapo, $title, $content)
+    public function addBlogPost($user,$title, $chapo,$content)
     {
         $db = $this->dbConnect();
         $post = $db->prepare('INSERT INTO blogpost(user_id,status,title,chapo, content,dateLastModification)
-             VALUES(1,1,?, ?, ?, NOW())');
-        $affectedLines = $post->execute(array($title, $chapo, $content));
+             VALUES(?,1,?, ?, ?, NOW())');
+        $affectedLines = $post->execute(array($user,$title, $chapo, $content));
 
         return $affectedLines;
+    }
+
+    public function ModifyPost($blogPostId,$userId,$title,$chapo,$content)
+    {
+         $db = $this->dbConnect();
+        $req = $db->prepare('UPDATE blogpost set title = :title,chapo = :chapo,content = :content,user_id = :userId  WHERE id = :blogPostId');
+       $req->bindValue(":userId", $userId, PDO::PARAM_INT);
+        $req->bindValue(":title", $title);
+         $req->bindValue(":chapo", $chapo);
+          $req->bindValue(":content", $content);
+       $req->bindValue(":blogPostId", $blogPostId);
+        $req->execute();
+    }
+     public function DeletePost($blogPostId)
+    {
+         $db = $this->dbConnect();
+        $req = $db->prepare('DELETE FROM `blogpost`WHERE id = :blogPostId');
+       $req->bindValue(":blogPostId", $blogPostId, PDO::PARAM_INT);
+        $req->execute();
     }
 }

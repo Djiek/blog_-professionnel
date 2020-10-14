@@ -19,8 +19,8 @@ $title = 'Mon blog';
                     <div class="col-sm-2"></div>
                     <div class="col-sm-8">
                         <div class="card border-success mb-3 ">
-                            <label for="title"> Par <?= htmlspecialchars($comment->getUserId()); ?>, le <?= $comment->getDate()  ?> </label>
-                            <h4 class="table-success"><?= nl2br(htmlspecialchars(($comment->getTitle()))) ?> </h4>
+                            <label for="title"> Par <?= $comment->getUserId(); ?>, le <?= $comment->getDate()  ?> </label>
+                            <h4 class="table-success"><?= htmlspecialchars(($comment->getTitle())) ?> </h4>
                             </label>
                             <div class="card-text bordureCom  ">
                                 <label for="content"> <?= nl2br(htmlspecialchars(($comment->getContent()))); ?></label>
