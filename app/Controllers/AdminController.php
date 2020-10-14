@@ -9,6 +9,7 @@ require_once('app/Models/UserManager.php');
 
 use blogProfessionnel\app\Models\CommentManager;
 use \blogProfessionnel\app\Models\PostManager;
+use \blogProfessionnel\app\Models\UserManager;
 
 class AdminController
 {
@@ -20,6 +21,33 @@ class AdminController
     //      }
     // }
 
+public function postDelete(){
+    $postManager = new PostManager;
+    $affectedLines = $postManager->deletePost($_GET['id']);
+      if ($affectedLines === false) {
+                $_SESSION['error'] = "Impossible de supprimer le blog post !";
+            } else {
+                $_SESSION['flash']['success'] = "Le blogPost a été supprimé.";   
+        } 
+         header('Location: index.php?action=listPosts');
+
+}
+public function postModify(){
+    $postManager = new PostManager;
+    $posts = $postManager->getPost($_GET['id']);
+    require('App/Views/postModify.php');
+}
+
+public function modifyBlogPost(){
+     $postManager = new PostManager;
+     $affectedLines = $postManager->ModifyPost($_GET['id'],$_SESSION['User']['id'],$_POST['title'],$_POST['chapo'],$_POST['content']);
+    if ($affectedLines === false) {
+                $_SESSION['error'] = "Impossible de modifier le blog post !";
+            } else {
+                $_SESSION['flash']['success'] = "Le blogPost a été modifié.";   
+        } 
+         header('Location: index.php?action=post&id='.$_GET['id']);
+}
 
     //addPostForm sans requete, le controler appel une vue
     public function addPostForm()
@@ -30,16 +58,19 @@ class AdminController
             $_SESSION['error'] = 'Vous devez être administrateur pour acceder à cette page';
             header('Location: index.php?action=connection');
         }
+        
     }
 
-    function addBlogPost($title, $chapo, $content)
+    function addBlogPost($title, $chapo,$content,$user)
     {
+        //var_dump($user);die;
         $postManager = new PostManager(); // Création d'un objet
         if (isset($_SESSION['User']) && $_SESSION['User']['admin'] == 1) {
-            $affectedLines = $postManager->addBlogPost($title, $chapo, $content);
+            $affectedLines = $postManager->addBlogPost($title, $chapo, $content,$user);
+            //var_dump($affectedLines);die;
             if ($affectedLines === false) {
-                $_SESSION['error'] = "Impossible d\'ajouter le blog post !";
-                header('Location: app/Views/addBlogPost.php');
+                $_SESSION['error'] = "Impossible d'ajouter le blog post !";
+                header('Location: index.php?action=addPostForm');
             } else {
                 $_SESSION['flash']['success'] = "Le blogPost a été enregistré en base de donnée.";
                 header('Location: index.php?action=addPostForm');
@@ -52,40 +83,32 @@ class AdminController
 
     public function updateStatusComment()
     {
-        $postManager = new PostManager;
-        $posts = $postManager->getPost($_GET['id']);
         $commentManager = new CommentManager();
-        $comments = $commentManager->UpdateStatusComment($_GET['id']);
-
-        $_SESSION['flash']['success'] = 'Le commentaire a été validé';
-        //require('app/Views/ViewPost.php');
-        header('Location: index.php?action=ViewPostComment');
+        $affectedLines = $commentManager->UpdateStatusComment($_GET['postId'],$_GET['id']);
+       if ($affectedLines === false) {
+            $_SESSION['error'] = 'Impossible de valider le commentaire';
+        } else {
+            $_SESSION['flash']['success'] = 'Le commentaire a été validé';    
+        }
+        header('Location: index.php?action=ViewPostComment&id='.$_GET['postId']);
     }
 
     public function deleteComment()
     {
-        $postManager = new PostManager;
-        $posts = $postManager->getPost($_GET['id']);
         $commentManager = new CommentManager();
-        $affectedLines = $commentManager->deleteComment($_GET['id']);
-        if ($affectedLines === false) {
-            $_SESSION['error'] = 'Impossible de supprimer le commentaire';
-            header('Location: index.php?action=inscriptionForm');
+        $affectedLines = $commentManager->deleteComment($_GET['postId'],$_GET['id']);
+          if ($affectedLines === false) {
+             $_SESSION['error'] = 'Impossible de supprimer le commentaire';
         } else {
-            $_SESSION['flash']['success'] = 'Le commentaire à été suprimé';
-            header('Location: index.php?action=success');
+            $_SESSION['flash']['success'] = 'Le commentaire a été supprimé';    
         }
-
-        // $comments = $commentManager->deleteComment($_GET['id']);
-
-        // //require('app/Views/ViewPostComment.php');
-        // // header('Location: "index.php?action=ViewPostComment&id="'.$_GET['id']);
-        //  header('Location: index.php?action=ViewPostComment');
+        header('Location: index.php?action=ViewPostComment&id='.$_GET['postId']);
+        
+       
     }
 
     function ViewPostComment()
     {
-
         if (isset($_GET['page']) && !empty($_GET['page'])) {
             $_GET['page'] = intval($_GET['page']);
             $currentPage = $_GET['page'];

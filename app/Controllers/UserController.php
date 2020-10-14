@@ -90,7 +90,8 @@ class UserController
                 $users = $userManager->connectionUser($_POST["login"], $_POST["password"]);
                 $_SESSION['User'] = array(
                     'login' => $_POST['login'],
-                    'admin' => $user['admin']
+                    'admin' => $user['admin'],
+                    'id' => $user['id'],
                 );
                 header('Location: index.php?action=home');
             }

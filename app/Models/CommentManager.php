@@ -67,29 +67,36 @@ class CommentManager extends Manager
         return $pageOfNumber;
     }
 
-    public function deleteComment($commentId)
+    public function deleteComment($postId,$commentId)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('DELETE FROM comment WHERE id = :commentId ');
+        $req = $db->prepare('DELETE FROM comment WHERE blogPost_id = :postId AND id = :commentId ');
+        $req->bindValue(":postId", $postId, PDO::PARAM_INT);
         $req->bindValue(":commentId", $commentId, PDO::PARAM_INT);
         $req->execute();
     }
-
-    public function UpdateStatusComment($commentId)
-    {
-        $db = $this->dbConnect();
-        $req = $db->prepare('UPDATE comment set status=1 WHERE id = :commentId ');
-        $req->bindValue(":commentId", $commentId, PDO::PARAM_INT);
-        $req->execute();
-    }
-
-
 
     public function CommentPage($currentPage)
     {
         $nbPerPage = $this->getNbPerPage();
         $commentPage = ($currentPage - 1) * $nbPerPage;
         return $commentPage;
+    }
+
+    public function UpdateStatusComment($postId,$commentId)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('UPDATE comment set status=1  WHERE blogPost_id = :postId && id = :commentId ');
+        $req->bindValue(":postId", $postId, PDO::PARAM_INT);
+         $req->bindValue(":commentId", $commentId, PDO::PARAM_INT);
+        $req->execute();
+        while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
+            $comment = new Comment();
+            $comment->setId($row['id']);
+            $comments[] = $comment;
+           
+        }
+            return $comments;
     }
 
     public function getComments($postId, $currentPage)
@@ -110,6 +117,7 @@ class CommentManager extends Manager
             $login->setLogin($row['login']);
             $comment = new Comment();
             $comment->setTitle($row['title']);
+            
             $comment->setContent($row['content']);
             $comment->setDate($row['date']);
             $comment->setStatus($row['status']);
@@ -152,7 +160,7 @@ class CommentManager extends Manager
         $nbPerPage = $this->getNbPerPage();
         $commentPage = $this->CommentPage($currentPage);
         $db = $this->dbConnect();
-        $req = $db->prepare("SELECT * FROM comment INNER JOIN user ON comment.user_id = user.id WHERE blogPost_id = :postId AND status = 0 ORDER BY date DESC LIMIT :commentPage ,:nbPerPage ");
+        $req = $db->prepare("SELECT comment.id,title,content,date,status,blogPost_id,user.login FROM comment INNER JOIN user ON comment.user_id = user.id WHERE blogPost_id = :postId AND status = 0 ORDER BY date DESC LIMIT :commentPage ,:nbPerPage ");
         $req->bindValue(":postId", $postId, PDO::PARAM_INT);
         $req->bindValue(":commentPage", $commentPage, PDO::PARAM_INT);
         $req->bindValue(":nbPerPage", $nbPerPage, PDO::PARAM_INT);
@@ -162,14 +170,15 @@ class CommentManager extends Manager
             $login = new User();
             $login->setLogin($row['login']);
             $comment = new Comment();
-            $comment->setId($row['id']);
             $comment->setTitle($row['title']);
+            $comment->setId($row['id']);
             $comment->setContent($row['content']);
             $comment->setDate($row['date']);
             $comment->setStatus($row['status']);
             $comment->setUserId($row['login']);
             $comment->setBlogPostId($row['blogPost_id']);
             $comments[] = $comment;
+
         }
         return $comments;
     }
