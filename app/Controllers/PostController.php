@@ -51,7 +51,7 @@ class PostController
             $affectedLines = $commentManager->postComment($postId, $userId, $content, $title);
             if ($affectedLines === false) {
                 $_SESSION['error'] = 'Impossible d\'ajouter le commentaire !';
-                header('Location: index.php?action=post&id='.$postId);
+                header('Location: index.php?action=post&id=' . $postId);
             } else {
                 $_SESSION['flash']['success'] = "Votre commentaire a été pris en compte et sera traité par un administrateur dans les meilleurs délais.";
                 header('Location: index.php?action=post&id=' . $postId);

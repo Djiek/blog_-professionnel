@@ -18,7 +18,7 @@ if (isset($_SESSION['flash']['success'])) {
     <div class="col-sm-2"></div>
     <div class="col-sm-8">
         <div class="card border-primary mb-3" style="max-width: 50rem;">
-            <form action="index.php?action=addBlogPost&UserId=<?= $_SESSION['User']['id'] ?>" method="post">
+            <form action="index.php?action=addBlogPost" method="post">
                 <fieldset>
                     <h2 class="bordure">Ajouter un blog post</h2>
                     <div class="form-group  bordure">

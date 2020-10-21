@@ -23,34 +23,15 @@ class CommentManager extends Manager
 
     public function countComment($postId, $currentPage)
     {
-        // // $db = $this->dbConnect();
-        // // $countComment = $db->prepare('SELECT count(id) as nbrComment FROM comment WHERE status=1');
-        // // $countComment->setFetchMode(PDO::FETCH_ASSOC);
-        // // $countComment->execute();
-        // // $countComments = $countComment->fetchAll();
-
-        // $getComment = $this->getComments($postId, $currentPage);
-        // $db = $this->dbConnect();
-        // $countComment = $db->prepare("SELECT count(comment.id) as nbrComment FROM comment INNER JOIN blogpost ON comment.blogPost_id = blogpost.id WHERE status=1 && blogPost_id = $postId");
-        // $countComment->setFetchMode(PDO::FETCH_ASSOC);
-        // $countComment->execute(array($postId,$currentPage));
-        // $countComments = $countComment->fetchAll();
-
-        // //pagination
-        // $nbPerPage = $this->getNbPerPage();
-        // $pageOfNumber = ceil($countComments[0]["nbrComment"] / $nbPerPage); //ceil pour arondir au nombre au dessus en cas de division a virgule
-        // return $pageOfNumber;
-
-
         $db = $this->dbConnect();
         $countComment = $db->prepare('SELECT count(id) as nbrComment FROM comment WHERE status=1 && blogPost_id = ?');
         $countComment->setFetchMode(PDO::FETCH_ASSOC);
         $countComment->execute(array($postId));
         $countComments = $countComment->fetchAll();
 
-        //pagination
+
         $nbPerPage = $this->getNbPerPage();
-        $pageOfNumber = ceil($countComments[0]["nbrComment"] / $nbPerPage); //ceil pour arondir au nombre au dessus en cas de division a virgule
+        $pageOfNumber = ceil($countComments[0]["nbrComment"] / $nbPerPage);
         return $pageOfNumber;
     }
     public function countCommentWithoutId()
@@ -63,11 +44,11 @@ class CommentManager extends Manager
 
         //pagination
         $nbPerPage = $this->getNbPerPage();
-        $pageOfNumber = ceil($countComments[0]["nbrComment"] / $nbPerPage); //ceil pour arondir au nombre au dessus en cas de division a virgule
+        $pageOfNumber = ceil($countComments[0]["nbrComment"] / $nbPerPage);
         return $pageOfNumber;
     }
 
-    public function deleteComment($postId,$commentId)
+    public function deleteComment($postId, $commentId)
     {
         $db = $this->dbConnect();
         $req = $db->prepare('DELETE FROM comment WHERE blogPost_id = :postId AND id = :commentId ');
@@ -83,20 +64,19 @@ class CommentManager extends Manager
         return $commentPage;
     }
 
-    public function UpdateStatusComment($postId,$commentId)
+    public function UpdateStatusComment($postId, $commentId)
     {
         $db = $this->dbConnect();
         $req = $db->prepare('UPDATE comment set status=1  WHERE blogPost_id = :postId && id = :commentId ');
         $req->bindValue(":postId", $postId, PDO::PARAM_INT);
-         $req->bindValue(":commentId", $commentId, PDO::PARAM_INT);
+        $req->bindValue(":commentId", $commentId, PDO::PARAM_INT);
         $req->execute();
         while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
             $comment = new Comment();
             $comment->setId($row['id']);
             $comments[] = $comment;
-           
         }
-            return $comments;
+        return $comments;
     }
 
     public function getComments($postId, $currentPage)
@@ -117,7 +97,7 @@ class CommentManager extends Manager
             $login->setLogin($row['login']);
             $comment = new Comment();
             $comment->setTitle($row['title']);
-            
+
             $comment->setContent($row['content']);
             $comment->setDate($row['date']);
             $comment->setStatus($row['status']);
@@ -178,18 +158,15 @@ class CommentManager extends Manager
             $comment->setUserId($row['login']);
             $comment->setBlogPostId($row['blogPost_id']);
             $comments[] = $comment;
-
         }
         return $comments;
     }
 
-
-
     public function postComment($postId, $userId, $content, $title)
     {
         $db = $this->dbConnect();
-        $comments = $db->prepare('INSERT INTO comment(status, blogPost_id, title, user_id, content,date) VALUES(0,?,?,?,?,NOW())');
-        $affectedLines = $comments->execute(array($postId, $title, $userId, $content));
+        $comments = $db->prepare('INSERT INTO comment(status, blogPost_id,user_id, content,title,date) VALUES(0,?,?,?,?,NOW())');
+        $affectedLines = $comments->execute(array($postId, $userId, $content, $title));
         return $affectedLines;
     }
 
