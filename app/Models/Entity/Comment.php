@@ -89,7 +89,7 @@ class Comment
         $this->id = $id;
     }
 
-    
+
     /**
      * @return mixed
      */

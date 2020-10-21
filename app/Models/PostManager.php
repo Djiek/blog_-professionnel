@@ -31,7 +31,7 @@ class PostManager extends Manager
 
         //pagination
         $nbPerPage = $this->getNbPerPage();
-        $pageOfNumber = ceil($countPosts[0]["nbrPost"] / $nbPerPage); //ceil pour arondir au nombre au dessus en cas de division a virgule
+        $pageOfNumber = ceil($countPosts[0]["nbrPost"] / $nbPerPage);
         return $pageOfNumber;
     }
 
@@ -66,11 +66,7 @@ class PostManager extends Manager
             $post->setChapo($row['chapo']);
             $posts[] = $post;
         }
-
-        // $req->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'posts');
-        // $posts = $req->fetchAll();
-        //$posts = new BlogPost($req['id'], $req['title'], $req['content'], $req["dateLastModification"], $req['status'], $req['user_id'], $req['chapo']);
-        return $posts; //retourner un new blogpost 
+        return $posts;
     }
 
     public function getPost($postId)
@@ -94,35 +90,35 @@ class PostManager extends Manager
             $post->setChapo($row['chapo']);
             $posts[] = $post;
         }
-        return $posts; //retourner un new blogpost 
+        return $posts;
     }
 
-    public function addBlogPost($user,$title, $chapo,$content)
+    public function addBlogPost($title, $chapo, $content, $user)
     {
         $db = $this->dbConnect();
-        $post = $db->prepare('INSERT INTO blogpost(user_id,status,title,chapo, content,dateLastModification)
-             VALUES(?,1,?, ?, ?, NOW())');
-        $affectedLines = $post->execute(array($user,$title, $chapo, $content));
+        $post = $db->prepare('INSERT INTO blogpost(title,chapo, content,user_id,status,dateLastModification)
+             VALUES(?,?, ?, ?,1, NOW())');
+        $affectedLines = $post->execute(array($title, $chapo, $content, $user));
 
         return $affectedLines;
     }
 
-    public function ModifyPost($blogPostId,$userId,$title,$chapo,$content)
+    public function ModifyPost($blogPostId, $userId, $title, $chapo, $content)
     {
-         $db = $this->dbConnect();
+        $db = $this->dbConnect();
         $req = $db->prepare('UPDATE blogpost set title = :title,chapo = :chapo,content = :content,user_id = :userId  WHERE id = :blogPostId');
-       $req->bindValue(":userId", $userId, PDO::PARAM_INT);
+        $req->bindValue(":userId", $userId, PDO::PARAM_INT);
         $req->bindValue(":title", $title);
-         $req->bindValue(":chapo", $chapo);
-          $req->bindValue(":content", $content);
-       $req->bindValue(":blogPostId", $blogPostId);
+        $req->bindValue(":chapo", $chapo);
+        $req->bindValue(":content", $content);
+        $req->bindValue(":blogPostId", $blogPostId);
         $req->execute();
     }
-     public function DeletePost($blogPostId)
+    public function DeletePost($blogPostId)
     {
-         $db = $this->dbConnect();
+        $db = $this->dbConnect();
         $req = $db->prepare('DELETE FROM `blogpost`WHERE id = :blogPostId');
-       $req->bindValue(":blogPostId", $blogPostId, PDO::PARAM_INT);
+        $req->bindValue(":blogPostId", $blogPostId, PDO::PARAM_INT);
         $req->execute();
     }
 }
