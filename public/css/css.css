@@ -1,6 +1,6 @@
 body {
     color: black;
-    font-family: Arial, verdana, georgia;
+    /* font-family: Arial, verdana, georgia; */
     margin: auto !important;
     max-width: 1150px !important;
 }
@@ -10,12 +10,10 @@ body {
     border: 3px #263f3f solid;
     box-shadow: 2px 2px 3px #444;
     margin: 20px;
-    background: url(public/image/fondvert.png);
     background-size: cover;
 }
 
 #fond {
-    background: url(public/image/fondvert3.png);
     -webkit-background-size: cover;
     background-size: cover;
     border: 2px black solid;
@@ -65,7 +63,6 @@ a:visited {
     /*tout mes titres sont centré, avec un cadre de la même taille*/
     border: 2px black solid;
     padding-top: 17px;
-    background: url(public/image/fondvert.png);
     /* apparement les deux ligres du bas sont faite pour que les anciennes versions des navigateurs puissent voir le fond correctement*/
     background-size: cover;
     /* j'ai testé sans et c'est moche*/
@@ -78,7 +75,6 @@ header {
     /*word-wrap: break-word;*/
     border: 1px solid #333;
     box-shadow: 8px 8px 5px #444;
-    background: url(public/image/fondvert.png);
     -webkit-background-size: cover;
     background-size: cover;
     text-align: center;

@@ -4,7 +4,7 @@ namespace blogProfessionnel\app\Models\Entity;
 
 class Comment
 {
-    private $id;
+    private $CommentId;
     private $title;
     private $content;
     private $date;
@@ -12,16 +12,16 @@ class Comment
     private $userId;
     private $blogPostId;
 
-    public function __construct($id, $title, $content, $date, $status, $userId, $blogPostId)
-    {
-        $this->id = $id;
-        $this->title = $title;
-        $this->content = $content;
-        $this->date = $date;
-        $this->status = $status;
-        $this->userId = $userId;
-        $this->blogPostId = $blogPostId;
-    }
+    // public function __construct($id, $title, $content, $date, $status, $userId, $blogPostId)
+    // {
+    //     $this->id = $id;
+    //     $this->title = $title;
+    //     $this->content = $content;
+    //     $this->date = $date;
+    //     $this->status = $status;
+    //     $this->userId = $userId;
+    //     $this->blogPostId = $blogPostId;
+    // }
 
 
     /**
@@ -76,6 +76,23 @@ class Comment
     /**
      * @return mixed
      */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $userId
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+
+    /**
+     * @return mixed
+     */
     public function getUserId()
     {
         return $this->userId;
@@ -89,22 +106,6 @@ class Comment
         $this->userId = $userId;
     }
 
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
 
     /**
      * @return mixed

@@ -3,21 +3,33 @@
 namespace blogProfessionnel\app\Models;
 
 require_once("app/Models/Manager.php");
+require 'app/Models/Entity/User.php';
 
+use blogProfessionnel\app\Models\Entity\User;
 use PDO;
 
 class UserManager extends Manager
 {
-    public function getUser($userId)
+
+    public function connectionUser($login, $password)
     {
         $db = $this->dbConnect();
-        $user = $db->prepare('SELECT * FROM user');
-        $user->execute(array($userId));
-        //  if($mail == $user['mail'] && $login == $user['login']  && $password == $user['password'] ){
-        //     $_SESSION["login"] = $user['login'] ;
-        //     $_SESSION["mail"] = $user['mail'];
-        // }
+        $user = $db->prepare("SELECT login, password,mail,admin  FROM user WHERE login=:login AND password=:password");
+        $user->bindValue(":login", $login, PDO::PARAM_STR);
+        $user->bindValue(":password", $password, PDO::PARAM_STR);
+        $user->execute();
         return $user;
+    }
+
+    public function getUser($login)
+    {
+        $db = $this->dbConnect();
+        $user = $db->prepare('SELECT * FROM user WHERE login=:login');
+        $user->bindValue(":login", $login, PDO::PARAM_STR);
+        $user->execute();
+        return $user->fetch();
+        $users = new User($user['id'], $user['mail'], $user['login'], $user["password"], $user["admin"]);
+        return $users;
     }
 
     public function addUser($login, $password, $mail)
@@ -39,7 +51,7 @@ class UserManager extends Manager
     }
     //regrouper les deux
 
-        public function loginVerify($login)
+    public function loginVerify($login)
     {
         $db = $this->dbConnect();
         $user = $db->prepare("SELECT login FROM user WHERE login = :login");

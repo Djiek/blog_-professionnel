@@ -1,7 +1,8 @@
 <?php
 $title = 'Mon blog'; ?>
 
-<?php ob_start(); ?>
+<?php ob_start();
+?>
 <br /><br />
 <div class="row">
     <div class="col-sm-2"></div>
@@ -11,10 +12,10 @@ $title = 'Mon blog'; ?>
                 <fieldset>
                     <h2 class="bordure">Veuillez entrer vos iddentifiants pour vous connecter :</h2>
                     <div class="form-group  bordure">
-                        <p>Login</p><input type="login" name="login"  /> <br /> <!--required  -->
+                        <p>Login</p><input type="login" name="login" required="required" /> <br />
                     </div>
                     <div class="form-group  bordure">
-                         <p> Mot de passe </p> <input type="password" name="password"/><br /><br /> <!--required  -->
+                        <p> Mot de passe </p> <input type="password" name="password" required="required" /><br /><br />
                     </div>
                     <div class="bordure"> <button type="submit" class="btn btn-primary"> Valider </button></div>
                     <div><a class="nav-link" href="index.php?action=inscriptionForm"> Vous n'avez pas encore de compte ? Inscrivez vous en cliquant ici.</a></div>

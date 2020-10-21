@@ -8,13 +8,15 @@ class User
     private $email;
     private $login;
     private $password;
+    private $admin;
 
-    public function __construct($email, $login, $password)
-    {
-        $this->email = $email;
-        $this->login = $login;
-        $this->password = $password;
-    }
+    // public function __construct($id, $email, $login, $password)
+    // {
+    //     $this->id = $id;
+    //     $this->email = $email;
+    //     $this->login = $login;
+    //     $this->password = $password;
+    // }
 
     /**
      * @return mixed
@@ -78,5 +80,21 @@ class User
     public function setPassword($password)
     {
         $this->password = $password;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAdmin()
+    {
+        return $this->admin;
+    }
+
+    /**
+     * @param mixed $password
+     */
+    public function setAdmin($admin)
+    {
+        $this->admin = $admin;
     }
 }

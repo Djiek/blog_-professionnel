@@ -2,7 +2,16 @@
 
 $title = 'Mon blog'; ?>
 
-<?php ob_start(); ?>
+<?php ob_start();
+if (isset($_SESSION['error'])) {
+    echo $_SESSION['error'];
+    unset($_SESSION['error']);
+}
+if (isset($_SESSION['flash']['success'])) {
+    echo "<h3 class='table-success bordure'>" . $_SESSION['flash']['success'] . "</h3>";
+    unset($_SESSION['flash']['success']);
+}
+?>
 
 <br /><br />
 <div class="row">
