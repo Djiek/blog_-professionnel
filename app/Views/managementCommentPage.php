@@ -14,7 +14,6 @@ $title = 'Mon blog';
             <?php
             foreach ($comments as $comment) :
             ?>
-
                 <div class="row bordureCom">
                     <div class="col-sm-2"></div>
                     <div class="col-sm-8">
@@ -36,17 +35,11 @@ $title = 'Mon blog';
             ?>
             <div>
                 <ul class="pagination pagination-sm">
-                    <!-- <li class="page-item disabled">
-                        <a class="page-link" href="#">&laquo;</a>
-                    </li> -->
                     <?php for ($i = 1; $i <= $pageOfNumber; $i++) { ?>
                         <li class="page-item active">
                             <a class="page-link" href="index.php?action=managementCommentPage&page=<?= $i ?>"><?php echo $i  ?></a>
                         <?php } ?>
                         </li>
-                        <!-- <li class="page-item">
-                            <a class="page-link" href="#">&raquo;</a>
-                        </li> -->
                 </ul>
             </div>
             <?php $content = ob_get_clean(); ?>

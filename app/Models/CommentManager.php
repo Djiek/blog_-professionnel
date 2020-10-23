@@ -9,7 +9,6 @@ use blogProfessionnel\app\Models\Entity\Comment;
 use blogProfessionnel\app\Models\Entity\User;
 use PDO;
 
-
 class CommentManager extends Manager
 {
 
@@ -20,11 +19,10 @@ class CommentManager extends Manager
         return $this->nbrPerPage;
     }
 
-
-    public function countComment($postId, $currentPage)
+    public function countComment($postId)
     {
-        $db = $this->dbConnect();
-        $countComment = $db->prepare('SELECT count(id) as nbrComment FROM comment WHERE status=1 && blogPost_id = ?');
+        $dbConnect = $this->dbConnect();
+        $countComment = $dbConnect->prepare('SELECT count(id) as nbrComment FROM comment WHERE status=1 && blogPost_id = ?');
         $countComment->setFetchMode(PDO::FETCH_ASSOC);
         $countComment->execute(array($postId));
         $countComments = $countComment->fetchAll();
@@ -36,13 +34,12 @@ class CommentManager extends Manager
     }
     public function countCommentWithoutId()
     {
-        $db = $this->dbConnect();
-        $countComment = $db->prepare('SELECT count(id) as nbrComment FROM comment WHERE status= 0 ');
+        $dbConnect = $this->dbConnect();
+        $countComment = $dbConnect->prepare('SELECT count(id) as nbrComment FROM comment WHERE status= 0 ');
         $countComment->setFetchMode(PDO::FETCH_ASSOC);
         $countComment->execute();
         $countComments = $countComment->fetchAll();
 
-        //pagination
         $nbPerPage = $this->getNbPerPage();
         $pageOfNumber = ceil($countComments[0]["nbrComment"] / $nbPerPage);
         return $pageOfNumber;
@@ -50,8 +47,8 @@ class CommentManager extends Manager
 
     public function deleteComment($postId, $commentId)
     {
-        $db = $this->dbConnect();
-        $req = $db->prepare('DELETE FROM comment WHERE blogPost_id = :postId AND id = :commentId ');
+        $dbConnect = $this->dbConnect();
+        $req = $dbConnect->prepare('DELETE FROM comment WHERE blogPost_id = :postId AND id = :commentId ');
         $req->bindValue(":postId", $postId, PDO::PARAM_INT);
         $req->bindValue(":commentId", $commentId, PDO::PARAM_INT);
         $req->execute();
@@ -66,8 +63,8 @@ class CommentManager extends Manager
 
     public function UpdateStatusComment($postId, $commentId)
     {
-        $db = $this->dbConnect();
-        $req = $db->prepare('UPDATE comment set status=1  WHERE blogPost_id = :postId && id = :commentId ');
+        $dbConnect = $this->dbConnect();
+        $req = $dbConnect->prepare('UPDATE comment set status=1  WHERE blogPost_id = :postId && id = :commentId ');
         $req->bindValue(":postId", $postId, PDO::PARAM_INT);
         $req->bindValue(":commentId", $commentId, PDO::PARAM_INT);
         $req->execute();
@@ -83,8 +80,8 @@ class CommentManager extends Manager
     {
         $nbPerPage = $this->getNbPerPage();
         $commentPage = $this->CommentPage($currentPage);
-        $db = $this->dbConnect();
-        $req = $db->prepare("SELECT  title, user_id,status, content,user.login, DATE_FORMAT(date, '%d/%m/%Y à %Hh%imin%ss')
+        $dbConnect = $this->dbConnect();
+        $req = $dbConnect->prepare("SELECT  title, user_id,status, content,user.login, DATE_FORMAT(date, '%d/%m/%Y à %Hh%imin%ss')
         AS date FROM comment INNER JOIN user ON comment.user_id = user.id WHERE blogPost_id = :postId AND status = 1 ORDER BY date DESC LIMIT :commentPage ,:nbPerPage");
         $req->bindValue(":postId", $postId, PDO::PARAM_INT);
         $req->bindValue(":commentPage", $commentPage, PDO::PARAM_INT);
@@ -104,8 +101,6 @@ class CommentManager extends Manager
             $comment->setUserId($row['login']);
             $comments[] = $comment;
         }
-
-        //$comment = new Comment($comments['id'],$comments['title'],$comments['content'],$comments['date'],$comments['status'],$comments['login'],$comments['blogPostId']);
         return $comments;
     }
 
@@ -113,8 +108,8 @@ class CommentManager extends Manager
     {
         $nbPerPage = $this->getNbPerPage();
         $commentPage = $this->CommentPage($currentPage);
-        $db = $this->dbConnect();
-        $req = $db->prepare("SELECT * FROM comment INNER JOIN user ON comment.user_id = user.id WHERE status = 0 ORDER BY date DESC LIMIT :commentPage ,:nbPerPage ");
+        $dbConnect = $this->dbConnect();
+        $req = $dbConnect->prepare("SELECT * FROM comment INNER JOIN user ON comment.user_id = user.id WHERE status = 0 ORDER BY date DESC LIMIT :commentPage ,:nbPerPage ");
         $req->bindValue(":commentPage", $commentPage, PDO::PARAM_INT);
         $req->bindValue(":nbPerPage", $nbPerPage, PDO::PARAM_INT);
         $req->execute();
@@ -139,8 +134,8 @@ class CommentManager extends Manager
     {
         $nbPerPage = $this->getNbPerPage();
         $commentPage = $this->CommentPage($currentPage);
-        $db = $this->dbConnect();
-        $req = $db->prepare("SELECT comment.id,title,content,date,status,blogPost_id,user.login FROM comment INNER JOIN user ON comment.user_id = user.id WHERE blogPost_id = :postId AND status = 0 ORDER BY date DESC LIMIT :commentPage ,:nbPerPage ");
+        $dbConnect = $this->dbConnect();
+        $req = $dbConnect->prepare("SELECT comment.id,title,content,date,status,blogPost_id,user.login FROM comment INNER JOIN user ON comment.user_id = user.id WHERE blogPost_id = :postId AND status = 0 ORDER BY date DESC LIMIT :commentPage ,:nbPerPage ");
         $req->bindValue(":postId", $postId, PDO::PARAM_INT);
         $req->bindValue(":commentPage", $commentPage, PDO::PARAM_INT);
         $req->bindValue(":nbPerPage", $nbPerPage, PDO::PARAM_INT);
@@ -164,16 +159,16 @@ class CommentManager extends Manager
 
     public function postComment($postId, $userId, $content, $title)
     {
-        $db = $this->dbConnect();
-        $comments = $db->prepare('INSERT INTO comment(status, blogPost_id,user_id, content,title,date) VALUES(0,?,?,?,?,NOW())');
+        $dbConnect = $this->dbConnect();
+        $comments = $dbConnect->prepare('INSERT INTO comment(status, blogPost_id,user_id, content,title,date) VALUES(0,?,?,?,?,NOW())');
         $affectedLines = $comments->execute(array($postId, $userId, $content, $title));
         return $affectedLines;
     }
 
     public function updateStatus($postId, $userId)
     {
-        $db = $this->dbConnect();
-        $comments = $db->prepare('UPDATE INTO comment(status) VALUES(1,NOW())');
+        $dbConnect = $this->dbConnect();
+        $comments = $dbConnect->prepare('UPDATE INTO comment(status) VALUES(1,NOW())');
         $affectedLines = $comments->execute($postId, $userId);
         return $affectedLines;
     }

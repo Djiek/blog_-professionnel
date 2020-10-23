@@ -41,7 +41,6 @@ if (isset($_SESSION['flash']['success'])) {
 </div>
 
 <?php
-// $posts->closeCursor();
 ?>
 <?php $content = ob_get_clean(); ?>
 
