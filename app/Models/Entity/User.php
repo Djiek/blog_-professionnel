@@ -10,14 +10,6 @@ class User
     private $password;
     private $admin;
 
-    // public function __construct($id, $email, $login, $password)
-    // {
-    //     $this->id = $id;
-    //     $this->email = $email;
-    //     $this->login = $login;
-    //     $this->password = $password;
-    // }
-
     /**
      * @return mixed
      */

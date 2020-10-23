@@ -58,7 +58,7 @@ a:visited {
     color: black;
 }
 
-#titre {
+.titre {
     text-align: center;
     /*tout mes titres sont centré, avec un cadre de la même taille*/
     border: 2px black solid;
@@ -124,13 +124,13 @@ header {
 }
 
 .bordure {
-    padding: 10px !important;
-    margin: 10px !important;
-    text-align: center !important;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
 }
 
 .bordureCom {
-    text-align: center !important;
+    text-align: center;
 }
 
 .listpost {

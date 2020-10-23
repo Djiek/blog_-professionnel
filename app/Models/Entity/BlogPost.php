@@ -97,7 +97,6 @@ class BlogPost
         $this->userId = $userId;
     }
 
-
     /**
      * @return mixed
      */
@@ -144,23 +143,4 @@ class BlogPost
     {
         $this->chapo = $chapo;
     }
-
-
-    // /**
-    //      * @return mixed
-    //      */
-    //     public function getLogin()
-    //     {
-    //         return $this->login;
-    //     }
-
-    // /**
-    //  * @param mixed $chapo
-    //  */
-    // public function setLogin($login)
-    // {
-    //     $this->login = $login;
-    // }
-
-
 }

@@ -11,15 +11,12 @@ use PDO;
 
 class PostManager extends Manager
 {
-
     public $nbrPerPage = 5;
-
 
     public function getNbPerPage()
     {
         return $this->nbrPerPage;
     }
-
 
     public function countPost()
     {
@@ -29,12 +26,10 @@ class PostManager extends Manager
         $countPost->execute();
         $countPosts = $countPost->fetchAll();
 
-        //pagination
         $nbPerPage = $this->getNbPerPage();
         $pageOfNumber = ceil($countPosts[0]["nbrPost"] / $nbPerPage);
         return $pageOfNumber;
     }
-
 
     public function PostPage($currentPage)
     {
@@ -106,7 +101,8 @@ class PostManager extends Manager
     public function ModifyPost($blogPostId, $userId, $title, $chapo, $content)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('UPDATE blogpost set title = :title,chapo = :chapo,content = :content,user_id = :userId  WHERE id = :blogPostId');
+        $req = $db->prepare('UPDATE blogpost set title = :title,chapo = :chapo,content = :content,user_id = :userId ,dateLastModification = CURRENT_TIMESTAMP
+         WHERE id = :blogPostId');
         $req->bindValue(":userId", $userId, PDO::PARAM_INT);
         $req->bindValue(":title", $title);
         $req->bindValue(":chapo", $chapo);

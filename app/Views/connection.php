@@ -23,7 +23,7 @@ $title = 'Mon blog'; ?>
         </div>
     </div>
 </div>
-<div class="col-sm-2"></div>
-
+<div class="col-sm-2 "></div>
+<br/><br/>
 <?php $content = ob_get_clean(); ?>
 <?php require('template.php'); ?>

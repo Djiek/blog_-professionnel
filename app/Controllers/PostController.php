@@ -7,7 +7,6 @@ require_once('app/Models/CommentManager.php');
 
 use \blogProfessionnel\app\Models\PostManager;
 use \blogProfessionnel\app\Models\CommentManager;
-//use \Exception;
 
 class PostController
 {
@@ -39,7 +38,6 @@ class PostController
         $posts = $postManager->getPost($_GET['id']);
         $comments = $commentManager->getComments($_GET['id'], $currentPage);
         $pageOfNumber = $commentManager->countComment($_GET['id'], $currentPage);
-        // $CommentPage = $commentManager->commentPage($currentPage);
         require('app/Views/postView.php');
     }
 

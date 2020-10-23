@@ -48,8 +48,6 @@
         </div>
     </nav>
 
-
-
     <?= $content ?>
     <?php if (isset($_SESSION['error'])) {
         echo $_SESSION['error'];
@@ -59,6 +57,17 @@
         echo "<h3 class='table-success bordure'>" . $_SESSION['flash']['success'] . "</h3>";
         unset($_SESSION['flash']['success']);
     } ?>
+
+    <footer>
+        <br />
+      
+        <div class="bordure bg-primary">
+            <a class = "nav-link"  href="#">Lien d'accès à l'administration du site </a>
+        </div>
+        
+        
+      
+    </footer>
 </body>
 
 </html>

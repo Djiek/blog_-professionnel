@@ -4,25 +4,12 @@ namespace blogProfessionnel\app\Models\Entity;
 
 class Comment
 {
-    private $CommentId;
     private $title;
     private $content;
     private $date;
     private $status;
     private $userId;
     private $blogPostId;
-
-    // public function __construct($id, $title, $content, $date, $status, $userId, $blogPostId)
-    // {
-    //     $this->id = $id;
-    //     $this->title = $title;
-    //     $this->content = $content;
-    //     $this->date = $date;
-    //     $this->status = $status;
-    //     $this->userId = $userId;
-    //     $this->blogPostId = $blogPostId;
-    // }
-
 
     /**
      * @return mixed

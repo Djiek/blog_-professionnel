@@ -57,23 +57,15 @@
                  </div> <br />
              <?php
                 endforeach;
-
                 ?>
-
-
+                
              <div>
                  <ul class="pagination pagination-sm">
-                     <!-- <li class="page-item disabled">
-                        <a class="page-link" href="#">&laquo;</a>
-                    </li> -->
                      <?php for ($i = 1; $i <= $pageOfNumber; $i++) { ?>
                          <li class="page-item active">
                              <a class="page-link" href="index.php?action=post&id=<?= $post->getId() ?>&page=<?= $i ?>"><?php echo $i  ?></a>
                          <?php } ?>
                          </li>
-                         <!-- <li class="page-item">
-                            <a class="page-link" href="#">&raquo;</a>
-                        </li> -->
                  </ul>
              </div>
          </div>

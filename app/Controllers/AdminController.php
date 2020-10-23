@@ -9,18 +9,10 @@ require_once('app/Models/UserManager.php');
 
 use blogProfessionnel\app\Models\CommentManager;
 use \blogProfessionnel\app\Models\PostManager;
-use \blogProfessionnel\app\Models\UserManager;
 
 class AdminController
 {
-
-    // public function isLogged()
-    // {
-    //      if(isset($_SESSION['User']) && $_SESSION['User']['admin'] == 1){
-    //          return true;
-    //      }
-    // }
-
+    
     public function postDelete()
     {
         $postManager = new PostManager;
@@ -51,7 +43,6 @@ class AdminController
         header('Location: index.php?action=post&id=' . $_GET['id']);
     }
 
-    //addPostForm sans requete, le controler appel une vue
     public function addPostForm()
     {
         if (isset($_SESSION['User']) && $_SESSION['User']['admin'] == 1) {
@@ -64,11 +55,9 @@ class AdminController
 
     function addBlogPost($title, $chapo, $content, $id)
     {
-        //var_dump($user);die;
-        $postManager = new PostManager(); // Création d'un objet
+        $postManager = new PostManager(); 
         if (isset($_SESSION['User']) && $_SESSION['User']['admin'] == 1) {
             $affectedLines = $postManager->addBlogPost($title, $chapo, $content, $id);
-            //var_dump($affectedLines);die;
             if ($affectedLines === false) {
                 $_SESSION['error'] = "Impossible d'ajouter le blog post !";
                 header('Location: index.php?action=addPostForm');
@@ -137,10 +126,8 @@ class AdminController
             $currentPage = 1;
         }
         if (isset($_SESSION['User']) && $_SESSION['User']['admin'] == 1) {
-            //$postManager = new PostManager;
             $comment = new CommentManager();
             $commentManager = new CommentManager();
-            //   $posts = $postManager->getPost($_GET['id']);
             $comments = $comment->getCommentsWithoutStatus($currentPage);
             $pageOfNumber = $commentManager->countCommentWithoutId();
             require('App/Views/managementCommentPage.php');

@@ -71,9 +71,6 @@ class UserController
             throw new Exception('Erreur lors de l\'inscription.');
             header('Location: index.php?action=inscriptionForm');
         }
-        //else {
-        //     header('Location: index.php?action=inscriptionForm');
-        // }
     }
 
     function login()

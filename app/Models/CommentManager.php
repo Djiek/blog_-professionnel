@@ -9,10 +9,8 @@ use blogProfessionnel\app\Models\Entity\Comment;
 use blogProfessionnel\app\Models\Entity\User;
 use PDO;
 
-
 class CommentManager extends Manager
 {
-
     public $nbrPerPage = 5;
 
     public function getNbPerPage()
@@ -20,8 +18,7 @@ class CommentManager extends Manager
         return $this->nbrPerPage;
     }
 
-
-    public function countComment($postId, $currentPage)
+    public function countComment($postId)
     {
         $db = $this->dbConnect();
         $countComment = $db->prepare('SELECT count(id) as nbrComment FROM comment WHERE status=1 && blogPost_id = ?');
@@ -42,7 +39,6 @@ class CommentManager extends Manager
         $countComment->execute();
         $countComments = $countComment->fetchAll();
 
-        //pagination
         $nbPerPage = $this->getNbPerPage();
         $pageOfNumber = ceil($countComments[0]["nbrComment"] / $nbPerPage);
         return $pageOfNumber;
@@ -104,8 +100,6 @@ class CommentManager extends Manager
             $comment->setUserId($row['login']);
             $comments[] = $comment;
         }
-
-        //$comment = new Comment($comments['id'],$comments['title'],$comments['content'],$comments['date'],$comments['status'],$comments['login'],$comments['blogPostId']);
         return $comments;
     }
 
