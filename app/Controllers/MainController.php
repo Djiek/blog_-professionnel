@@ -8,7 +8,6 @@ use \blogProfessionnel\app\Services\Form;
 
 class MainController
 {
-
     function home()
     {
         require('app/Views/home.php');
@@ -21,8 +20,8 @@ class MainController
 
     public function postContact()
     {
-        if (isset($_POST) && isset($_POST['name']) && isset($_POST['firstname']) && isset($_POST['email']) && isset($_POST['message'])) {
-            extract($_POST); //pour simplifier l'ecriture de $_post['*']
+        if (isset($_POST['name']) && isset($_POST['firstname']) && isset($_POST['email']) && isset($_POST['message'])) {
+            extract($_POST);
             if (!empty($name) && !empty($firstname) && !empty($email) && !empty($message)) {
                 $mail = new Form();
                 $mail->mail($name, $firstname, $email, $message);

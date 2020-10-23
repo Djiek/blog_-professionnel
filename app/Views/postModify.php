@@ -43,7 +43,6 @@ foreach ($posts as $post) :
     </div>
 <?php endforeach ?>
 <?php
-// $posts->closeCursor();
 ?>
 <?php $content = ob_get_clean(); ?>
 

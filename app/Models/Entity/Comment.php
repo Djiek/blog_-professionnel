@@ -12,18 +12,6 @@ class Comment
     private $userId;
     private $blogPostId;
 
-    // public function __construct($id, $title, $content, $date, $status, $userId, $blogPostId)
-    // {
-    //     $this->id = $id;
-    //     $this->title = $title;
-    //     $this->content = $content;
-    //     $this->date = $date;
-    //     $this->status = $status;
-    //     $this->userId = $userId;
-    //     $this->blogPostId = $blogPostId;
-    // }
-
-
     /**
      * @return mixed
      */
@@ -78,15 +66,15 @@ class Comment
      */
     public function getId()
     {
-        return $this->id;
+        return $this->CommentId;
     }
 
     /**
      * @param mixed $userId
      */
-    public function setId($id)
+    public function setId($CommentId)
     {
-        $this->id = $id;
+        $this->CommentId = $CommentId;
     }
 
 
