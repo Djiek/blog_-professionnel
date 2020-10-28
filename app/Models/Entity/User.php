@@ -4,7 +4,7 @@ namespace blogProfessionnel\app\Models\Entity;
 
 class User
 {
-    private $id;
+    private $userId;
     private $email;
     private $login;
     private $password;
@@ -15,15 +15,15 @@ class User
      */
     public function getId()
     {
-        return $this->id;
+        return $this->userId;
     }
 
     /**
      * @param mixed $id
      */
-    public function setId($id)
+    public function setId($userId)
     {
-        $this->id = $id;
+        $this->userId = $userId;
     }
 
     /**

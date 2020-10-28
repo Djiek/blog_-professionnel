@@ -2,7 +2,6 @@
 
 namespace blogProfessionnel\app\Controllers;
 
-
 require_once('app/Models/PostManager.php');
 require_once('app/Models/CommentManager.php');
 require_once('app/Models/UserManager.php');
@@ -12,16 +11,16 @@ use \blogProfessionnel\app\Models\PostManager;
 
 class AdminController
 {
-    
     public function postDelete()
     {
         $postManager = new PostManager;
         $affectedLines = $postManager->deletePost($_GET['id']);
         if ($affectedLines === false) {
             $_SESSION['error'] = "Impossible de supprimer le blog post !";
-        } else {
-            $_SESSION['flash']['success'] = "Le blogPost a été supprimé.";
+            header('Location: index.php?action=listPosts');
         }
+
+        $_SESSION['flash']['success'] = "Le blogPost a été supprimé.";
         header('Location: index.php?action=listPosts');
     }
     public function postModify()
@@ -53,11 +52,11 @@ class AdminController
         }
     }
 
-    function addBlogPost($title, $chapo, $content, $id)
+    function addBlogPost($title, $chapo, $content, $userId)
     {
-        $postManager = new PostManager(); 
+        $postManager = new PostManager(); // Création d'un objet
         if (isset($_SESSION['User']) && $_SESSION['User']['admin'] == 1) {
-            $affectedLines = $postManager->addBlogPost($title, $chapo, $content, $id);
+            $affectedLines = $postManager->addBlogPost($title, $chapo, $content, $userId);
             if ($affectedLines === false) {
                 $_SESSION['error'] = "Impossible d'ajouter le blog post !";
                 header('Location: index.php?action=addPostForm');

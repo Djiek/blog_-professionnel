@@ -54,9 +54,11 @@ foreach ($posts as $post) :
     </div>
 
 <?php endforeach;
+
 ?>
 <div>
     <ul class="pagination pagination-sm">
+
         <?php for ($i = 1; $i <= $pageOfNumber; $i++) { ?>
             <li class="page-item active">
                 <?php echo  "<a class=\"page-link\" href='index.php?action=listPosts&page=$i'>$i</a>"  ?>

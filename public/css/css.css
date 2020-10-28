@@ -1,6 +1,5 @@
 body {
     color: black;
-    /* font-family: Arial, verdana, georgia; */
     margin: auto !important;
     max-width: 1150px !important;
 }
@@ -17,20 +16,17 @@ body {
     -webkit-background-size: cover;
     background-size: cover;
     border: 2px black solid;
-    /*padding : 30px; */
     box-shadow: 2px 2px 3px #444;
 }
 
 #nom {
     font-size: 23px;
     vertical-align: middle;
-    /* pour que le nom soit separé du reste et d'une autre taille,couleur*/
 }
 
 #nom,
 table {
     display: inline-block;
-    /* pour aligner les infos et le nom*/
     margin: 0px 100px 0px;
 }
 
@@ -43,7 +39,7 @@ table {
     box-shadow: 2px 2px 3px #444;
     padding: 8px;
     font-weight: bold;
-    background-image: linear-gradient(180deg, #fff, #ddd 40%, #ccc);
+    background-image: linear-gradient( 180deg, #fff, #ddd 40%, #ccc);
     font-size: 15px;
 }
 
@@ -51,28 +47,16 @@ a:hover {
     color: #9400D3;
 }
 
-
-/* pour rendre le mail dynamique*/
-
-a:visited {
-    color: black;
-}
-
 .titre {
     text-align: center;
-    /*tout mes titres sont centré, avec un cadre de la même taille*/
     border: 2px black solid;
     padding-top: 17px;
-    /* apparement les deux ligres du bas sont faite pour que les anciennes versions des navigateurs puissent voir le fond correctement*/
-    background-size: cover;
-    /* j'ai testé sans et c'est moche*/
     box-shadow: 2px 2px 3px #444;
     margin-bottom: 0em;
     padding-bottom: 2em;
 }
 
 header {
-    /*word-wrap: break-word;*/
     border: 1px solid #333;
     box-shadow: 8px 8px 5px #444;
     -webkit-background-size: cover;
@@ -95,18 +79,11 @@ header {
     margin: 8px 10px 21px;
 }
 
-
-/*.conteneur
-{
-	display:flex;
-	justify-content: space-between;     mettre deux bloc a coté avec un espace entre eux ...
-}*/
-
 .benevolat {
     border: 1px solid #333;
     box-shadow: 8px 8px 5px #444;
     padding: 8px 12px;
-    background-image: linear-gradient(180deg, #fff, #ddd 40%, #ccc);
+    background-image: linear-gradient( 180deg, #fff, #ddd 40%, #ccc);
     margin: 12px -10px 10px;
     text-align: center;
     font-size: 16px;
@@ -115,8 +92,6 @@ header {
 #loisir {
     text-align: center;
     margin: 10px 20px 10px;
-    /* pour separer les loisirs du reste des infos du bas, ça allait pas vraimeent avec */
-    padding: 30px;
     background: #C0C0C0;
     border: 3px #263f3f solid;
     box-shadow: 4px 4px 3px #444;

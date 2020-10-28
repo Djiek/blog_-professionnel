@@ -20,8 +20,8 @@ class PostManager extends Manager
 
     public function countPost()
     {
-        $db = $this->dbConnect();
-        $countPost = $db->prepare('SELECT count(id) as nbrPost FROM blogpost WHERE status=1');
+        $dbName = $this->dbConnect();
+        $countPost = $dbName->prepare('SELECT count(id) as nbrPost FROM blogpost WHERE status=1');
         $countPost->setFetchMode(PDO::FETCH_ASSOC);
         $countPost->execute();
         $countPosts = $countPost->fetchAll();
@@ -42,8 +42,8 @@ class PostManager extends Manager
     {
         $nbPerPage = $this->getNbPerPage();
         $postPage = $this->PostPage($currentPage);
-        $db = $this->dbConnect();
-        $req = $db->prepare("SELECT id, title,chapo, content,status,user_id, DATE_FORMAT(dateLastModification, '%d/%m/%Y à %Hh%imin%ss')
+        $dbName = $this->dbConnect();
+        $req = $dbName->prepare("SELECT id, title,chapo, content,status,user_id, DATE_FORMAT(dateLastModification, '%d/%m/%Y à %Hh%imin%ss')
          AS dateLastModification FROM blogpost WHERE status = 1 ORDER BY dateLastModification DESC LIMIT :postPage ,:nbPerPage");
         $req->bindValue(":postPage", $postPage, PDO::PARAM_INT);
         $req->bindValue(":nbPerPage", $nbPerPage, PDO::PARAM_INT);
@@ -66,8 +66,8 @@ class PostManager extends Manager
 
     public function getPost($postId)
     {
-        $db = $this->dbConnect();
-        $req = $db->prepare('SELECT blogpost.id, title,chapo, content,status, user_id,user.login,DATE_FORMAT(dateLastModification, \'%d/%m/%Y à %Hh%imin%ss\') 
+        $dbName = $this->dbConnect();
+        $req = $dbName->prepare('SELECT blogpost.id, title,chapo, content,status, user_id,user.login,DATE_FORMAT(dateLastModification, \'%d/%m/%Y à %Hh%imin%ss\') 
         AS dateLastModification FROM blogpost INNER JOIN user ON blogpost.user_id = user.id WHERE blogpost.id = ? AND blogpost.status = 1');
         $req->execute(array($postId));
 
@@ -90,8 +90,8 @@ class PostManager extends Manager
 
     public function addBlogPost($title, $chapo, $content, $user)
     {
-        $db = $this->dbConnect();
-        $post = $db->prepare('INSERT INTO blogpost(title,chapo, content,user_id,status,dateLastModification)
+        $dbName = $this->dbConnect();
+        $post = $dbName->prepare('INSERT INTO blogpost(title,chapo, content,user_id,status,dateLastModification)
              VALUES(?,?, ?, ?,1, NOW())');
         $affectedLines = $post->execute(array($title, $chapo, $content, $user));
 
@@ -100,9 +100,8 @@ class PostManager extends Manager
 
     public function ModifyPost($blogPostId, $userId, $title, $chapo, $content)
     {
-        $db = $this->dbConnect();
-        $req = $db->prepare('UPDATE blogpost set title = :title,chapo = :chapo,content = :content,user_id = :userId ,dateLastModification = CURRENT_TIMESTAMP
-         WHERE id = :blogPostId');
+        $dbName = $this->dbConnect();
+        $req = $dbName->prepare('UPDATE blogpost set title = :title,chapo = :chapo,content = :content,user_id = :userId  WHERE id = :blogPostId');
         $req->bindValue(":userId", $userId, PDO::PARAM_INT);
         $req->bindValue(":title", $title);
         $req->bindValue(":chapo", $chapo);
@@ -112,8 +111,8 @@ class PostManager extends Manager
     }
     public function DeletePost($blogPostId)
     {
-        $db = $this->dbConnect();
-        $req = $db->prepare('DELETE FROM `blogpost`WHERE id = :blogPostId');
+        $dbName = $this->dbConnect();
+        $req = $dbName->prepare('DELETE FROM `blogpost`WHERE id = :blogPostId');
         $req->bindValue(":blogPostId", $blogPostId, PDO::PARAM_INT);
         $req->execute();
     }

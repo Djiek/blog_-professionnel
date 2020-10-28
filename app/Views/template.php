@@ -58,16 +58,17 @@
         unset($_SESSION['flash']['success']);
     } ?>
 
-    <footer>
+ <footer>
         <br />
-      
         <div class="bordure bg-primary">
-            <a class = "nav-link"  href="#">Lien d'accès à l'administration du site </a>
+            <?php if (isset($_SESSION['User']) && $_SESSION['User']['admin'] == 1) : ?>
+           <a class="nav-link" href="index.php?action=managementCommentPage">Lien d'accès à l'administration du site</a>
         </div>
-        
-        
-      
+         <?php else : ?>
+          <a class = "nav-link"  href="index.php?action=connection">Lien d'accès à l'administration du site </a>
+         <?php endif; ?>
     </footer>
+
 </body>
 
 </html>

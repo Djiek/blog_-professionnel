@@ -65,15 +65,15 @@ class Comment
      */
     public function getId()
     {
-        return $this->id;
+        return $this->CommentId;
     }
 
     /**
      * @param mixed $userId
      */
-    public function setId($id)
+    public function setId($CommentId)
     {
-        $this->id = $id;
+        $this->CommentId = $CommentId;
     }
 
 

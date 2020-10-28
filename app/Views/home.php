@@ -21,7 +21,6 @@ $title = 'Mon blog'; ?>
             <h4> Une Développeuse faite pour votre entreprise ! </h4>
             <img src="public/image/photocv.PNG" alt="photo-cv">
 
-
             <p> Permis B -
                 Tourcoing </p>
             <p>
@@ -36,11 +35,8 @@ $title = 'Mon blog'; ?>
         </header>
 </div>
 
-
-
-
 <div class="container">
-        <h3 class="titre"> Mes expériences professionnelles</h3>
+    <h3 class="titre"> Mes expériences professionnelles</h3>
     <ul style="padding : 20px;">
 
         <li><U>Novembre 2019 à fevrier 2020</U>
@@ -92,15 +88,10 @@ $title = 'Mon blog'; ?>
         </li><br />
     </ul>
 
+    <h3 class="titre">
+        Diplômes et formations
+    </h3>
 
-
-
-
-  
-        <h3 class="titre">
-            Diplômes et formations
-        </h3>
-  
     <div id="texteCache2" style="padding : 10px;" class="bordure">
         <p><U> Mai 2019 à novembre 2019</U>
             <span style="color : #01796F;">Formation développeur web et web mobile avec diplome obtenu</span>
@@ -129,9 +120,9 @@ $title = 'Mon blog'; ?>
         </p>
     </div>
 
-        <h3 class="titre">
-          Bénévolat, wwoofing et centre d'intérêt  Diplômes et formations
-        </h3>
+    <h3 class="titre">
+        Bénévolat, wwoofing et centre d'intérêt Diplômes et formations
+    </h3>
 
     <ul style="padding : 20px;">
         <li> <U>De 2017 à 2018 </U><br />

@@ -14,7 +14,6 @@ $title = 'Mon blog';
             <?php
             foreach ($comments as $comment) :
             ?>
-
                 <div class="row bordureCom">
                     <div class="col-sm-2"></div>
                     <div class="col-sm-8">

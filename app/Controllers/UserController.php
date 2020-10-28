@@ -7,7 +7,6 @@ require_once('app/Models/UserManager.php');
 use blogProfessionnel\app\Models\UserManager;
 use \Exception;
 
-
 class UserController
 {
     function connection()
@@ -44,12 +43,6 @@ class UserController
                             $_SESSION['flash']['success'] = 'Enregistrement reussi, veuillez vous connecter pour continuer';
                             header('Location: index.php?action=connection');
                             $addUser = $user->addUser($login, $hashPassword, $mail);
-                        } elseif ($longueur < 8) {
-                            $_SESSION['error'] = "Le mot de passe doit faire au moins 8 caractères";
-                            header('Location: index.php?action=inscriptionForm');
-                        } else {
-                            $_SESSION['error'] = 'Invalid password.';
-                            header('Location: index.php?action=inscriptionForm');
                         }
                     } else {
                         $_SESSION['error'] = "Les mots de passe ne sont pas iddentique.";

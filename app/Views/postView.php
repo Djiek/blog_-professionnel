@@ -58,7 +58,6 @@
              <?php
                 endforeach;
                 ?>
-                
              <div>
                  <ul class="pagination pagination-sm">
                      <?php for ($i = 1; $i <= $pageOfNumber; $i++) { ?>

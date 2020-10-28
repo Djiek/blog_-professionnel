@@ -40,6 +40,8 @@ if (isset($_SESSION['flash']['success'])) {
     <div class="col-sm-2"></div>
 </div>
 
+<?php
+?>
 <?php $content = ob_get_clean(); ?>
 
 <?php require('template.php'); ?>

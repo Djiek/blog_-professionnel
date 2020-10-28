@@ -4,33 +4,14 @@ namespace blogProfessionnel\app\Models\Entity;
 
 class BlogPost
 {
-    private $id;
+    private $postId;
     private $title;
     private $chapo;
     private $content;
     private $date;
     private $status;
     private $userId;
-    //private $login;
 
-    // public function __construct(array $row)
-    // { $this->hydrate($row);     
-    // }
-
-    // public function hydrate(array $row)
-    // {
-    //   foreach ($row as $key => $value)
-    //   {
-    //     $method = 'set'.ucfirst($key);
-
-    //     // Si le setter correspondant existe.
-    //     if (method_exists($this, $method))
-    //     {
-    //       // On appelle le setter.
-    //       $this->$method($value);
-    //     }
-    //   }
-    // }
 
     /**
      * @return mixed
@@ -102,15 +83,15 @@ class BlogPost
      */
     public function getId()
     {
-        return $this->id;
+        return $this->postId;
     }
 
     /**
      * @param mixed $id
      */
-    public function setId($id)
+    public function setId($postId)
     {
-        $this->id = $id;
+        $this->postId = $postId;
     }
 
     /**

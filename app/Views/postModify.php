@@ -42,6 +42,8 @@ foreach ($posts as $post) :
         <div class="col-sm-2"></div>
     </div>
 <?php endforeach ?>
+<?php
+?>
 <?php $content = ob_get_clean(); ?>
 
 <?php require('template.php'); ?>

@@ -20,8 +20,8 @@ class MainController
 
     public function postContact()
     {
-        if (isset($_POST) && isset($_POST['name']) && isset($_POST['firstname']) && isset($_POST['email']) && isset($_POST['message'])) {
-            extract($_POST); 
+        if (isset($_POST['name']) && isset($_POST['firstname']) && isset($_POST['email']) && isset($_POST['message'])) {
+            extract($_POST);
             if (!empty($name) && !empty($firstname) && !empty($email) && !empty($message)) {
                 $mail = new Form();
                 $mail->mail($name, $firstname, $email, $message);
