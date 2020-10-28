@@ -2,8 +2,8 @@
 
 namespace blogProfessionnel\app\Models;
 
-require_once("app/Models/Manager.php");
-require 'app/Models/Entity/Comment.php';
+require_once "app/Models/Manager.php";
+require_once 'app/Models/Entity/Comment.php';
 
 use blogProfessionnel\app\Models\Entity\Comment;
 use blogProfessionnel\app\Models\Entity\User;
