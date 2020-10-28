@@ -26,4 +26,4 @@ $title = 'Mon blog'; ?>
 <div class="col-sm-2 "></div>
 <br/><br/>
 <?php $content = ob_get_clean(); ?>
-<?php require('template.php'); ?>
+<?php require 'template.php'; ?>

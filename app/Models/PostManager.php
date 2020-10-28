@@ -2,8 +2,8 @@
 
 namespace blogProfessionnel\app\Models;
 
-require_once("app/Models/Manager.php");
-require 'app/Models/Entity/BlogPost.php';
+require_once "app/Models/Manager.php";
+require_once 'app/Models/Entity/BlogPost.php';
 
 use blogProfessionnel\app\Models\Entity\BlogPost;
 use blogProfessionnel\app\Models\Entity\User;
