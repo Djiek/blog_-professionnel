@@ -5,7 +5,7 @@ namespace blogProfessionnel\app\Models;
 class Manager
 {
     /**
-     * dbConnect : fais une connection avec la base de donnée
+     * fais une connection avec la base de donnée
      */
     protected function dbConnect()
     {

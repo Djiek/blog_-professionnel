@@ -14,7 +14,7 @@ class CommentManager extends Manager
     public $nbrPerPage = 5;
 
     /**
-     * getNbPerPage : recupere le nombre de page.
+     * recupere le nombre de page.
      */
     public function getNbPerPage()
     {
@@ -22,7 +22,7 @@ class CommentManager extends Manager
     }
 
     /**
-     *  countComment : Permets de Compter les commentaires
+     *  Permets de Compter les commentaires
      */
     public function countComment($postId)
     {
@@ -39,7 +39,7 @@ class CommentManager extends Manager
     }
 
     /**
-     *  countCommentWithoutId : Permets de compter les commentaires avec un status 0
+     * Permets de compter les commentaires avec un status 0
      */
     public function countCommentWithoutId()
     {
@@ -55,7 +55,7 @@ class CommentManager extends Manager
     }
 
     /**
-     * deleteComment : Permets de supprimer un commentaire en bdd
+     *  Permets de supprimer un commentaire en bdd
      */
     public function deleteComment($postId, $commentId)
     {
@@ -67,7 +67,7 @@ class CommentManager extends Manager
     }
 
     /**
-     * CommentPage : Compte le nombre de page pour ensuite faire la pagination
+     *  Compte le nombre de page pour ensuite faire la pagination
      */
     public function CommentPage($currentPage)
     {
@@ -77,7 +77,7 @@ class CommentManager extends Manager
     }
 
     /**
-     * UpdateStatusComment : mets à jour le status d'un commentaire (sur 1 pour l'afficher)
+     *  mets à jour le status d'un commentaire (sur 1 pour l'afficher)
      */
     public function UpdateStatusComment($postId, $commentId)
     {
@@ -95,7 +95,7 @@ class CommentManager extends Manager
     }
 
     /**
-     * getComments : Permets d'afficher les commentaires qui ont un status 1 sur la vue
+     *  Permets d'afficher les commentaires qui ont un status 1 sur la vue
      */
     public function getComments($postId, $currentPage)
     {
@@ -126,7 +126,7 @@ class CommentManager extends Manager
     }
 
     /**
-     * getCommentsWithoutStatus : va chercher les commentaires en status 0 pour les afficher sur la vue
+     *  va chercher les commentaires en status 0 pour les afficher sur la vue
      */
     public function getCommentsWithoutStatus($currentPage)
     {
@@ -155,7 +155,7 @@ class CommentManager extends Manager
     }
 
     /**
-     * getCommentsWithoutStatusWithId : va chercher les commentaires en status 0 pour les afficher sur la vue et avec l'userId
+     *  va chercher les commentaires en status 0 pour les afficher sur la vue et avec l'userId
      */
     public function getCommentsWithoutStatusWithId($postId, $currentPage)
     {
@@ -185,7 +185,7 @@ class CommentManager extends Manager
     }
 
     /**
-     * postComment : Insert en bdd le commentaire 
+     *  Insert en bdd le commentaire 
      */
     public function postComment($postId, $userId, $content, $title)
     {
@@ -196,7 +196,7 @@ class CommentManager extends Manager
     }
 
     /**
-     * updateStatus : mets à jour le status du commentaire
+     * mets à jour le status du commentaire
      */
     public function updateStatus($postId, $userId)
     {

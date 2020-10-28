@@ -10,17 +10,17 @@ use \Exception;
 class UserController
 {
     /**
-     * connection : pour avoir acces a la view connection
+     * pour avoir acces a la view connection
      */
-    function connection()
+    public function connection()
     {
         require('app/Views/connection.php');
     }
 
     /**
-     * logout : permets de deconnecté l'utilisateur connecté
+     * permets de deconnecté l'utilisateur connecté
      */
-    function logout()
+    public function logout()
     {
         unset($_SESSION['User']);
         unset($_SESSION['Admin']);
@@ -29,17 +29,17 @@ class UserController
     }
 
     /**
-     * inscriptionForm : pour avoir acces au formulaire d'inscription
+     *  pour avoir acces au formulaire d'inscription
      */
-    function inscriptionForm()
+    public function inscriptionForm()
     {
         require('app/Views/inscription.php');
     }
 
     /**
-     * inscription : inscription des utilisateurs
+     * inscription des utilisateurs
      */
-    function inscription($login, $password, $mail)
+    public function inscription($login, $password, $mail)
     {
         $user = new UserManager;
         $mailVerify = $user->emailVerify($mail);
@@ -79,9 +79,9 @@ class UserController
     }
 
     /**
-     * login : connection de l'utilisateur 
+     *  connection de l'utilisateur 
      */
-    function login()
+    public function login()
     {
         $userManager = new UserManager();
         $user = $userManager->getUser($_POST["login"]);

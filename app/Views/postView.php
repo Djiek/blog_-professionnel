@@ -10,21 +10,21 @@
     }
     foreach ($posts as $post) :
         $title = htmlspecialchars($post->getTitle()); ?>
-     <h1><br /></h1>
+     <br>
+     <h3 class='bordure'> Post </h3>
+     <br>
      <div class="row news">
          <div class="col-sm-2"></div>
          <div class="col-sm-8">
-             <div class="card border-primary mb-3" style="max-width: 50rem;">
-                 <h3 class="bordure card-header  ">
-                     <?= htmlspecialchars($post->getTitle()); ?>
-                     <em>le <?= $post->getDate(); ?></em>
-                     <p>Auteur : <?= $post->getUserId(); ?></p>
-                 </h3>
+             <div class="bordure card-header card border-primary" style="max-width: 50rem;">
 
-                 <div class="bordure card-title list-group-item">
-                     <?= htmlspecialchars($post->getChapo()); ?>
+                 <h3> <?= htmlspecialchars($post->getTitle()); ?></h3>
 
-                 </div>
+                 <em class='bordure'>Auteur : <?= $post->getUserId(); ?>, le <?= $post->getDate(); ?>  </em>
+
+                 <p class='bordure card-title list-group-item'>
+                     <?= htmlspecialchars($post->getChapo()); ?></p>
+
                  <p class="bordure card-text">
                      <?= nl2br(htmlspecialchars($post->getContent())); ?>
                  </p>
@@ -48,7 +48,6 @@
                          <div class="card border-success mb-3 ">
                              <label for="title"> Par <?= $comment->getUserId(); ?>, le <?= $comment->getDate()  ?> </label>
                              <h4 class="table-success"><?= htmlspecialchars(($comment->getTitle())) ?> </h4>
-                             </label>
                              <div class="card-text bordureCom  ">
                                  <label for="content"> <?= nl2br(htmlspecialchars(($comment->getContent()))); ?></label>
                              </div>
@@ -77,7 +76,6 @@
          <div class="col-sm-8">
              <div class="card border-primary mb-3" style="max-width: 50rem;">
                  <form action="index.php?action=addComment&amp;id=<?= $post->getId() ?>" method="post">
-                     <fieldset>
                          <h2 class="bordure">Ajouter un commentaire</h2>
                          <div class="form-group  bordure">
                              <label for="title">Titre du commentaire : </label>

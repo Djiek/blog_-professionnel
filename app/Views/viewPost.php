@@ -27,10 +27,10 @@ if (isset($_SESSION['flash']['success'])) {
                     <div class="col-sm-8">
                         <div class="card border-primary mb-3" style="max-width: 50rem;">
                             <h3 class="bordure card-header  ">
-                                <?= htmlspecialchars($post->getTitle()); ?>
+                                <?= htmlspecialchars($post->getTitle()); ?></h3>
                                 <em>le <?= $post->getDate(); ?></em>
                                 <p>auteur : <?= $post->getUserId(); ?></p>
-                            </h3>
+                            
 
                             <div class="bordure card-title list-group-item">
                                 <?= htmlspecialchars($post->getChapo()); ?>
@@ -57,7 +57,6 @@ foreach ($comments as $comment) :
             <div class="card border-success mb-3 ">
                 <label for="title"> Par <?= $comment->getUserId(); ?>, le <?= $comment->getDate()  ?> </label>
                 <h4 class="table-success"><?= htmlspecialchars(($comment->getTitle())) ?> </h4>
-                </label>
                 <div class="card-text bordureCom  ">
                     <label for="content"> <?= nl2br(htmlspecialchars(($comment->getContent()))); ?></label>
                 </div>
@@ -65,10 +64,10 @@ foreach ($comments as $comment) :
                     <div class="col-sm-2"></div>
                     <div class="col-sm-8">
                         <div class="bordure"> <a href="index.php?action=updateStatusComment&id=<?= $comment->getId() ?>&postId=<?= $comment->getBlogPostId() ?>" class="btn btn-success"> Valider </a>
-                            </form>
+                    
                         </div>
                         <div class="bordure"><a onClick=" return confirm('Voulez-vous vraiment supprimer ce commentaire ?')" href="index.php?action=deleteComment&id=<?= $comment->getId() ?>&postId=<?= $comment->getBlogPostId() ?>" class="btn btn-primary"> Rejeter</a>
-                            </form>
+                         
                         </div>
 
                     </div>

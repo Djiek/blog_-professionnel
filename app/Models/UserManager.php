@@ -12,7 +12,7 @@ class UserManager extends Manager
 {
 
     /**
-     * connectionUser : recupere le login et le passeword et verifie qu'ils existent en bdd, si oui connection
+     *  recupere le login et le passeword et verifie qu'ils existent en bdd, si oui connection
      */
     public function connectionUser($login, $password)
     {
@@ -25,7 +25,7 @@ class UserManager extends Manager
     }
 
     /**
-     * getUser : recupere le login de l'utilisateur connecté
+     * recupere le login de l'utilisateur connecté
      */
     public function getUser($login)
     {
@@ -39,7 +39,7 @@ class UserManager extends Manager
     }
 
     /**
-     * addUser : ajoute un utilisateur en bdd
+     *  ajoute un utilisateur en bdd
      */
     public function addUser($login, $password, $mail)
     {
@@ -50,7 +50,7 @@ class UserManager extends Manager
     }
 
     /**
-     * emailVerify : verifie si l'email n'existe pas deja en bdd quand un utilisateur d'inscrit
+     *  verifie si l'email n'existe pas deja en bdd quand un utilisateur d'inscrit
      */
     public function emailVerify($mail)
     {
@@ -63,7 +63,7 @@ class UserManager extends Manager
     }
 
     /**
-     * loginVerify : verifie si le login n'existe pas deja en bdd quand un utilisateur d'inscrit
+     * verifie si le login n'existe pas deja en bdd quand un utilisateur d'inscrit
      */
     public function loginVerify($login)
     {

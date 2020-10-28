@@ -12,7 +12,7 @@ use \blogProfessionnel\app\Models\PostManager;
 class AdminController
 {
     /**
-     * postDelete : supprime un post
+     * supprime un post
      */
     public function postDelete()
     {
@@ -28,7 +28,7 @@ class AdminController
     }
 
     /**
-     * postModify : envoie sur la page de modification d'un post
+     * envoie sur la page de modification d'un post
      */
     public function postModify()
     {
@@ -38,7 +38,7 @@ class AdminController
     }
 
     /**
-     * modifyBlogPost : modifie un post
+     *  modifie un post
      */
     public function modifyBlogPost()
     {
@@ -53,7 +53,7 @@ class AdminController
     }
 
     /**
-     * addPostForm : envoie sur la page pour ajouter un blogpost
+     * envoie sur la page pour ajouter un blogpost
      */
     public function addPostForm()
     {
@@ -66,9 +66,9 @@ class AdminController
     }
 
     /**
-     * addBlogPost : ajoute un blop post
+     *  ajoute un blop post
      */
-    function addBlogPost($title, $chapo, $content, $userId)
+    public function addBlogPost($title, $chapo, $content, $userId)
     {
         $postManager = new PostManager(); // Création d'un objet
         if (isset($_SESSION['User']) && $_SESSION['User']['admin'] == 1) {
@@ -87,7 +87,7 @@ class AdminController
     }
 
     /**
-     * updateStatusComment : modifie le status d'un commentaire pour l'ajouter sur la view
+     * modifie le status d'un commentaire pour l'ajouter sur la view
      */
     public function updateStatusComment()
     {
@@ -102,7 +102,7 @@ class AdminController
     }
 
     /**
-     * deleteComment : supprime un commentaire
+     *  supprime un commentaire
      */
     public function deleteComment()
     {
@@ -117,13 +117,12 @@ class AdminController
     }
 
     /**
-     * ViewPostComment : page pour voirles commentaires en attente de verification sur le post associé
+     * page pour voirles commentaires en attente de verification sur le post associé
      */
-    function ViewPostComment()
+    public function ViewPostComment()
     {
         if (isset($_GET['page']) && !empty($_GET['page'])) {
-            $_GET['page'] = (int) $_GET['page'];
-            $currentPage = $_GET['page'];
+            $currentPage = (int) $_GET['page'];
         } else {
             $currentPage = 1;
         }
@@ -141,14 +140,13 @@ class AdminController
     }
 
     /**
-     * managementCommentPage :  page pour voir tout les commentaires attente de verification
+     *   page pour voir tout les commentaires attente de verification
      */
     public function managementCommentPage()
     {
 
         if (isset($_GET['page']) && !empty($_GET['page'])) {
-            $_GET['page'] = (int) $_GET['page'];
-            $currentPage = $_GET['page'];
+            $currentPage = (int) $_GET['page'];
         } else {
             $currentPage = 1;
         }

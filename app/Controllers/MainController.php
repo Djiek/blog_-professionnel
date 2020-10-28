@@ -9,23 +9,23 @@ use \blogProfessionnel\app\Services\Form;
 class MainController
 {
     /**
-     * home : pour acceder a la page home
+     * pour acceder a la page home
      */
-    function home()
+    public function home()
     {
         require('app/Views/home.php');
     }
 
     /**
-     * downloadCv : pour telecharger le cv
+     *  pour telecharger le cv
      */
-    function downloadCv()
+    public function downloadCv()
     {
         return 'location:../public/image/cv.pdf';
     }
 
     /**
-     * postContact : permet d'envoyer le mail via le formulaire de contact
+     * permet d'envoyer le mail via le formulaire de contact
      */
     public function postContact()
     {
