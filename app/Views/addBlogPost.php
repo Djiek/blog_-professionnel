@@ -13,13 +13,12 @@ if (isset($_SESSION['flash']['success'])) {
 }
 ?>
 
-<br /><br />
-<div class="row">
+
+<div class="row  paddingA">
     <div class="col-sm-2"></div>
     <div class="col-sm-8">
         <div class="card border-primary mb-3" style="max-width: 50rem;">
             <form action="index.php?action=addBlogPost" method="post">
-                <fieldset>
                     <h2 class="bordure">Ajouter un blog post</h2>
                     <div class="form-group  bordure">
                         <label for="title">Titre : </label>
@@ -31,7 +30,7 @@ if (isset($_SESSION['flash']['success'])) {
                     </div>
                     <div class="form-group  bordure">
                         <label for="content">Contenu : </label>
-                        <textarea name="content" class="form-control" id="exampleTextarea" rows="3"></textarea>
+                        <textarea name="content" class="form-control" id="content" rows="3"></textarea>
                     </div>
                     <div class="bordure"> <button type="submit" class="btn btn-primary"> Envoyer </button></div>
             </form>

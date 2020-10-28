@@ -18,14 +18,14 @@ if (isset($_SESSION['flash']['success'])) {
     <div class="row listpost ">
         <div class="col-sm-1"></div>
         <div class="col-sm-9">
-            <h3>Les posts :</h3><br />
+            <h3 class="paddingB">Les posts :</h3>
         </div>
     </div>
 </div>
 <?php
 foreach ($posts as $post) :
 ?>
-    <div class="container ">
+    <div class="container paddingB ">
         <div class="row listpost ">
             <div class="col-sm-2">
             </div>
@@ -39,13 +39,13 @@ foreach ($posts as $post) :
                         <div class="card-body">
                             <h5 class="card-title textBlogPost"><?= htmlspecialchars($post->getChapo()) ?></h5>
 
-                            <p class="card-text"><em><a href="index.php?action=post&id=<?= $post->getId() ?>">Voir le blog post en entier</a></em></p>
+                            <p class="card-text paddingB"><em><a href="index.php?action=post&id=<?= $post->getId() ?>">Voir le blog post en entier</a></em></p>
                             <?php if (isset($_SESSION['User']) && $_SESSION['User']['admin'] == 1) : ?>
                                 <a class="btn btn-primary mb-2" href="index.php?action=postModify&id=<?= $post->getId() ?>"> Modifier</a><br />
                                 <a onClick="return confirm('Voulez-vous vraiment supprimer ce post ?')" href="index.php?action=postDelete&id=<?= $post->getId() ?>" class="btn btn-primary"> Supprimer</a><br />
-                                </form><?php endif ?>
+                               <?php endif ?>
                         </div>
-                    </div><br />
+                    </div>
                 </div>
             </div>
             <div class="col-sm-2">

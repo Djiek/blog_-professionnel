@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
     <meta charset="utf-8" />
@@ -58,15 +58,15 @@
         unset($_SESSION['flash']['success']);
     } ?>
 
- <footer>
-        <br />
+    <footer class="paddingFooter">
+        
         <div class="bordure bg-primary">
             <?php if (isset($_SESSION['User']) && $_SESSION['User']['admin'] == 1) : ?>
-           <a class="nav-link" href="index.php?action=managementCommentPage">Lien d'accès à l'administration du site</a>
-        </div>
-         <?php else : ?>
-          <a class = "nav-link"  href="index.php?action=connection">Lien d'accès à l'administration du site </a>
-         <?php endif; ?>
+                <a class="nav-link" href="index.php?action=managementCommentPage">Lien d'accès à l'administration du site</a>
+
+            <?php else : ?>
+                <a class="nav-link" href="index.php?action=connection">Lien d'accès à l'administration du site </a>
+            <?php endif; ?> </div>
     </footer>
 
 </body>

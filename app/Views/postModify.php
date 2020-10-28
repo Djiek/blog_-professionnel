@@ -21,7 +21,6 @@ foreach ($posts as $post) :
         <div class="col-sm-8">
             <div class="card border-primary mb-3" style="max-width: 50rem;">
                 <form action="index.php?action=modifyBlogPost&id=<?= $post->getId() ?>" method="post">
-                    <fieldset>
                         <h2 class="bordure">Modifier un blog post</h2>
                         <div class="form-group  bordure">
                             <label for="title">Titre : </label>

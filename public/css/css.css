@@ -14,8 +14,7 @@ body {
     border: 2px black solid;
     padding-top: 17px;
     box-shadow: 2px 2px 3px #444;
-    margin-bottom: 0em;
-    padding-bottom: 2em;
+    padding-bottom: 15px;
 }
 
 header {
@@ -53,4 +52,20 @@ header {
 
 .textBlogPost {
     color: black;
+}
+
+.paddingA {
+    padding-top: 50px;
+}
+
+.paddingB {
+    padding-top: 15px;
+}
+
+.paddingFooter {
+    padding-top: 250px !important;
+}
+
+.color {
+    color: #01796F;
 }

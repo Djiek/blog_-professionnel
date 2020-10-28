@@ -13,11 +13,17 @@ class PostManager extends Manager
 {
     public $nbrPerPage = 5;
 
+    /**
+     *  va chercher le nombre de page dans la variable declaré 
+     */
     public function getNbPerPage()
     {
         return $this->nbrPerPage;
     }
 
+    /**
+     *  compte les posts en status 1 pour pouvoir ensuite les afficher sur la vue
+     */
     public function countPost()
     {
         $dbName = $this->dbConnect();
@@ -31,6 +37,9 @@ class PostManager extends Manager
         return $pageOfNumber;
     }
 
+    /**
+     * combien de post sur une vue
+     */
     public function PostPage($currentPage)
     {
         $nbPerPage = $this->getNbPerPage();
@@ -38,6 +47,9 @@ class PostManager extends Manager
         return $postPage;
     }
 
+    /**
+     *  va checher les posts en status 1 en leur mettant la limite de pagination pour les afficher sur la vue
+     */
     public function getPosts($currentPage)
     {
         $nbPerPage = $this->getNbPerPage();
@@ -64,6 +76,9 @@ class PostManager extends Manager
         return $posts;
     }
 
+    /**
+     * va chercher un post pour l'afficher sur la vue
+     */
     public function getPost($postId)
     {
         $dbName = $this->dbConnect();
@@ -88,6 +103,9 @@ class PostManager extends Manager
         return $posts;
     }
 
+    /**
+     *  ajoute un post en bdd 
+     */
     public function addBlogPost($title, $chapo, $content, $user)
     {
         $dbName = $this->dbConnect();
@@ -98,10 +116,13 @@ class PostManager extends Manager
         return $affectedLines;
     }
 
+    /**
+     * Modifie un post et l'envois en update en bdd
+     */
     public function ModifyPost($blogPostId, $userId, $title, $chapo, $content)
     {
         $dbName = $this->dbConnect();
-        $req = $dbName->prepare('UPDATE blogpost set title = :title,chapo = :chapo,content = :content,user_id = :userId  WHERE id = :blogPostId');
+        $req = $dbName->prepare('UPDATE blogpost set title = :title,chapo = :chapo,content = :content,user_id = :userId, dateLastModification = NOW() WHERE id = :blogPostId');
         $req->bindValue(":userId", $userId, PDO::PARAM_INT);
         $req->bindValue(":title", $title);
         $req->bindValue(":chapo", $chapo);
@@ -109,6 +130,10 @@ class PostManager extends Manager
         $req->bindValue(":blogPostId", $blogPostId);
         $req->execute();
     }
+
+    /**
+     * supprime un post en bdd
+     */
     public function DeletePost($blogPostId)
     {
         $dbName = $this->dbConnect();
