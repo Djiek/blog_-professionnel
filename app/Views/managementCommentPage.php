@@ -29,7 +29,10 @@ $title = 'Mon blog';
                             </div>
                         </div>
                     </div>
+                    </div>
                 </div> <br />
+                </div>
+                </div>
             <?php
             endforeach;
             ?>

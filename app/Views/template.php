@@ -57,6 +57,18 @@
         echo "<h3 class='table-success bordure'>" . $_SESSION['flash']['success'] . "</h3>";
         unset($_SESSION['flash']['success']);
     } ?>
+
+ <footer>
+        <br />
+        <div class="bordure bg-primary">
+            <?php if (isset($_SESSION['User']) && $_SESSION['User']['admin'] == 1) : ?>
+           <a class="nav-link" href="index.php?action=managementCommentPage">Lien d'accès à l'administration du site</a>
+        </div>
+         <?php else : ?>
+          <a class = "nav-link"  href="index.php?action=connection">Lien d'accès à l'administration du site </a>
+         <?php endif; ?>
+    </footer>
+
 </body>
 
 </html>
