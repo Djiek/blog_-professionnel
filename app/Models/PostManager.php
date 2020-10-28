@@ -2,8 +2,8 @@
 
 namespace blogProfessionnel\app\Models;
 
-require_once("app/Models/Manager.php");
-require 'app/Models/Entity/BlogPost.php';
+require_once "app/Models/Manager.php";
+require_once 'app/Models/Entity/BlogPost.php';
 
 use blogProfessionnel\app\Models\Entity\BlogPost;
 use blogProfessionnel\app\Models\Entity\User;
@@ -11,7 +11,6 @@ use PDO;
 
 class PostManager extends Manager
 {
-
     public $nbrPerPage = 5;
 
     public function getNbPerPage()
@@ -31,7 +30,6 @@ class PostManager extends Manager
         $pageOfNumber = ceil($countPosts[0]["nbrPost"] / $nbPerPage);
         return $pageOfNumber;
     }
-
 
     public function PostPage($currentPage)
     {

@@ -4,7 +4,6 @@ namespace blogProfessionnel\app\Models\Entity;
 
 class Comment
 {
-    private $CommentId;
     private $title;
     private $content;
     private $date;

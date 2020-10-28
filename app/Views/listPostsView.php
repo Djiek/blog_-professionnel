@@ -41,7 +41,7 @@ foreach ($posts as $post) :
 
                             <p class="card-text"><em><a href="index.php?action=post&id=<?= $post->getId() ?>">Voir le blog post en entier</a></em></p>
                             <?php if (isset($_SESSION['User']) && $_SESSION['User']['admin'] == 1) : ?>
-                                <a class="btn btn-primary mb-1" href="index.php?action=postModify&id=<?= $post->getId() ?>"> Modifier</a><br />
+                                <a class="btn btn-primary mb-2" href="index.php?action=postModify&id=<?= $post->getId() ?>"> Modifier</a><br />
                                 <a onClick="return confirm('Voulez-vous vraiment supprimer ce post ?')" href="index.php?action=postDelete&id=<?= $post->getId() ?>" class="btn btn-primary"> Supprimer</a><br />
                                 </form><?php endif ?>
                         </div>
@@ -64,10 +64,9 @@ foreach ($posts as $post) :
                 <?php echo  "<a class=\"page-link\" href='index.php?action=listPosts&page=$i'>$i</a>"  ?>
             <?php } ?>
             </li>
-
     </ul>
 </div>
 
 <?php $content = ob_get_clean(); ?>
 
-<?php require('template.php'); ?>
+<?php require 'template.php'; ?>

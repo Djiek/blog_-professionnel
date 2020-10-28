@@ -43,40 +43,43 @@ if (isset($_SESSION['flash']['success'])) {
                         </div>
                     </div>
                 </div>
+        </div>
+    </div>
+</div>
 
-            <?php endforeach; ?>
-            <?php
-            foreach ($comments as $comment) :
-            ?>
-                <div class="row bordureCom">
+<?php endforeach; ?>
+<?php
+foreach ($comments as $comment) :
+?>
+    <div class="row bordureCom">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div class="card border-success mb-3 ">
+                <label for="title"> Par <?= $comment->getUserId(); ?>, le <?= $comment->getDate()  ?> </label>
+                <h4 class="table-success"><?= htmlspecialchars(($comment->getTitle())) ?> </h4>
+                </label>
+                <div class="card-text bordureCom  ">
+                    <label for="content"> <?= nl2br(htmlspecialchars(($comment->getContent()))); ?></label>
+                </div>
+                <div class="row">
                     <div class="col-sm-2"></div>
                     <div class="col-sm-8">
-                        <div class="card border-success mb-3 ">
-                            <label for="title"> Par <?= $comment->getUserId(); ?>, le <?= $comment->getDate()  ?> </label>
-                            <h4 class="table-success"><?= htmlspecialchars(($comment->getTitle())) ?> </h4>
-                            </label>
-                            <div class="card-text bordureCom  ">
-                                <label for="content"> <?= nl2br(htmlspecialchars(($comment->getContent()))); ?></label>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-2"></div>
-                                <div class="col-sm-8">
-                                    <div class="bordure"> <a href="index.php?action=updateStatusComment&id=<?= $comment->getId() ?>&postId=<?= $comment->getBlogPostId() ?>" class="btn btn-success"> Valider </a>
-                                        </form>
-                                    </div>
-                                    <div class="bordure"><a onClick=" return confirm('Voulez-vous vraiment supprimer ce commentaire ?')" href="index.php?action=deleteComment&id=<?= $comment->getId() ?>&postId=<?= $comment->getBlogPostId() ?>" class="btn btn-primary"> Rejeter</a>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
+                        <div class="bordure"> <a href="index.php?action=updateStatusComment&id=<?= $comment->getId() ?>&postId=<?= $comment->getBlogPostId() ?>" class="btn btn-success"> Valider </a>
+                            </form>
                         </div>
+                        <div class="bordure"><a onClick=" return confirm('Voulez-vous vraiment supprimer ce commentaire ?')" href="index.php?action=deleteComment&id=<?= $comment->getId() ?>&postId=<?= $comment->getBlogPostId() ?>" class="btn btn-primary"> Rejeter</a>
+                            </form>
+                        </div>
+
                     </div>
-                </div> <br />
-            <?php
-            endforeach;
-            ?>
+                </div>
+            </div>
+        </div>
+    </div> <br />
+<?php
+endforeach;
+?>
 
 
-            <?php $content = ob_get_clean(); ?>
-            <?php require('template.php'); ?>
+<?php $content = ob_get_clean(); ?>
+<?php require 'template.php'; ?>

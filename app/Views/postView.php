@@ -58,7 +58,6 @@
              <?php
                 endforeach;
                 ?>
-
              <div>
                  <ul class="pagination pagination-sm">
                      <?php for ($i = 1; $i <= $pageOfNumber; $i++) { ?>
@@ -109,4 +108,4 @@
 
 
  <?php $content = ob_get_clean(); ?>
- <?php require('template.php'); ?>
+ <?php require 'template.php'; ?>

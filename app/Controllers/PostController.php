@@ -13,7 +13,7 @@ class PostController
     function listPosts()
     {
         if (isset($_GET['page']) && !empty($_GET['page'])) {
-            $_GET['page'] = intval($_GET['page']);
+            $_GET['page'] = (int) $_GET['page'];
             $currentPage = $_GET['page'];
         } else {
             $currentPage = 1;
@@ -28,7 +28,7 @@ class PostController
     function post()
     {
         if (isset($_GET['page']) && !empty($_GET['page'])) {
-            $_GET['page'] = intval($_GET['page']);
+            $_GET['page'] = (int) $_GET['page'];
             $currentPage = $_GET['page'];
         } else {
             $currentPage = 1;

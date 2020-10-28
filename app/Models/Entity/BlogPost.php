@@ -78,7 +78,6 @@ class BlogPost
         $this->userId = $userId;
     }
 
-
     /**
      * @return mixed
      */

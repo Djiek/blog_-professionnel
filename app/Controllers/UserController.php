@@ -2,7 +2,7 @@
 
 namespace blogProfessionnel\app\Controllers;
 
-require_once('app/Models/UserManager.php');
+require_once 'app/Models/UserManager.php';
 
 use blogProfessionnel\app\Models\UserManager;
 use \Exception;

@@ -2,16 +2,15 @@
 
 namespace blogProfessionnel\app\Controllers;
 
-require_once('app/Models/PostManager.php');
-require_once('app/Models/CommentManager.php');
-require_once('app/Models/UserManager.php');
+require_once 'app/Models/PostManager.php';
+require_once 'app/Models/CommentManager.php';
+require_once 'app/Models/UserManager.php';
 
 use blogProfessionnel\app\Models\CommentManager;
 use \blogProfessionnel\app\Models\PostManager;
 
 class AdminController
 {
-
     public function postDelete()
     {
         $postManager = new PostManager;
@@ -98,7 +97,7 @@ class AdminController
     function ViewPostComment()
     {
         if (isset($_GET['page']) && !empty($_GET['page'])) {
-            $_GET['page'] = intval($_GET['page']);
+            $_GET['page'] = (int) $_GET['page'];
             $currentPage = $_GET['page'];
         } else {
             $currentPage = 1;
@@ -120,7 +119,7 @@ class AdminController
     {
 
         if (isset($_GET['page']) && !empty($_GET['page'])) {
-            $_GET['page'] = intval($_GET['page']);
+            $_GET['page'] = (int) $_GET['page'];
             $currentPage = $_GET['page'];
         } else {
             $currentPage = 1;
