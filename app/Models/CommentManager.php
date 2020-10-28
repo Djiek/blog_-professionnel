@@ -13,11 +13,17 @@ class CommentManager extends Manager
 {
     public $nbrPerPage = 5;
 
+    /**
+     * getNbPerPage : recupere le nombre de page.
+     */
     public function getNbPerPage()
     {
         return $this->nbrPerPage;
     }
 
+    /**
+     *  countComment : Permets de Compter les commentaires
+     */
     public function countComment($postId)
     {
         $dbConnect = $this->dbConnect();
@@ -31,6 +37,10 @@ class CommentManager extends Manager
         $pageOfNumber = ceil($countComments[0]["nbrComment"] / $nbPerPage);
         return $pageOfNumber;
     }
+
+    /**
+     *  countCommentWithoutId : Permets de compter les commentaires avec un status 0
+     */
     public function countCommentWithoutId()
     {
         $dbConnect = $this->dbConnect();
@@ -44,6 +54,9 @@ class CommentManager extends Manager
         return $pageOfNumber;
     }
 
+    /**
+     * deleteComment : Permets de supprimer un commentaire en bdd
+     */
     public function deleteComment($postId, $commentId)
     {
         $dbConnect = $this->dbConnect();
@@ -53,6 +66,9 @@ class CommentManager extends Manager
         $req->execute();
     }
 
+    /**
+     * CommentPage : Compte le nombre de page pour ensuite faire la pagination
+     */
     public function CommentPage($currentPage)
     {
         $nbPerPage = $this->getNbPerPage();
@@ -60,6 +76,9 @@ class CommentManager extends Manager
         return $commentPage;
     }
 
+    /**
+     * UpdateStatusComment : mets à jour le status d'un commentaire (sur 1 pour l'afficher)
+     */
     public function UpdateStatusComment($postId, $commentId)
     {
         $dbConnect = $this->dbConnect();
@@ -75,6 +94,9 @@ class CommentManager extends Manager
         return $comments;
     }
 
+    /**
+     * getComments : Permets d'afficher les commentaires qui ont un status 1 sur la vue
+     */
     public function getComments($postId, $currentPage)
     {
         $nbPerPage = $this->getNbPerPage();
@@ -103,6 +125,9 @@ class CommentManager extends Manager
         return $comments;
     }
 
+    /**
+     * getCommentsWithoutStatus : va chercher les commentaires en status 0 pour les afficher sur la vue
+     */
     public function getCommentsWithoutStatus($currentPage)
     {
         $nbPerPage = $this->getNbPerPage();
@@ -129,6 +154,9 @@ class CommentManager extends Manager
         return $comments;
     }
 
+    /**
+     * getCommentsWithoutStatusWithId : va chercher les commentaires en status 0 pour les afficher sur la vue et avec l'userId
+     */
     public function getCommentsWithoutStatusWithId($postId, $currentPage)
     {
         $nbPerPage = $this->getNbPerPage();
@@ -156,6 +184,9 @@ class CommentManager extends Manager
         return $comments;
     }
 
+    /**
+     * postComment : Insert en bdd le commentaire 
+     */
     public function postComment($postId, $userId, $content, $title)
     {
         $dbConnect = $this->dbConnect();
@@ -164,6 +195,9 @@ class CommentManager extends Manager
         return $affectedLines;
     }
 
+    /**
+     * updateStatus : mets à jour le status du commentaire
+     */
     public function updateStatus($postId, $userId)
     {
         $dbConnect = $this->dbConnect();

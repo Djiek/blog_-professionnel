@@ -13,11 +13,17 @@ class PostManager extends Manager
 {
     public $nbrPerPage = 5;
 
+    /**
+     * getNbPerPage : va chercher le nombre de page dans la variable declaré 
+     */
     public function getNbPerPage()
     {
         return $this->nbrPerPage;
     }
 
+    /**
+     * countPost : compte les posts en status 1 pour pouvoir ensuite les afficher sur la vue
+     */
     public function countPost()
     {
         $dbName = $this->dbConnect();
@@ -31,6 +37,9 @@ class PostManager extends Manager
         return $pageOfNumber;
     }
 
+    /**
+     * PostPage : combien de post sur une vue
+     */
     public function PostPage($currentPage)
     {
         $nbPerPage = $this->getNbPerPage();
@@ -38,6 +47,9 @@ class PostManager extends Manager
         return $postPage;
     }
 
+    /**
+     * getPosts : va checher les posts en status 1 en leur mettant la limite de pagination pour les afficher sur la vue
+     */
     public function getPosts($currentPage)
     {
         $nbPerPage = $this->getNbPerPage();
@@ -64,6 +76,9 @@ class PostManager extends Manager
         return $posts;
     }
 
+    /**
+     * getPost : va chercher un post pour l'afficher sur la vue
+     */
     public function getPost($postId)
     {
         $dbName = $this->dbConnect();
@@ -88,6 +103,9 @@ class PostManager extends Manager
         return $posts;
     }
 
+    /**
+     * addBlogPost : ajoute un post en bdd 
+     */
     public function addBlogPost($title, $chapo, $content, $user)
     {
         $dbName = $this->dbConnect();
@@ -98,6 +116,9 @@ class PostManager extends Manager
         return $affectedLines;
     }
 
+    /**
+     * ModifyPost : Modifie un post et l'envois en update en bdd
+     */
     public function ModifyPost($blogPostId, $userId, $title, $chapo, $content)
     {
         $dbName = $this->dbConnect();
@@ -109,6 +130,10 @@ class PostManager extends Manager
         $req->bindValue(":blogPostId", $blogPostId);
         $req->execute();
     }
+
+    /**
+     * DeletePost : supprime un post en bdd
+     */
     public function DeletePost($blogPostId)
     {
         $dbName = $this->dbConnect();

@@ -4,6 +4,9 @@ namespace blogProfessionnel\app\Services;
 
 class Form
 {
+    /**
+     * mail : envois un mail apres que l'utilisateur ai rempli le formulaire sur la page home
+     */
     public function mail($name, $firstname, $email, $message)
     {
         $message = str_replace("\'", "'", $message);

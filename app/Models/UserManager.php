@@ -11,6 +11,9 @@ use PDO;
 class UserManager extends Manager
 {
 
+    /**
+     * connectionUser : recupere le login et le passeword et verifie qu'ils existent en bdd, si oui connection
+     */
     public function connectionUser($login, $password)
     {
         $dbName = $this->dbConnect();
@@ -21,6 +24,9 @@ class UserManager extends Manager
         return $user;
     }
 
+    /**
+     * getUser : recupere le login de l'utilisateur connecté
+     */
     public function getUser($login)
     {
         $dbName = $this->dbConnect();
@@ -32,6 +38,9 @@ class UserManager extends Manager
         return $users;
     }
 
+    /**
+     * addUser : ajoute un utilisateur en bdd
+     */
     public function addUser($login, $password, $mail)
     {
         $dbName = $this->dbConnect();
@@ -40,6 +49,9 @@ class UserManager extends Manager
         return $affectedLines;
     }
 
+    /**
+     * emailVerify : verifie si l'email n'existe pas deja en bdd quand un utilisateur d'inscrit
+     */
     public function emailVerify($mail)
     {
         $dbName = $this->dbConnect();
@@ -50,6 +62,9 @@ class UserManager extends Manager
         return $result;
     }
 
+    /**
+     * loginVerify : verifie si le login n'existe pas deja en bdd quand un utilisateur d'inscrit
+     */
     public function loginVerify($login)
     {
         $dbName = $this->dbConnect();

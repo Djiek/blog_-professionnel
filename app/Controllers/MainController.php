@@ -8,16 +8,25 @@ use \blogProfessionnel\app\Services\Form;
 
 class MainController
 {
+    /**
+     * home : pour acceder a la page home
+     */
     function home()
     {
         require('app/Views/home.php');
     }
 
+    /**
+     * downloadCv : pour telecharger le cv
+     */
     function downloadCv()
     {
         return 'location:../public/image/cv.pdf';
     }
 
+    /**
+     * postContact : permet d'envoyer le mail via le formulaire de contact
+     */
     public function postContact()
     {
         if (isset($_POST['name']) && isset($_POST['firstname']) && isset($_POST['email']) && isset($_POST['message'])) {

@@ -10,6 +10,9 @@ use \blogProfessionnel\app\Models\CommentManager;
 
 class PostController
 {
+    /**
+     * listPosts : gere la vue ou s'affiche la lise des posts publié
+     */
     function listPosts()
     {
         if (isset($_GET['page']) && !empty($_GET['page'])) {
@@ -25,6 +28,9 @@ class PostController
         require('app/Views/listPostsView.php');
     }
 
+    /**
+     * post : pour voir sur la vue d'un post, un post defini par son id
+     */
     function post()
     {
         if (isset($_GET['page']) && !empty($_GET['page'])) {
@@ -41,6 +47,9 @@ class PostController
         require('app/Views/postView.php');
     }
 
+    /**
+     * addComment : gere la partie pour ajouter un commentaire
+     */
     function addComment($postId, $userId, $content, $title)
     {
         $commentManager = new CommentManager();

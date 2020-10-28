@@ -11,6 +11,9 @@ use \blogProfessionnel\app\Models\PostManager;
 
 class AdminController
 {
+    /**
+     * postDelete : supprime un post
+     */
     public function postDelete()
     {
         $postManager = new PostManager;
@@ -23,6 +26,10 @@ class AdminController
         $_SESSION['flash']['success'] = "Le blogPost a été supprimé.";
         header('Location: index.php?action=listPosts');
     }
+
+    /**
+     * postModify : envoie sur la page de modification d'un post
+     */
     public function postModify()
     {
         $postManager = new PostManager;
@@ -30,6 +37,9 @@ class AdminController
         require('App/Views/postModify.php');
     }
 
+    /**
+     * modifyBlogPost : modifie un post
+     */
     public function modifyBlogPost()
     {
         $postManager = new PostManager;
@@ -42,6 +52,9 @@ class AdminController
         header('Location: index.php?action=post&id=' . $_GET['id']);
     }
 
+    /**
+     * addPostForm : envoie sur la page pour ajouter un blogpost
+     */
     public function addPostForm()
     {
         if (isset($_SESSION['User']) && $_SESSION['User']['admin'] == 1) {
@@ -52,6 +65,9 @@ class AdminController
         }
     }
 
+    /**
+     * addBlogPost : ajoute un blop post
+     */
     function addBlogPost($title, $chapo, $content, $userId)
     {
         $postManager = new PostManager(); // Création d'un objet
@@ -70,6 +86,9 @@ class AdminController
         }
     }
 
+    /**
+     * updateStatusComment : modifie le status d'un commentaire pour l'ajouter sur la view
+     */
     public function updateStatusComment()
     {
         $commentManager = new CommentManager();
@@ -82,6 +101,9 @@ class AdminController
         header('Location: index.php?action=ViewPostComment&id=' . $_GET['postId']);
     }
 
+    /**
+     * deleteComment : supprime un commentaire
+     */
     public function deleteComment()
     {
         $commentManager = new CommentManager();
@@ -94,6 +116,9 @@ class AdminController
         header('Location: index.php?action=ViewPostComment&id=' . $_GET['postId']);
     }
 
+    /**
+     * ViewPostComment : page pour voirles commentaires en attente de verification sur le post associé
+     */
     function ViewPostComment()
     {
         if (isset($_GET['page']) && !empty($_GET['page'])) {
@@ -115,6 +140,9 @@ class AdminController
         }
     }
 
+    /**
+     * managementCommentPage :  page pour voir tout les commentaires attente de verification
+     */
     public function managementCommentPage()
     {
 
