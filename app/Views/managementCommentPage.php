@@ -44,6 +44,6 @@ $title = 'Mon blog';
             </li>
     </ul>
 </div>
-<span class='class=paddingFooter'></span>
+
 <?php $content = ob_get_clean(); ?>
 <?php require 'template.php'; ?>

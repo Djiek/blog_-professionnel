@@ -41,7 +41,7 @@ class MainController
             if (!empty($name) && !empty($firstname) && !empty($email) && !empty($message)) {
                 $mail = new Form();
                 $mail->mail($name, $firstname, $email, $message);
-                $_SESSION['flash']['success'] = 'Le mail a bien été envoyé.';
+                $_SESSION['success'] = 'Le mail a bien été envoyé.';
                 header('Location: index.php?action=home');
             } else {
                 $_SESSION['error'] =  "Vous n'avez pas rempli tout les champs.";

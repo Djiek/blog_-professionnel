@@ -26,7 +26,7 @@ class UserController
     {
         unset($_SESSION['User']);
         unset($_SESSION['Admin']);
-        $_SESSION['flash']['success'] = "vous avez été déconnecté.";
+        $_SESSION['success'] = "vous avez été déconnecté.";
         header('Location: index.php?action=connection');
     }
 
@@ -56,7 +56,7 @@ class UserController
                     if ($postPassword === $postCPassword) {
                         $hashPassword =  password_hash($password, PASSWORD_BCRYPT);
                         if (password_verify($_POST['password'], $hashPassword)) {
-                            $_SESSION['flash']['success'] = 'Enregistrement reussi, veuillez vous connecter pour continuer';
+                            $_SESSION['success'] = 'Enregistrement reussi, veuillez vous connecter pour continuer';
                             header('Location: index.php?action=connection');
                             $addUser = $user->addUser($login, $hashPassword, $mail);
                         }

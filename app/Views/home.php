@@ -3,9 +3,9 @@
 $title = 'Mon blog'; ?>
 
 <?php ob_start();
-if (isset($_SESSION['flash']['success'])) {
-    echo "<h3 class='table-success bordure'>" . $_SESSION['flash']['success'] . "</h3>";
-    unset($_SESSION['flash']['success']);
+if (isset($_SESSION['success'])) {
+    echo "<h3 class='table-success bordure'>" . $_SESSION['success'] . "</h3>";
+    unset($_SESSION['success']);
 }
 ?>
 

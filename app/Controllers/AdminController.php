@@ -27,7 +27,7 @@ class AdminController
             header('Location: index.php?action=listPosts');
         }
 
-        $_SESSION['flash']['success'] = "Le blogPost a été supprimé.";
+        $_SESSION['success'] = "Le blogPost a été supprimé.";
         header('Location: index.php?action=listPosts');
     }
 
@@ -57,7 +57,7 @@ class AdminController
         if ($affectedLines === false) {
             $_SESSION['error'] = "Impossible de modifier le blog post !";
         } else {
-            $_SESSION['flash']['success'] = "Le blogPost a été modifié.";
+            $_SESSION['success'] = "Le blogPost a été modifié.";
         }
         header('Location: index.php?action=post&id=' . $getId);
     }
@@ -87,7 +87,7 @@ class AdminController
                 $_SESSION['error'] = "Impossible d'ajouter le blog post !";
                 header('Location: index.php?action=addPostForm');
             } else {
-                $_SESSION['flash']['success'] = "Le blogPost a été enregistré en base de donnée.";
+                $_SESSION['success'] = "Le blogPost a été enregistré en base de donnée.";
                 header('Location: index.php?action=addPostForm');
             }
         } else {
@@ -108,7 +108,7 @@ class AdminController
         if ($affectedLines === false) {
             $_SESSION['error'] = 'Impossible de valider le commentaire';
         } else {
-            $_SESSION['flash']['success'] = 'Le commentaire a été validé';
+            $_SESSION['success'] = 'Le commentaire a été validé';
         }
         header('Location: index.php?action=ViewPostComment&id=' . $getPostId);
     }
@@ -126,7 +126,7 @@ class AdminController
         if ($affectedLines === false) {
             $_SESSION['error'] = 'Impossible de supprimer le commentaire';
         } else {
-            $_SESSION['flash']['success'] = 'Le commentaire a été supprimé';
+            $_SESSION['success'] = 'Le commentaire a été supprimé';
         }
         header('Location: index.php?action=ViewPostComment&id=' . $getPostId);
     }

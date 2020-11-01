@@ -4,9 +4,9 @@
         echo $_SESSION['error'];
         unset($_SESSION['error']);
     }
-    if (isset($_SESSION['flash']['success'])) {
-        echo "<h3 class='table-success bordure'>" . $_SESSION['flash']['success'] . "</h3>";
-        unset($_SESSION['flash']['success']);
+    if (isset($_SESSION['success'])) {
+        echo "<h3 class='table-success bordure'>" . $_SESSION['success'] . "</h3>";
+        unset($_SESSION['success']);
     }
     foreach ($posts as $post) :
         $title = htmlspecialchars($post->getTitle()); ?>
