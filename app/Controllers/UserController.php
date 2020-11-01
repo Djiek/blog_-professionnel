@@ -2,8 +2,8 @@
 
 namespace blogProfessionnel\app\Controllers;
 
-require 'app/Models/UserManager.php';
-require 'app/Services/Request.php';
+require_once 'app/Models/UserManager.php';
+require_once 'app/Services/Request.php';
 
 use blogProfessionnel\app\Models\UserManager;
 use blogProfessionnel\app\Services\Request;
@@ -86,7 +86,8 @@ class UserController
      *  connection de l'utilisateur 
      */
     public function login()
-    {   $request = new Request();
+    {
+        $request = new Request();
         $postLogin = $request->post('login');
         $postPassword = $request->post('password');
         $userManager = new UserManager();

@@ -3,14 +3,10 @@
 $title = 'Mon blog'; ?>
 
 <?php ob_start();
-if (isset($_SESSION['success'])) {
-    echo "<h3 class='table-success bordure'>" . $_SESSION['success'] . "</h3>";
-    unset($_SESSION['success']);
-}
 ?>
 
 
-<div class= "paddingB">
+<div class="paddingB">
     <?php if (isset($_SESSION['User'])) : ?>
         <h3 class="bordure"> Bienvenue <?php echo $_SESSION['User']['login']; ?>
         <?php endif; ?>
@@ -43,35 +39,35 @@ if (isset($_SESSION['success'])) {
     <h3 class="titre"> Mes expériences professionnelles</h3>
     <ul>
 
-        <li class= "paddingB"><U>Novembre 2019 à fevrier 2020</U>
+        <li class="paddingB"><U>Novembre 2019 à fevrier 2020</U>
             <span class="color"> Stage Developpeur Web</span><br>
             Groupe Cerise - Tourcoing (59)<br>
             Base de données nosql, php, angular,methode agile(SCRUM)
         </li>
 
 
-        <li class= "paddingB"><U>Juin 2018</U>
+        <li class="paddingB"><U>Juin 2018</U>
             <span class="color"> Agent de production</span><br>
             Mission d'intérim : Usine Château Blanc - Marcq-en-Baroeul (59)<br>
             Emballage des produits, nettoyage, mise en boite des macarons, étiquetages, etc.
         </li>
 
 
-        <li class= "paddingB" ><U>Mars à avril 2016</U>
+        <li class="paddingB"><U>Mars à avril 2016</U>
             <span class="color"> Restauration collective</span><br>
             Mission d'intérim : Sovitrat - Lille (59) <br>
             Préparation des recettes, préparation des entrée et dessert sur assiette.
         </li>
 
 
-        <li class= "paddingB"><U>Juillet à septembre 2015</U>
+        <li class="paddingB"><U>Juillet à septembre 2015</U>
             <span class="color">Employée polyvalente </span><br>
             Station Shell - Briis-sous-forges (91)<br>
             Caisse, mise en rayon des produits, nettoyage des machines à café.
         </li>
 
 
-        <li class= "paddingB" ><U>Octobre 2013 à octobre 2014</U>
+        <li class="paddingB"><U>Octobre 2013 à octobre 2014</U>
             <span class="color"> Médiatrice culturelle </span> <br>
             Compagnie du Tire Laine - Lille (59) <br>
             Préparation du lieu et des repas des artistes en vue des concerts. Remise à jour des fichiers de contact pour les chargés de diffusion.<br>
@@ -79,13 +75,13 @@ if (isset($_SESSION['success'])) {
         </li>
 
 
-        <li class= "paddingB"><U>Août à septembre 2013</U>
+        <li class="paddingB"><U>Août à septembre 2013</U>
             <span class="color"> Restauration scolaire </span><br>
             Mairie de Lille (59)<br>
             Préparation des commandes et plats pour les enfants, instalation des tables, nettoyage de la vaisselle et du laboratoire.
         </li>
 
-        <li class= "paddingB"><U>De juillet 2006 à août 2009</U>
+        <li class="paddingB"><U>De juillet 2006 à août 2009</U>
             <span class="color"> Apprentie en pâtisserie et glacerie </span><br>
             Westminster Hôtel et Veron Chocolatier - Le Touquet Paris Plage <br>
             Conception d'entremets, décors en chocolat, biscuits, pâte à choux, tartes, glaces et sorbets, entremets glacés, etc,...
@@ -96,7 +92,7 @@ if (isset($_SESSION['success'])) {
         Diplômes et formations
     </h3>
 
-    <div class= "paddingB bordure">
+    <div class="paddingB bordure">
         <p><U> Mai 2019 à novembre 2019</U>
             <span class="color">Formation développeur web et web mobile avec diplome obtenu</span>
             Formation Afpa de Roubaix (59)
@@ -128,7 +124,7 @@ if (isset($_SESSION['success'])) {
         Bénévolat, wwoofing et centre d'intérêt Diplômes et formations
     </h3>
 
-    <ul class= "paddingB">
+    <ul class="paddingB">
         <li> <U>De 2017 à 2018 </U><br>
             <span class="color"> Intervenante(cuisine)</span><br>
             Association K-Pa-Cité - Roubaix (59) <br>
@@ -157,7 +153,7 @@ if (isset($_SESSION['success'])) {
         Lecture. Chant et piano dans un groupe de pop astral (Kiwi Astral)
 
     </div>
-    <p  class= "paddingB"> </p>
+    <p class="paddingB"> </p>
 
     <div class="row">
         <div class="col-sm-2"></div>

@@ -2,9 +2,9 @@
 
 namespace blogProfessionnel\app\Controllers;
 
-require 'app/Models/PostManager.php';
-require 'app/Models/CommentManager.php';
-require 'app/Services/Request.php';
+require_once 'app/Models/PostManager.php';
+require_once 'app/Models/CommentManager.php';
+require_once 'app/Services/Request.php';
 
 use \blogProfessionnel\app\Models\PostManager;
 use \blogProfessionnel\app\Models\CommentManager;
@@ -17,12 +17,12 @@ class PostController
      */
     public function listPosts()
     {
-  
+
         if (isset($_GET['page']) && !empty($_GET['page'])) {
             $currentPage = (int) $_GET['page'];
         } else {
             $currentPage = 1;
-        }  
+        }
         $postManager = new PostManager();
         $posts = $postManager->getPosts($currentPage);
         $pageOfNumber = $postManager->countPost();

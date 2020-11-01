@@ -48,7 +48,6 @@
         </div>
     </nav>
 
-    <?= $content ?>
     <?php if (isset($_SESSION['error'])) {
         echo $_SESSION['error'];
         unset($_SESSION['error']);
@@ -58,8 +57,9 @@
         unset($_SESSION['success']);
     } ?>
 
+    <?= $content ?>
+
     <footer class="paddingFooter">
-        
         <div class="bordure bg-primary">
             <?php if (isset($_SESSION['User']) && $_SESSION['User']['admin'] == 1) : ?>
                 <a class="nav-link" href="index.php?action=managementCommentPage">Lien d'accès à l'administration du site</a>

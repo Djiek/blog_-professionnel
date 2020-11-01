@@ -2,10 +2,10 @@
 
 namespace blogProfessionnel\app\Controllers;
 
-require 'app/Models/PostManager.php';
-require 'app/Models/CommentManager.php';
-require 'app/Models/UserManager.php';
-require 'app/Services/Request.php';
+require_once 'app/Models/PostManager.php';
+require_once 'app/Models/CommentManager.php';
+require_once 'app/Models/UserManager.php';
+require_once 'app/Services/Request.php';
 
 use blogProfessionnel\app\Models\CommentManager;
 use \blogProfessionnel\app\Models\PostManager;
@@ -35,7 +35,8 @@ class AdminController
      * envoie sur la page de modification d'un post
      */
     public function postModify()
-    {   $request = new Request();
+    {
+        $request = new Request();
         $get = $request->get('id');
         $postManager = new PostManager;
         $posts = $postManager->getPost($get);
@@ -79,7 +80,7 @@ class AdminController
      *  ajoute un blop post
      */
     public function addBlogPost($title, $chapo, $content, $userId)
-    { 
+    {
         $postManager = new PostManager(); // Création d'un objet
         if (isset($_SESSION['User']) && $_SESSION['User']['admin'] == 1) {
             $affectedLines = $postManager->addBlogPost($title, $chapo, $content, $userId);
@@ -100,7 +101,8 @@ class AdminController
      * modifie le status d'un commentaire pour l'ajouter sur la view
      */
     public function updateStatusComment()
-    {   $request = new Request();
+    {
+        $request = new Request();
         $getId = $request->get('id');
         $getPostId = $request->get('postId');
         $commentManager = new CommentManager();
@@ -122,7 +124,7 @@ class AdminController
         $getId = $request->get('id');
         $getPostId = $request->get('postId');
         $commentManager = new CommentManager();
-        $affectedLines = $commentManager->deleteComment( $getPostId,  $getId);
+        $affectedLines = $commentManager->deleteComment($getPostId,  $getId);
         if ($affectedLines === false) {
             $_SESSION['error'] = 'Impossible de supprimer le commentaire';
         } else {
@@ -146,7 +148,7 @@ class AdminController
             $getId = $request->get('id');
             $postManager = new PostManager;
             $commentManager = new CommentManager();
-            $posts = $postManager->getPost($getId );
+            $posts = $postManager->getPost($getId);
             $comments = $commentManager->getCommentsWithoutStatusWithId($getId, $currentPage);
             $pageOfNumber = $commentManager->countCommentWithoutId();
             require('app/Views/viewPost.php');

@@ -3,14 +3,7 @@ $title = 'Mon blog';
 ?>
 
 <?php ob_start();
-if (isset($_SESSION['error'])) {
-    echo $_SESSION['error'];
-    unset($_SESSION['error']);
-}
-if (isset($_SESSION['success'])) {
-    echo "<h3 class='table-success bordure'>" . $_SESSION['success'] . "</h3>";
-    unset($_SESSION['success']);
-} ?>
+?>
 
 <br />
 
@@ -28,9 +21,9 @@ if (isset($_SESSION['success'])) {
                         <div class="card border-primary mb-3" style="max-width: 50rem;">
                             <h3 class="bordure card-header  ">
                                 <?= htmlspecialchars($post->getTitle()); ?></h3>
-                                <em>le <?= $post->getDate(); ?></em>
-                                <p>auteur : <?= $post->getUserId(); ?></p>
-                            
+                            <em>le <?= $post->getDate(); ?></em>
+                            <p>auteur : <?= $post->getUserId(); ?></p>
+
 
                             <div class="bordure card-title list-group-item">
                                 <?= htmlspecialchars($post->getChapo()); ?>
@@ -64,10 +57,10 @@ foreach ($comments as $comment) :
                     <div class="col-sm-2"></div>
                     <div class="col-sm-8">
                         <div class="bordure"> <a href="index.php?action=updateStatusComment&id=<?= $comment->getId() ?>&postId=<?= $comment->getBlogPostId() ?>" class="btn btn-success"> Valider </a>
-                    
+
                         </div>
                         <div class="bordure"><a onClick=" return confirm('Voulez-vous vraiment supprimer ce commentaire ?')" href="index.php?action=deleteComment&id=<?= $comment->getId() ?>&postId=<?= $comment->getBlogPostId() ?>" class="btn btn-primary"> Rejeter</a>
-                         
+
                         </div>
 
                     </div>
