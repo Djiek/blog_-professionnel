@@ -38,12 +38,12 @@ $title = 'Mon blog';
 <div>
     <ul class="pagination pagination-sm ">
         <?php for ($i = 1; $i <= $pageOfNumber; $i++) { ?>
-            <li class="page-item active class="paddingB>
+            <li class="page-item active class=" paddingB>
                 <a class="page-link" href="index.php?action=managementCommentPage&page=<?= $i ?>"><?php echo $i  ?></a>
             <?php } ?>
             </li>
     </ul>
 </div>
-<span class='class=paddingFooter'></span>
+
 <?php $content = ob_get_clean(); ?>
 <?php require 'template.php'; ?>

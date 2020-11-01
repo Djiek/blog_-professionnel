@@ -2,14 +2,7 @@
 
 $title = 'Mon blog'; ?>
 <?php ob_start();
-if (isset($_SESSION['error'])) {
-    echo $_SESSION['error'];
-    unset($_SESSION['error']);
-}
-if (isset($_SESSION['flash']['success'])) {
-    echo "<h3 class='table-success bordure'>" . $_SESSION['flash']['success'] . "</h3>";
-    unset($_SESSION['flash']['success']);
-} ?>
+?>
 
 
 <div class="container ">
@@ -43,7 +36,7 @@ foreach ($posts as $post) :
                             <?php if (isset($_SESSION['User']) && $_SESSION['User']['admin'] == 1) : ?>
                                 <a class="btn btn-primary mb-2" href="index.php?action=postModify&id=<?= $post->getId() ?>"> Modifier</a><br />
                                 <a onClick="return confirm('Voulez-vous vraiment supprimer ce post ?')" href="index.php?action=postDelete&id=<?= $post->getId() ?>" class="btn btn-primary"> Supprimer</a><br />
-                               <?php endif ?>
+                            <?php endif ?>
                         </div>
                     </div>
                 </div>

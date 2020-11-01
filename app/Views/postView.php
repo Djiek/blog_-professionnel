@@ -1,13 +1,5 @@
  <?php
     ob_start();
-    if (isset($_SESSION['error'])) {
-        echo $_SESSION['error'];
-        unset($_SESSION['error']);
-    }
-    if (isset($_SESSION['flash']['success'])) {
-        echo "<h3 class='table-success bordure'>" . $_SESSION['flash']['success'] . "</h3>";
-        unset($_SESSION['flash']['success']);
-    }
     foreach ($posts as $post) :
         $title = htmlspecialchars($post->getTitle()); ?>
      <br>
@@ -20,7 +12,7 @@
 
                  <h3> <?= htmlspecialchars($post->getTitle()); ?></h3>
 
-                 <em class='bordure'>Auteur : <?= $post->getUserId(); ?>, le <?= $post->getDate(); ?>  </em>
+                 <em class='bordure'>Auteur : <?= $post->getUserId(); ?>, le <?= $post->getDate(); ?> </em>
 
                  <p class='bordure card-title list-group-item'>
                      <?= htmlspecialchars($post->getChapo()); ?></p>
@@ -76,16 +68,16 @@
          <div class="col-sm-8">
              <div class="card border-primary mb-3" style="max-width: 50rem;">
                  <form action="index.php?action=addComment&amp;id=<?= $post->getId() ?>" method="post">
-                         <h2 class="bordure">Ajouter un commentaire</h2>
-                         <div class="form-group  bordure">
-                             <label for="title">Titre du commentaire : </label>
-                             <input type="text" name="title" class="form-control" id="title" required="required">
-                         </div>
-                         <div class="form-group  bordure">
-                             <label for="content">Commentaire : </label>
-                             <textarea name="content" class="form-control" id="exampleTextarea" rows="3" required="required"></textarea>
-                         </div>
-                         <div class="bordure"> <button type="submit" class="btn btn-primary"> Envoyer </button></div>
+                     <h2 class="bordure">Ajouter un commentaire</h2>
+                     <div class="form-group  bordure">
+                         <label for="title">Titre du commentaire : </label>
+                         <input type="text" name="title" class="form-control" id="title" required="required">
+                     </div>
+                     <div class="form-group  bordure">
+                         <label for="content">Commentaire : </label>
+                         <textarea name="content" class="form-control" id="exampleTextarea" rows="3" required="required"></textarea>
+                     </div>
+                     <div class="bordure"> <button type="submit" class="btn btn-primary"> Envoyer </button></div>
                  </form>
              </div>
          </div>

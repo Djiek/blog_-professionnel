@@ -3,8 +3,10 @@
 namespace blogProfessionnel\app\Controllers;
 
 require_once 'app/Models/UserManager.php';
+require_once 'app/Services/Request.php';
 
 use blogProfessionnel\app\Models\UserManager;
+use blogProfessionnel\app\Services\Request;
 use \Exception;
 
 class UserController
@@ -24,7 +26,7 @@ class UserController
     {
         unset($_SESSION['User']);
         unset($_SESSION['Admin']);
-        $_SESSION['flash']['success'] = "vous avez été déconnecté.";
+        $_SESSION['success'] = "vous avez été déconnecté.";
         header('Location: index.php?action=connection');
     }
 
@@ -44,15 +46,17 @@ class UserController
         $user = new UserManager;
         $mailVerify = $user->emailVerify($mail);
         $loginVerify = $user->loginVerify($login);
-
+        $request = new Request();
+        $postPassword = $request->post('password');
+        $postCPassword = $request->post('cPassword');
         if ($mailVerify == 0) {
             if ($loginVerify == 0) {
-                $longueur = strlen($_POST['password']);
+                $longueur = strlen($postPassword);
                 if ($longueur >= 8) {
-                    if ($_POST['password'] === $_POST['cPassword']) {
+                    if ($postPassword === $postCPassword) {
                         $hashPassword =  password_hash($password, PASSWORD_BCRYPT);
                         if (password_verify($_POST['password'], $hashPassword)) {
-                            $_SESSION['flash']['success'] = 'Enregistrement reussi, veuillez vous connecter pour continuer';
+                            $_SESSION['success'] = 'Enregistrement reussi, veuillez vous connecter pour continuer';
                             header('Location: index.php?action=connection');
                             $addUser = $user->addUser($login, $hashPassword, $mail);
                         }
@@ -83,18 +87,21 @@ class UserController
      */
     public function login()
     {
+        $request = new Request();
+        $postLogin = $request->post('login');
+        $postPassword = $request->post('password');
         $userManager = new UserManager();
-        $user = $userManager->getUser($_POST["login"]);
+        $user = $userManager->getUser($postLogin);
 
-        if (isset($_POST["login"]) && isset($_POST["password"])) {
-            $isPasswordCorrect = password_verify($_POST['password'], $user['password']);
+        if (isset($postLogin) && isset($postPassword)) {
+            $isPasswordCorrect = password_verify($postPassword, $user['password']);
             if (!$isPasswordCorrect) {
                 $_SESSION['error'] = 'Mauvais identifiant ou mot de passe';
                 header('Location: index.php?action=connection');
             } else {
-                $users = $userManager->connectionUser($_POST["login"], $_POST["password"]);
+                $users = $userManager->connectionUser($postLogin, $postPassword);
                 $_SESSION['User'] = array(
-                    'login' => $_POST['login'],
+                    'login' => $postLogin,
                     'admin' => $user['admin'],
                     'id' => $user['id'],
                 );
