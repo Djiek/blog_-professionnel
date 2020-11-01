@@ -1,7 +1,6 @@
 <?php
 
 namespace blogProfessionnel\app\Controllers;
-
 require_once 'app/Models/PostManager.php';
 require_once 'app/Models/CommentManager.php';
 require_once 'app/Models/UserManager.php';

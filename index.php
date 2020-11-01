@@ -103,9 +103,9 @@ try {
             $controller->postContact();
         } elseif ($getAction == 'addComment') {
             if (isset($getId) && $getId > 0) {
-                if (!empty($postContent) && !empty($postTilte)) {
+                if (!empty($postContent) && !empty($postTitle)) {
                     $controller = new PostController();
-                    $controller->addComment($getId, $_SESSION['User']['id'], $postContent, $postTilte);
+                    $controller->addComment($getId, $_SESSION['User']['id'], $postContent, $postTitle);
                 } else {
                     $_SESSION['error'] = "Tous les champs ne sont pas remplis !";
                     header('Location: index.php?action=post&id=' . $getId);
@@ -115,10 +115,10 @@ try {
             }
         } elseif ($getAction == 'addBlogPost') {
 
-            if (!empty($postTilte) && !empty($postChapo) && !empty($postContent)) {
+            if (!empty($postTitle) && !empty($postChapo) && !empty($postContent)) {
                 $controller = new AdminController();
                 $controller->addBlogPost(
-                    $postTilte,
+                    $postTitle,
                     $postChapo,
                     $postContent,
                     $_SESSION['User']['id']
