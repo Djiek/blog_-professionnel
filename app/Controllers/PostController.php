@@ -2,9 +2,9 @@
 
 namespace blogProfessionnel\app\Controllers;
 
-require_once 'app/Models/PostManager.php';
-require_once 'app/Models/CommentManager.php';
-require_once 'app/Services/Request.php';
+require 'app/Models/PostManager.php';
+require 'app/Models/CommentManager.php';
+require 'app/Services/Request.php';
 
 use \blogProfessionnel\app\Models\PostManager;
 use \blogProfessionnel\app\Models\CommentManager;

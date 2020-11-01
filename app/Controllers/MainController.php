@@ -2,8 +2,8 @@
 
 namespace blogProfessionnel\app\Controllers;
 
-require_once 'app/Services/Form.php';
-require_once 'app/Services/Request.php';
+require 'app/Services/Form.php';
+require 'app/Services/Request.php';
 
 use \blogProfessionnel\app\Services\Form;
 use blogProfessionnel\app\Services\Request;

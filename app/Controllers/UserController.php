@@ -2,8 +2,8 @@
 
 namespace blogProfessionnel\app\Controllers;
 
-require_once 'app/Models/UserManager.php';
-require_once 'app/Services/Request.php';
+require 'app/Models/UserManager.php';
+require 'app/Services/Request.php';
 
 use blogProfessionnel\app\Models\UserManager;
 use blogProfessionnel\app\Services\Request;
