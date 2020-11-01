@@ -2,11 +2,13 @@
 
 namespace blogProfessionnel\app\Controllers;
 
-require_once('app/Models/PostManager.php');
-require_once('app/Models/CommentManager.php');
+require_once 'app/Models/PostManager.php';
+require_once 'app/Models/CommentManager.php';
+require_once 'app/Services/Request.php';
 
 use \blogProfessionnel\app\Models\PostManager;
 use \blogProfessionnel\app\Models\CommentManager;
+use blogProfessionnel\app\Services\Request;
 
 class PostController
 {
@@ -15,11 +17,12 @@ class PostController
      */
     public function listPosts()
     {
+  
         if (isset($_GET['page']) && !empty($_GET['page'])) {
             $currentPage = (int) $_GET['page'];
         } else {
             $currentPage = 1;
-        }
+        }  
         $postManager = new PostManager();
         $posts = $postManager->getPosts($currentPage);
         $pageOfNumber = $postManager->countPost();
@@ -37,11 +40,13 @@ class PostController
         } else {
             $currentPage = 1;
         }
+        $request = new Request();
+        $get = $request->get('id');
         $postManager = new PostManager;
         $commentManager = new CommentManager();
-        $posts = $postManager->getPost($_GET['id']);
-        $comments = $commentManager->getComments($_GET['id'], $currentPage);
-        $pageOfNumber = $commentManager->countComment($_GET['id'], $currentPage);
+        $posts = $postManager->getPost($get);
+        $comments = $commentManager->getComments($get, $currentPage);
+        $pageOfNumber = $commentManager->countComment($get, $currentPage);
         require('app/Views/postView.php');
     }
 
@@ -51,8 +56,10 @@ class PostController
     public function addComment($postId, $userId, $content, $title)
     {
         $commentManager = new CommentManager();
-
-        if (isset($_SESSION['User']) || isset($_SESSION['Admin'])) {
+        $request = new Request();
+        $sessionUser = $request->session('User');
+        $sessionAdmin = $request->session('Admin');
+        if (isset($sessionUser) || isset($sessionAdmin)) {
             $affectedLines = $commentManager->postComment($postId, $userId, $content, $title);
             if ($affectedLines === false) {
                 $_SESSION['error'] = 'Impossible d\'ajouter le commentaire !';

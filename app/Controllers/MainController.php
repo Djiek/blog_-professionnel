@@ -3,8 +3,10 @@
 namespace blogProfessionnel\app\Controllers;
 
 require_once 'app/Services/Form.php';
+require_once 'app/Services/Request.php';
 
 use \blogProfessionnel\app\Services\Form;
+use blogProfessionnel\app\Services\Request;
 
 class MainController
 {
@@ -29,7 +31,12 @@ class MainController
      */
     public function postContact()
     {
-        if (isset($_POST['name']) && isset($_POST['firstname']) && isset($_POST['email']) && isset($_POST['message'])) {
+        $request = new Request();
+        $postName = $request->post('name');
+        $postFirstName = $request->post('firstname');
+        $postMail = $request->post('email');
+        $postMail = $request->post('message');
+        if (isset($postName) && isset($postFirstName) && isset($postMail) && isset($postMail)) {
             extract($_POST);
             if (!empty($name) && !empty($firstname) && !empty($email) && !empty($message)) {
                 $mail = new Form();
