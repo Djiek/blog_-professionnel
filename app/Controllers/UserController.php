@@ -73,7 +73,7 @@ class UserController
                 header('Location: index.php?action=inscriptionForm');
             }
         } else {
-            $_SESSION['error'] = "L\'email existe deja";
+            $_SESSION['error'] = "L'email existe deja";
             header('Location: index.php?action=inscriptionForm');
         }
         if ($addUser === false) {
