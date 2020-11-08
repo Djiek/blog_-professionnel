@@ -1,6 +1,6 @@
 <?php
 
-namespace blogProfessionnel\app\Models\Entity;
+namespace App\Models\Entity;
 
 class Comment
 {

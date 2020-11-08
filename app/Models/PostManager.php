@@ -1,12 +1,9 @@
 <?php
 
-namespace blogProfessionnel\app\Models;
+namespace App\Models;
 
-require_once "app/Models/Manager.php";
-require_once 'app/Models/Entity/BlogPost.php';
-
-use blogProfessionnel\app\Models\Entity\BlogPost;
-use blogProfessionnel\app\Models\Entity\User;
+use App\Models\Entity\BlogPost;
+use App\Models\Entity\User;
 use PDO;
 
 class PostManager extends Manager
@@ -56,7 +53,7 @@ class PostManager extends Manager
         $postPage = $this->PostPage($currentPage);
         $dbName = $this->dbConnect();
         $req = $dbName->prepare("SELECT id, title,chapo, content,status,user_id, DATE_FORMAT(dateLastModification, '%d/%m/%Y à %Hh%imin%ss')
-         AS dateLastModification FROM blogpost WHERE status = 1 ORDER BY dateLastModification DESC LIMIT :postPage ,:nbPerPage");
+         AS dateFr FROM blogpost WHERE status = 1 ORDER BY dateLastModification DESC LIMIT :postPage ,:nbPerPage");
         $req->bindValue(":postPage", $postPage, PDO::PARAM_INT);
         $req->bindValue(":nbPerPage", $nbPerPage, PDO::PARAM_INT);
         $req->execute();
@@ -67,7 +64,7 @@ class PostManager extends Manager
             $post->setId($row['id']);
             $post->setTitle($row['title']);
             $post->setContent($row['content']);
-            $post->setDate($row['dateLastModification']);
+            $post->setDate($row['dateFr']);
             $post->setStatus($row['status']);
             $post->setUserId($row['user_id']);
             $post->setChapo($row['chapo']);
@@ -83,7 +80,7 @@ class PostManager extends Manager
     {
         $dbName = $this->dbConnect();
         $req = $dbName->prepare('SELECT blogpost.id, title,chapo, content,status, user_id,user.login,DATE_FORMAT(dateLastModification, \'%d/%m/%Y à %Hh%imin%ss\') 
-        AS dateLastModification FROM blogpost INNER JOIN user ON blogpost.user_id = user.id WHERE blogpost.id = ? AND blogpost.status = 1');
+        AS dateFr FROM blogpost INNER JOIN user ON blogpost.user_id = user.id WHERE blogpost.id = ? AND blogpost.status = 1');
         $req->execute(array($postId));
 
         while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
@@ -94,7 +91,7 @@ class PostManager extends Manager
             $post->setId($row['id']);
             $post->setTitle($row['title']);
             $post->setContent($row['content']);
-            $post->setDate($row['dateLastModification']);
+            $post->setDate($row['dateFr']);
             $post->setStatus($row['status']);
             $post->setUserId($row['login']);
             $post->setChapo($row['chapo']);
@@ -137,7 +134,7 @@ class PostManager extends Manager
     public function DeletePost($blogPostId)
     {
         $dbName = $this->dbConnect();
-        $req = $dbName->prepare('DELETE FROM `blogpost`WHERE id = :blogPostId');
+        $req = $dbName->prepare('UPDATE blogpost  set status = 0, dateLastModification = NOW() WHERE id = :blogPostId');
         $req->bindValue(":blogPostId", $blogPostId, PDO::PARAM_INT);
         $req->execute();
     }

@@ -1,16 +1,17 @@
 <?php
 session_start();
-require_once 'app/Controllers/PostController.php';
-require_once 'app/Controllers/UserController.php';
-require_once 'app/Controllers/AdminController.php';
-require_once 'app/Controllers/MainController.php';
-require_once 'app/Services/Request.php';
+require_once 'vendor/autoload.php'; 
+// require_once 'app/class/Controllers/PostController.php';
+// require_once 'app/Controllers/UserController.php';
+// require_once 'app/Controllers/AdminController.php';
+// require_once 'app/Controllers/MainController.php';
+// require_once 'app/Services/Request.php';
 
-use blogProfessionnel\App\Controllers\UserController;
-use blogProfessionnel\App\Controllers\PostController;
-use blogProfessionnel\App\Controllers\MainController;
-use blogProfessionnel\App\Controllers\AdminController;
-use blogProfessionnel\app\Services\Request;
+use App\Controllers\UserController;
+use App\Controllers\PostController;
+use App\Controllers\MainController;
+use App\Controllers\AdminController;
+use App\Services\Request;
 
 $request = new Request();
 $getAction = $request->get('action');

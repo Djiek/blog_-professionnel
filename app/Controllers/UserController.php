@@ -1,12 +1,9 @@
 <?php
 
-namespace blogProfessionnel\app\Controllers;
+namespace App\Controllers;
 
-require_once 'app/Models/UserManager.php';
-require_once 'app/Services/Request.php';
-
-use blogProfessionnel\app\Models\UserManager;
-use blogProfessionnel\app\Services\Request;
+use App\Models\UserManager;
+use App\Services\Request;
 use \Exception;
 
 class UserController

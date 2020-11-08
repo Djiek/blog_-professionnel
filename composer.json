@@ -1,0 +1,13 @@
+{
+    "name": "marin/blog.professionnel",
+    "authors": [{
+        "name": "Marine Richini",
+        "email": "marine.richini@gmai.com"
+    }],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "require": {}
+}

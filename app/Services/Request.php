@@ -1,6 +1,6 @@
 <?php
 
-namespace blogProfessionnel\app\Services;
+namespace App\Services;
 
 class Request
 {
