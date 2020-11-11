@@ -8,12 +8,11 @@ use App\Services\Request;
 class MainController
 {
 
-    private $request;
+   private $request;
 
-    public function __construct($request)
+    public function __construct()
     {
-        $this->request  = $request;
-        $this->request = new Request();
+        $this->request  = new Request();
     }
 
     /**

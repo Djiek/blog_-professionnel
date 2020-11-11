@@ -9,14 +9,12 @@ use App\Services\Request;
 class PostController
 {
 
-    private $request;
+   private $request;
 
-    public function __construct($request)
+    public function __construct()
     {
-        $this->request  = $request;
-        $this->request = new Request();
+        $this->request  = new Request();
     }
-
     /**
      *  Gere la vue ou s'affiche la lise des posts publié
      */

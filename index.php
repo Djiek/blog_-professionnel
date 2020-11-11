@@ -23,26 +23,26 @@ $postChapo = $request->post('chapo');
 try {
     if (isset($getAction)) {
         if ($getAction == 'home') {
-            $controller = new MainController(new Request());
+            $controller = new MainController();
             $controller->home();
         } elseif ($getAction == 'post') {
             if (isset($getId) && $getId > 0) {
-                $controller = new PostController(new Request());
+                $controller = new PostController();
                 $controller->post();
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
         } elseif ($getAction == 'listPosts') {
-            $controller = new PostController(new Request());
+            $controller = new PostController();
             $controller->listPosts();
         } elseif ($getAction == 'addPostForm') {
-            $controller = new AdminController(new Request());
+            $controller = new AdminController();
             $controller->addPostForm();
         } elseif ($getAction == 'login') {
             if (!empty($postLogin) && !empty($postPassword)) {
                 if (isset($postLogin) && strlen($postPassword) > 0) {
                     if (!empty($postLogin) && !empty($postPassword)) {
-                        $controller = new UserController(new Request());
+                        $controller = new UserController();
                         $controller->login();
                     } else {
                         $request->setSession('error', "Tous les champs ne sont pas remplis !");
@@ -54,54 +54,54 @@ try {
                 header('Location: index.php?action=connection');
             }
         } elseif ($getAction == 'managementCommentPage') {
-            $controller = new AdminController(new Request());
+            $controller = new AdminController();
             $controller->managementCommentPage();
         } elseif ($getAction == 'ViewPostComment') {
             if (isset($getId) && $getId > 0) {
-                $controller = new AdminController(new Request());
+                $controller = new AdminController();
                 $controller->ViewPostComment();
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
         } elseif ($getAction == 'deleteComment') {
-            $controller = new AdminController(new Request());
+            $controller = new AdminController();
             $controller->deleteComment();
         } elseif ($getAction == 'updateStatusComment') {
-            $controller = new AdminController(new Request());
+            $controller = new AdminController();
             $controller->updateStatusComment();
         } elseif ($getAction == 'postModify') {
-            $controller = new AdminController(new Request());
+            $controller = new AdminController();
             $controller->postModify();
         } elseif ($getAction == 'modifyBlogPost') {
-            $controller = new AdminController(new Request());
+            $controller = new AdminController();
             $controller->modifyBlogPost();
         } elseif ($getAction == 'postDelete') {
-            $controller = new AdminController(new Request());
+            $controller = new AdminController();
             $controller->postDelete();
         } elseif ($getAction == 'connection') {
-            $controller = new UserController(new Request());
+            $controller = new UserController();
             $controller->connection();
         } elseif ($getAction == 'logout') {
-            $controller = new UserController(new Request());
+            $controller = new UserController();
             $controller->logout();
         } elseif ($getAction == 'inscriptionForm') {
-            $controller = new UserController(new Request());
+            $controller = new UserController();
             $controller->inscriptionForm();
         } elseif ($getAction == 'inscription') {
             if (!empty($postLogin) && !empty($postPassword) && !empty($postMail)  && !empty($postCPassword)) {
-                $controller = new UserController(new Request());
+                $controller = new UserController();
                 $controller->inscription($postLogin,  $postPassword, $postMail);
             } elseif (!isset($_SESSION[$postLogin])) {
                  $request->setSession('error', "Tous les champs ne sont pas remplis !");
                 header('Location: index.php?action=inscriptionForm');
             }
         } elseif ($getAction == 'postContact') {
-            $controller = new MainController(new Request());
+            $controller = new MainController();
             $controller->postContact();
         } elseif ($getAction == 'addComment') {
             if (isset($getId) && $getId > 0) {
                 if (!empty($postContent) && !empty($postTitle)) {
-                    $controller = new PostController(new Request());
+                    $controller = new PostController();
                     $controller->addComment($getId, $_SESSION['User']['id'], $postContent, $postTitle);
                 } else {
                      $request->setSession('error', "Tous les champs ne sont pas remplis !");
@@ -113,7 +113,7 @@ try {
         } elseif ($getAction == 'addBlogPost') {
 
             if (!empty($postTitle) && !empty($postChapo) && !empty($postContent)) {
-                $controller = new AdminController(new Request());
+                $controller = new AdminController();
                 $controller->addBlogPost(
                     $postTitle,
                     $postChapo,
@@ -126,7 +126,7 @@ try {
             }
         }
     } else {
-        $controller = new MainController(new Request());
+        $controller = new MainController();
         $controller->home();
     }
 } catch (Exception $e) {
