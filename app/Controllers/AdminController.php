@@ -8,21 +8,27 @@ use App\Services\Request;
 
 class AdminController
 {
+
+    private $request;
+
+    public function __construct()
+    {
+        $this->request  = new Request();
+    }
+
     /**
      * supprime un post
      */
     public function postDelete()
     {
-        $request = new Request();
-        $get = $request->get('id');
+        $get = $this->request->get('id');
         $postManager = new PostManager;
         $affectedLines = $postManager->deletePost($get);
         if ($affectedLines === false) {
-            $_SESSION['error'] = "Impossible de supprimer le blog post !";
+            $this->request->setSession('error', "Impossible de supprimer le blog post !");
             header('Location: index.php?action=listPosts');
         }
-
-        $_SESSION['success'] = "Le blogPost a été supprimé.";
+        $this->request->setSession('success', "Le blogPost a été supprimé.");
         header('Location: index.php?action=listPosts');
     }
 
@@ -31,8 +37,7 @@ class AdminController
      */
     public function postModify()
     {
-        $request = new Request();
-        $get = $request->get('id');
+        $get = $this->request->get('id');
         $postManager = new PostManager;
         $posts = $postManager->getPost($get);
         require('App/Views/postModify.php');
@@ -43,17 +48,16 @@ class AdminController
      */
     public function modifyBlogPost()
     {
-        $request = new Request();
-        $getId = $request->get('id');
-        $postTitle = $request->post('title');
-        $postChapo = $request->post('chapo');
-        $postContent = $request->post('content');
+        $getId = $this->request->get('id');
+        $postTitle = $this->request->post('title');
+        $postChapo = $this->request->post('chapo');
+        $postContent = $this->request->post('content');
         $postManager = new PostManager;
         $affectedLines = $postManager->ModifyPost($getId, $_SESSION['User']['id'], $postTitle, $postChapo, $postContent);
         if ($affectedLines === false) {
-            $_SESSION['error'] = "Impossible de modifier le blog post !";
+            $this->request->setSession('error', "Impossible de modifier le blog post !");
         } else {
-            $_SESSION['success'] = "Le blogPost a été modifié.";
+            $this->request->setSession('success', "Le blogPost a été modifié.");
         }
         header('Location: index.php?action=post&id=' . $getId);
     }
@@ -63,10 +67,11 @@ class AdminController
      */
     public function addPostForm()
     {
-        if (isset($_SESSION['User']) && $_SESSION['User']['admin'] == 1) {
+        $user = $this->request->session("User");
+        if (isset($user) && $_SESSION['User']['admin'] == 1) {
             require('App/Views/addBlogPost.php');
         } else {
-            $_SESSION['error'] = 'Vous devez être administrateur pour acceder à cette page';
+            $this->request->setSession('error', "Vous devez être administrateur pour acceder à cette page");
             header('Location: index.php?action=connection');
         }
     }
@@ -76,18 +81,19 @@ class AdminController
      */
     public function addBlogPost($title, $chapo, $content, $userId)
     {
+        $user = $this->request->session("User");
         $postManager = new PostManager(); // Création d'un objet
-        if (isset($_SESSION['User']) && $_SESSION['User']['admin'] == 1) {
+        if (isset($user) && $_SESSION['User']['admin'] == 1) {
             $affectedLines = $postManager->addBlogPost($title, $chapo, $content, $userId);
             if ($affectedLines === false) {
-                $_SESSION['error'] = "Impossible d'ajouter le blog post !";
+                $this->request->setSession('error', "Impossible d'ajouter le blog post !");
                 header('Location: index.php?action=addPostForm');
             } else {
-                $_SESSION['success'] = "Le blogPost a été enregistré en base de donnée.";
+                $this->request->setSession('success', "Le blogPost a été enregistré en base de donnée.");
                 header('Location: index.php?action=addPostForm');
             }
         } else {
-            $_SESSION['error'] = 'Vous devez être administrateur pour pouvoir ajouter un post';
+            $this->request->setSession('error', "Vous devez être administrateur pour pouvoir ajouter un post");
             header('Location: index.php?action=connection');
         }
     }
@@ -97,15 +103,14 @@ class AdminController
      */
     public function updateStatusComment()
     {
-        $request = new Request();
-        $getId = $request->get('id');
-        $getPostId = $request->get('postId');
+        $getId = $this->request->get('id');
+        $getPostId = $this->request->get('postId');
         $commentManager = new CommentManager();
         $affectedLines = $commentManager->UpdateStatusComment($getPostId, $getId);
         if ($affectedLines === false) {
-            $_SESSION['error'] = 'Impossible de valider le commentaire';
+            $this->request->setSession('error', "Impossible de valider le commentaire");
         } else {
-            $_SESSION['success'] = 'Le commentaire a été validé';
+            $this->request->setSession('success', "Le commentaire a été validé");
         }
         header('Location: index.php?action=ViewPostComment&id=' . $getPostId);
     }
@@ -115,32 +120,37 @@ class AdminController
      */
     public function deleteComment()
     {
-        $request = new Request();
-        $getId = $request->get('id');
-        $getPostId = $request->get('postId');
+        $getId = $this->request->get('id');
+        $getPostId = $this->request->get('postId');
         $commentManager = new CommentManager();
         $affectedLines = $commentManager->deleteComment($getPostId,  $getId);
         if ($affectedLines === false) {
-            $_SESSION['error'] = 'Impossible de supprimer le commentaire';
+            $this->request->setSession('error', "Impossible de supprimer le commentaire !");
         } else {
-            $_SESSION['success'] = 'Le commentaire a été supprimé';
+            $this->request->setSession('success', "Le commentaire a été supprimé");
         }
         header('Location: index.php?action=ViewPostComment&id=' . $getPostId);
     }
 
     /**
-     * page pour voirles commentaires en attente de verification sur le post associé
+     * page pour voir les commentaires en attente de verification sur le post associé
      */
     public function ViewPostComment()
     {
-        if (isset($_GET['page']) && !empty($_GET['page'])) {
-            $currentPage = (int) $_GET['page'];
+        $page = $this->request->get("page");
+        $user = $this->request->session("User");
+        if (isset($page) && !empty($page)) {
+            $currentPage = (int) $page;
         } else {
             $currentPage = 1;
         }
-        if (isset($_SESSION['User']) && $_SESSION['User']['admin'] == 1) {
-            $request = new Request();
-            $getId = $request->get('id');
+        if (isset($user) && $_SESSION['User']['admin'] == 1) {
+            $getPostId = $this->request->get('postId');
+            $getId = $this->request->get('id');
+            if (empty($getPostId)) {
+                $commentManager = new CommentManager();
+                $commentManager->deleteComment($getPostId,  $getId);
+            }
             $postManager = new PostManager;
             $commentManager = new CommentManager();
             $posts = $postManager->getPost($getId);
@@ -148,7 +158,7 @@ class AdminController
             $pageOfNumber = $commentManager->countCommentWithoutId();
             require('app/Views/viewPost.php');
         } else {
-            $_SESSION['error'] = 'Vous devez être administrateur pour acceder à cette page';
+            $request->setSession('error', "Vous devez être administrateur pour acceder à cette page");
             header('Location: index.php?action=connection');
         }
     }
@@ -158,20 +168,21 @@ class AdminController
      */
     public function managementCommentPage()
     {
-
-        if (isset($_GET['page']) && !empty($_GET['page'])) {
-            $currentPage = (int) $_GET['page'];
+        $user = $this->request->session("User");
+        $page = $this->request->get("page");
+        if (isset($page) && !empty($page)) {
+            $currentPage = (int) $page;
         } else {
             $currentPage = 1;
         }
-        if (isset($_SESSION['User']) && $_SESSION['User']['admin'] == 1) {
+        if (isset($user) && $_SESSION['User']['admin'] == 1) {
             $comment = new CommentManager();
             $commentManager = new CommentManager();
             $comments = $comment->getCommentsWithoutStatus($currentPage);
             $pageOfNumber = $commentManager->countCommentWithoutId();
             require('App/Views/managementCommentPage.php');
         } else {
-            $_SESSION['error'] = 'Vous devez être administrateur pour acceder à cette page';
+            $this->request->setSession('error', "Vous devez être administrateur pour acceder à cette page");
             header('Location: index.php?action=connection');
         }
     }

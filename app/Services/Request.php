@@ -24,4 +24,9 @@ class Request
             return $_SESSION[$key];
         }
     }
+
+    public function setSession($key,$message){
+        return $_SESSION[$key] = $message;
+    }
+
 }
