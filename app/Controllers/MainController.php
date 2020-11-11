@@ -1,12 +1,9 @@
 <?php
 
-namespace blogProfessionnel\app\Controllers;
+namespace App\Controllers;
 
-require_once 'app/Services/Form.php';
-require_once 'app/Services/Request.php';
-
-use \blogProfessionnel\app\Services\Form;
-use blogProfessionnel\app\Services\Request;
+use App\Services\Form;
+use App\Services\Request;
 
 class MainController
 {

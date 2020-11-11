@@ -1,11 +1,8 @@
 <?php
 
-namespace blogProfessionnel\app\Models;
+namespace App\Models;
 
-require_once "app/Models/Manager.php";
-require_once 'app/Models/Entity/User.php';
-
-use blogProfessionnel\app\Models\Entity\User;
+use App\Models\Entity\User;
 use PDO;
 
 class UserManager extends Manager

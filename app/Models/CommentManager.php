@@ -1,12 +1,9 @@
 <?php
 
-namespace blogProfessionnel\app\Models;
+namespace App\Models;
 
-require_once "app/Models/Manager.php";
-require_once 'app/Models/Entity/Comment.php';
-
-use blogProfessionnel\app\Models\Entity\Comment;
-use blogProfessionnel\app\Models\Entity\User;
+use App\Models\Entity\Comment;
+use App\Models\Entity\User;
 use PDO;
 
 class CommentManager extends Manager
@@ -103,7 +100,7 @@ class CommentManager extends Manager
         $commentPage = $this->CommentPage($currentPage);
         $dbConnect = $this->dbConnect();
         $req = $dbConnect->prepare("SELECT  title, user_id,status, content,user.login, DATE_FORMAT(date, '%d/%m/%Y à %Hh%imin%ss')
-        AS date FROM comment INNER JOIN user ON comment.user_id = user.id WHERE blogPost_id = :postId AND status = 1 ORDER BY date DESC LIMIT :commentPage ,:nbPerPage");
+        AS dateFr FROM comment INNER JOIN user ON comment.user_id = user.id WHERE blogPost_id = :postId AND status = 1 ORDER BY date DESC LIMIT :commentPage ,:nbPerPage");
         $req->bindValue(":postId", $postId, PDO::PARAM_INT);
         $req->bindValue(":commentPage", $commentPage, PDO::PARAM_INT);
         $req->bindValue(":nbPerPage", $nbPerPage, PDO::PARAM_INT);
@@ -117,7 +114,7 @@ class CommentManager extends Manager
             $comment->setTitle($row['title']);
 
             $comment->setContent($row['content']);
-            $comment->setDate($row['date']);
+            $comment->setDate($row['dateFr']);
             $comment->setStatus($row['status']);
             $comment->setUserId($row['login']);
             $comments[] = $comment;
