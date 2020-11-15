@@ -25,10 +25,10 @@ $title = 'Mon blog'; ?>
                 Tourcoing </p>
             <p>
                 <a href="https://www.linkedin.com/in/marine-richini-791149194/">
-                    <img src="public/image/linkedIn.png" height="50" width="50" alt="logo-linkedIn" /></a>
+                    <img src="public/image/linkedIn.jpg" height="50" width="50" alt="logo-linkedIn" /></a>
 
                 <a href="https://github.com/Djiek">
-                    <img src="public/image/github.png" height="50" width="50" alt="logo-linkedIn" /></a>
+                    <img src="public/image/github.png" height="50" width="50" alt="logo-github" /></a>
             </p>
 
             <a href="public/image/cv.pdf" download="cv.pdf">Telecharger mon Cv</a>

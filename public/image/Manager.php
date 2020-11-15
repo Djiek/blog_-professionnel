@@ -9,7 +9,7 @@ class Manager
      */
     protected function dbConnect()
     {
-       $dbName = new \PDO('mysql:host=localhost;dbname=blog_professionnel;charset=utf8', 'root', '');
+        $dbName = new \PDO('mysql:host=djiekovhoddjiek.mysql.db;dbname=djiekovhoddjiek;charset=utf8', 'djiekovhoddjiek', 'Azerty1234');
         return $dbName;
     }
 }
