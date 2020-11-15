@@ -8,14 +8,21 @@ use App\Services\Request;
 
 class PostController
 {
+
+   private $request;
+
+    public function __construct()
+    {
+        $this->request  = new Request();
+    }
     /**
      *  Gere la vue ou s'affiche la lise des posts publié
      */
     public function listPosts()
     {
-
-        if (isset($_GET['page']) && !empty($_GET['page'])) {
-            $currentPage = (int) $_GET['page'];
+        $page = $this->request->get("page");
+        if (isset($page) && !empty($page)) {
+            $currentPage = (int) $page;
         } else {
             $currentPage = 1;
         }
@@ -31,13 +38,13 @@ class PostController
      */
     public function post()
     {
-        if (isset($_GET['page']) && !empty($_GET['page'])) {
-            $currentPage = (int) $_GET['page'];
+        $page = $this->request->get("page");
+        if (isset($page) && !empty($page)) {
+            $currentPage = (int) $page;
         } else {
             $currentPage = 1;
         }
-        $request = new Request();
-        $get = $request->get('id');
+        $get = $this->request->get('id');
         $postManager = new PostManager;
         $commentManager = new CommentManager();
         $posts = $postManager->getPost($get);
@@ -52,20 +59,19 @@ class PostController
     public function addComment($postId, $userId, $content, $title)
     {
         $commentManager = new CommentManager();
-        $request = new Request();
-        $sessionUser = $request->session('User');
-        $sessionAdmin = $request->session('Admin');
+        $sessionUser = $this->request->session('User');
+        $sessionAdmin = $this->request->session('Admin');
         if (isset($sessionUser) || isset($sessionAdmin)) {
             $affectedLines = $commentManager->postComment($postId, $userId, $content, $title);
             if ($affectedLines === false) {
-                $_SESSION['error'] = 'Impossible d\'ajouter le commentaire !';
+                $this->request->setSession('error', "Impossible d'ajouter le commentaire !");
                 header('Location: index.php?action=post&id=' . $postId);
             } else {
-                $_SESSION['success'] = "Votre commentaire a été pris en compte et sera traité par un administrateur dans les meilleurs délais.";
+                $this->request->setSession('success', "Votre commentaire a été pris en compte et sera traité par un administrateur dans les meilleurs délais.");
                 header('Location: index.php?action=post&id=' . $postId);
             }
         } else {
-            $_SESSION['error'] = 'Vous devez être connecté pour ajouter un commentaire.';
+            $this->request->setSession('error', "Vous devez être connecté pour ajouter un commentaire.");
             header('Location: index.php?action=connection');
         }
     }

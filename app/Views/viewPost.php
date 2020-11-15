@@ -12,35 +12,44 @@ $title = 'Mon blog';
     <div class="col-sm-8">
         <div class="card border-success mb-3" style="max-width: 50rem;">
             <h2 class="bordure">gestion des commentaires :</h2>
-            <?php foreach ($posts as $post) :
+            <?php  if (!isset($posts)) :?>
+                    <h4> Le poste a été suprimé </h4>
+                <?php else : 
+          foreach ($posts as $post) :
+               
+                    $title = htmlspecialchars($post->getTitle()); ?>
 
-                $title = htmlspecialchars($post->getTitle()); ?>
-                <div class="row news">
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-8">
-                        <div class="card border-primary mb-3" style="max-width: 50rem;">
-                            <h3 class="bordure card-header  ">
-                                <?= htmlspecialchars($post->getTitle()); ?></h3>
-                            <em>le <?= $post->getDate(); ?></em>
-                            <p>auteur : <?= $post->getUserId(); ?></p>
+                    <div class="row news">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-8">
+                            <div class="card border-primary mb-3" style="max-width: 50rem;">
+                                <h3 class="bordure card-header  ">
+                                    <?= htmlspecialchars($post->getTitle()); ?></h3>
+                                <em>le <?= $post->getDate(); ?></em>
+                                <p>auteur : <?= $post->getUserId(); ?></p>
 
 
-                            <div class="bordure card-title list-group-item">
-                                <?= htmlspecialchars($post->getChapo()); ?>
+                                <div class="bordure card-title list-group-item">
+                                    <?= htmlspecialchars($post->getChapo()); ?>
+
+                                </div>
+                                <p class="bordure card-text">
+                                    <?= nl2br(htmlspecialchars($post->getContent()));  ?>
+                                </p>
+
+
 
                             </div>
-                            <p class="bordure card-text">
-                                <?= nl2br(htmlspecialchars($post->getContent()));  ?>
-                            </p>
-
                         </div>
                     </div>
-                </div>
         </div>
     </div>
 </div>
+    <?php endforeach; ?>                    
 
-<?php endforeach; ?>
+<?php endif; ?>
+
+
 <?php
 foreach ($comments as $comment) :
 ?>

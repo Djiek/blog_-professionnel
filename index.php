@@ -1,11 +1,7 @@
 <?php
 session_start();
 require_once 'vendor/autoload.php'; 
-// require_once 'app/class/Controllers/PostController.php';
-// require_once 'app/Controllers/UserController.php';
-// require_once 'app/Controllers/AdminController.php';
-// require_once 'app/Controllers/MainController.php';
-// require_once 'app/Services/Request.php';
+
 
 use App\Controllers\UserController;
 use App\Controllers\PostController;
@@ -49,12 +45,12 @@ try {
                         $controller = new UserController();
                         $controller->login();
                     } else {
-                        $_SESSION['error'] = "Tous les champs ne sont pas remplis !";
+                        $request->setSession('error', "Tous les champs ne sont pas remplis !");
                         header('Location: index.php?action=connection');
                     }
                 }
             } else {
-                $_SESSION['error'] = "Tous les champs ne sont pas remplis !";
+                $request->setSession('error', "Tous les champs ne sont pas remplis !");
                 header('Location: index.php?action=connection');
             }
         } elseif ($getAction == 'managementCommentPage') {
@@ -92,11 +88,11 @@ try {
             $controller = new UserController();
             $controller->inscriptionForm();
         } elseif ($getAction == 'inscription') {
-            if (!empty($postLogin) && !empty($postPassword) && !empty($postMail  && !empty($postCPassword))) {
+            if (!empty($postLogin) && !empty($postPassword) && !empty($postMail)  && !empty($postCPassword)) {
                 $controller = new UserController();
                 $controller->inscription($postLogin,  $postPassword, $postMail);
             } elseif (!isset($_SESSION[$postLogin])) {
-                $_SESSION['error'] = "Tous les champs ne sont pas remplis !!";
+                 $request->setSession('error', "Tous les champs ne sont pas remplis !");
                 header('Location: index.php?action=inscriptionForm');
             }
         } elseif ($getAction == 'postContact') {
@@ -108,7 +104,7 @@ try {
                     $controller = new PostController();
                     $controller->addComment($getId, $_SESSION['User']['id'], $postContent, $postTitle);
                 } else {
-                    $_SESSION['error'] = "Tous les champs ne sont pas remplis !";
+                     $request->setSession('error', "Tous les champs ne sont pas remplis !");
                     header('Location: index.php?action=post&id=' . $getId);
                 }
             } else {
@@ -125,7 +121,7 @@ try {
                     $_SESSION['User']['id']
                 );
             } else {
-                $_SESSION['error'] = "Tous les champs ne sont pas remplis !!";
+                 $request->setSession('error', "Tous les champs ne sont pas remplis !");
                 header('Location: index.php?action=addPostForm');
             }
         }
