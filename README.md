@@ -1,8 +1,31 @@
 # blog_-professionnel
 
-1 - Pour telechargez le projet, veuiller cloner le projet github avec le lien du repository
-2 - Quand ceci est effectué, veuillez copier la bdd "blog_professionnel" qui est copié à la racine du projet dans phpMyAdmin.
-3 - Mettez a jour vos iddentifiants de BDD dans blogProfessionnel\app\Models\Manager.php
-3 - Pour vous connecter en tant qu'administrateur, Utilisez l'administrateur dejà crée en base de donnée (login : administrateur) avec le mot de passe "12345678" et n'oubliez pas de le mettre à jour par la suite.
+blog_-professionnel is a professional blog. 
+ [![Codacy Badge](https://app.codacy.com/project/badge/Grade/ecad65cde9164393a2a3b646107ac7f9)](https://www.codacy.com/gh/Djiek/blog_-professionnel/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Djiek/blog_-professionnel&amp;utm_campaign=Badge_Grade)
 
-lien du badge : [![Codacy Badge](https://app.codacy.com/project/badge/Grade/ecad65cde9164393a2a3b646107ac7f9)](https://www.codacy.com/gh/Djiek/blog_-professionnel/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Djiek/blog_-professionnel&amp;utm_campaign=Badge_Grade)
+
+
+### Tech
+blog_-professionnel uses :
+
+* [composer]
+* [html,php,css]
+* [Bootstrap]  
+* [git]  
+* [mySql] 
+
+
+
+### Installation
+
+blog_-professionnel requires php 7.3.12 to run.
+
+* To download the project, please clone the github project with the repository link
+* When this is done, please copy the "professional_blog" database which is copied to the root of the project in phpMyAdmin.
+* Update your BDD credentials in Professional blog\app\Models\Manager.php
+* Install vendor folder
+```sh
+composer install
+```
+* To connect as administrator, Use the administrator already created in the database (login: administrator) with the password "12345678" and don't forget to update it later.
+
