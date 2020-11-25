@@ -29,6 +29,9 @@ try {
             if (isset($getId) && $getId > 0) {
                 $controller = new PostController();
                 $controller->post();
+            }elseif (empty($getId)){
+  header('HTTP/1.0 404 Not Found');
+        exit;
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
@@ -124,7 +127,10 @@ try {
                  $request->setSession('error', "Tous les champs ne sont pas remplis !");
                 header('Location: index.php?action=addPostForm');
             }
-        }
+        } elseif(isset($getAction) ) {
+     header('HTTP/1.0 404 Not Found');
+        exit;
+}
     } else {
         $controller = new MainController();
         $controller->home();
