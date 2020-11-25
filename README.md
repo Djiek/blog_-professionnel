@@ -1,7 +1,7 @@
 # blog_-professionnel
 
 blog_-professionnel is a professional blog. 
- [![Codacy Badge](https://app.codacy.com/project/badge/Grade/ecad65cde9164393a2a3b646107ac7f9)](https://www.codacy.com/gh/Djiek/blog_-professionnel/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Djiek/blog_-professionnel&amp;utm_campaign=Badge_Grade)
+ * [![Codacy Badge](https://app.codacy.com/project/badge/Grade/ecad65cde9164393a2a3b646107ac7f9)](https://www.codacy.com/gh/Djiek/blog_-professionnel/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Djiek/blog_-professionnel&amp;utm_campaign=Badge_Grade)
 
 
 
